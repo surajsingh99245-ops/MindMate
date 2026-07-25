@@ -242,59 +242,101 @@
         </section>
 
     </main>
-    
-<!-- ==================== Chat Section ==================== -->
 
-<section class="chat-section" id="chat">
 
-    <div class="container">
 
-        <div class="chat-header">
+    <!-- Chat Section -->
 
-            <span class="chat-badge">
-                ✨ AI Companion
-            </span>
+    <section class="chat-section" id="chat">
 
-            <h2>Talk to MindMate</h2>
+        <div class="container">
 
-            <p>
-                Share your thoughts, feelings, or concerns. MindMate is here
-                to listen and guide you with AI-powered emotional support.
-            </p>
+            <div class="section-header">
 
-        </div>
+                <span class="section-badge">
+                    ✨ AI Companion
+                </span>
 
-        <div class="chat-container">
+                <h2>Talk to MindMate</h2>
 
-            <!-- Messages -->
+                <p>
+                    Share your thoughts, feelings, or concerns. MindMate is here
+                    to listen and guide you with AI-powered emotional support.
+                </p>
 
-            <div class="chat-messages" id="chatMessages">
+            </div>
 
-                <div class="message ai-message">
+            <div class="chat-container">
 
-                    <div class="message-avatar">
+                <!-- Messages -->
 
-                        <i class="fa-solid fa-robot"></i>
+                <div class="chat-messages" id="chatMessages">
+
+                    <div class="message ai-message">
+
+                        <div class="message-avatar">
+
+                            <i class="fa-solid fa-robot"></i>
+
+                        </div>
+
+                        <div class="message-content">
+
+                            <h4>MindMate</h4>
+
+                            <p>
+
+                                Hi 👋
+
+                                <br><br>
+
+                                I'm MindMate.
+
+                                <br>
+
+                                Tell me how you're feeling today.
+
+                            </p>
+
+                            <div class="suggestion-chips">
+
+                                <button class="chip">
+                                    😊 Happy
+                                </button>
+
+                                <button class="chip">
+                                    😔 Stressed
+                                </button>
+
+                                <button class="chip">
+                                    😟 Anxious
+                                </button>
+
+                                <button class="chip">
+                                    😴 Can't sleep
+                                </button>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
-                    <div class="message-content">
+                </div>
 
-                        <h4>MindMate</h4>
+                <!-- Input -->
 
-                        <p>
+                <div class="chat-input">
 
-                            Hi 👋
+                    <div class="input-wrapper">
 
-                            <br><br>
+                        <input type="text" id="userInput" placeholder="How are you feeling today?">
 
-                            I'm MindMate.
+                        <button id="sendBtn">
 
-                            <br>
+                            <i class="fa-solid fa-paper-plane"></i>
 
-                            Tell me how you're feeling today.
-
-                        </p>
+                        </button>
 
                     </div>
 
@@ -302,31 +344,145 @@
 
             </div>
 
-            <!-- Input -->
+        </div>
 
-            <div class="chat-input">
+    </section>
 
-                <input
-                    type="text"
-                    id="userInput"
-                    placeholder="Type your thoughts here..."
-                >
 
-                <button id="sendBtn">
+    <!-- Features Section -->
 
-                    <i class="fa-solid fa-paper-plane"></i>
+    <section class="feature-section" id="features">
 
-                </button>
+        <div class="container">
+
+            <div class="section-header">
+
+                <span class="section-badge">
+                    ✨ Features
+                </span>
+
+                <h2>Everything You Need for Better Mental Wellness</h2>
+
+                <p>
+                    MindMate combines AI-powered conversations, mood tracking,
+                    personalized insights, and wellness tools to help you
+                    understand and improve your mental health every day.
+                </p>
+
+            </div>
+
+            <div class="feature-grid">
+
+                <!-- Feature 1 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+
+                    <h3>AI Conversations</h3>
+
+                    <p>
+                        Chat naturally with an AI companion that listens,
+                        understands, and supports your emotional well-being.
+                    </p>
+
+                </div>
+
+                <!-- Feature 2 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-face-smile"></i>
+                    </div>
+
+                    <h3>Mood Tracking</h3>
+
+                    <p>
+                        Log your daily emotions and discover patterns in
+                        your mental health journey over time.
+                    </p>
+
+                </div>
+
+                <!-- Feature 3 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <h3>Progress Reports</h3>
+
+                    <p>
+                        Visualize your emotional progress through weekly
+                        and monthly insights and reports.
+                    </p>
+
+                </div>
+
+                <!-- Feature 4 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <h3>Personal Journal</h3>
+
+                    <p>
+                        Write private journal entries and reflect on your
+                        thoughts whenever you need.
+                    </p>
+
+                </div>
+
+                <!-- Feature 5 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+
+                    <h3>Wellness Tips</h3>
+
+                    <p>
+                        Receive personalized breathing exercises,
+                        mindfulness suggestions, and healthy habits.
+                    </p>
+
+                </div>
+
+                <!-- Feature 6 -->
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-shield-heart"></i>
+                    </div>
+
+                    <h3>Private & Secure</h3>
+
+                    <p>
+                        Your conversations and personal data remain secure,
+                        giving you a safe space to express yourself.
+                    </p>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
+    <!-- End Features Section -->
 
-<!-- ==================== End Chat Section ==================== -->
 
 </body>
 
