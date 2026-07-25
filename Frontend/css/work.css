@@ -1,6 +1,4 @@
-/* ===========================
-   How It Works Section
-=========================== */
+/* How It Works Section */
 
 .works-section {
     padding: 5rem 0;
@@ -8,12 +6,13 @@
 }
 
 
-/* ===========================
-   Works Grid
-=========================== */
+/* Works Grid */
 
 .works-grid {
 
+    max-width: 1200px;
+
+    margin: 0 auto;
     display: grid;
 
     grid-template-columns: repeat(3, 1fr);
@@ -25,9 +24,7 @@
     margin-top: 4rem;
 }
 
-/* ===========================
-   Work Card
-=========================== */
+/* Work Card */
 
 .work-card {
 
@@ -52,15 +49,13 @@
 
     transform: translateY(-8px);
 
-    border-color: rgba(79,142,247,.25);
+    border-color: rgba(79, 142, 247, .25);
 
     box-shadow:
-        0 15px 35px rgba(15,23,42,.08);
+        0 15px 35px rgba(15, 23, 42, .08);
 }
 
-/* ===========================
-   Step Number
-=========================== */
+/* Step Number */
 
 .work-number {
 
@@ -73,14 +68,12 @@
 
     font-weight: 700;
 
-    color: rgba(79,142,247,.08);
+    color: rgba(79, 142, 247, .08);
 
     user-select: none;
 }
 
-/* ===========================
-   Work Icon
-=========================== */
+/* Work Icon */
 
 .work-icon {
 
@@ -92,7 +85,7 @@
     display: grid;
     place-items: center;
 
-    background: rgba(79,142,247,.10);
+    background: rgba(79, 142, 247, .10);
 
     color: var(--primary);
 
@@ -103,7 +96,7 @@
     transition: .3s ease;
 }
 
-.work-card:hover .work-icon{
+.work-card:hover .work-icon {
 
     background: var(--primary);
 
@@ -112,11 +105,9 @@
     transform: rotate(-8deg) scale(1.08);
 }
 
-/* ===========================
-   Work Content
-=========================== */
+/* Work Content */
 
-.work-card h3{
+.work-card h3 {
 
     margin-bottom: 1rem;
 
@@ -127,23 +118,9 @@
     font-weight: 600;
 }
 
-.work-card p{
+.work-card p {
 
     color: var(--text-light);
 
     line-height: 1.8;
-}
-
-
-@media (max-width:768px){
-
-    .works-grid{
-        grid-template-columns:1fr;
-    }
-
-    .work-card::before,
-    .work-card::after{
-        display:none;
-    }
-
 }
