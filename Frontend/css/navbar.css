@@ -1,0 +1,159 @@
+header {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+
+}
+
+
+.navbar {
+
+    width: 90%;
+    max-width: 1280px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
+
+}
+
+
+
+/* Logo */
+
+
+.logo {
+
+    display: flex;
+    align-items: center;
+    /* gap:2px; */
+    cursor: pointer;
+
+}
+
+.logo img {
+
+    width: 56px;
+    height: 56px;
+
+}
+
+.logo-text {
+
+    font-size: 24px;
+    font-weight: 700;
+
+}
+
+.mind {
+    color: var(--logo-blue);
+}
+
+.mate {
+    color: var(--logo-green);
+}
+
+
+
+/* Navigation */
+
+
+.nav-links {
+
+    display: flex;
+    gap: 40px;
+    list-style: none;
+
+}
+
+.nav-links a {
+
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 600;
+    transition: .3s;
+    position: relative;
+
+}
+
+
+/* Hover */
+
+.nav-links a:hover {
+
+    color: var(--primary);
+
+}
+
+
+/* Underline Animation */
+
+.nav-links a::after {
+
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0%;
+    height: 2px;
+    background: var(--primary);
+    transition: .3s;
+
+}
+
+.nav-links a:hover::after {
+
+    width: 100%;
+
+}
+
+
+
+/* Login */
+
+
+.login a {
+
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    padding: 10px 22px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: .3s;
+
+}
+
+.login a:hover {
+
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+
+}
+
+@media (max-width:768px) {
+
+    .navbar {
+
+        padding: 16px 20px;
+
+    }
+
+    .nav-links {
+
+        display: none;
+
+    }
+
+}
