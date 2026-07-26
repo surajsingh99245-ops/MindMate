@@ -12,7 +12,7 @@ header {
 
     position: fixed;
 
-    top: 20px;
+    top: 25px;
     left: 50%;
     transform: translateX(-50%);
 
@@ -143,11 +143,49 @@ header {
 }
 
 
+/* ===========================
+   Authentication
+=========================== */
+
+.auth{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:1.5rem;
+
+}
+
+.signup-link{
+
+    text-decoration:none;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:var(--primary);
+
+    transition:.3s ease;
+
+}
+
+.signup-link:hover{
+
+    color:var(--primary-dark);
+
+}
+
 
 /* Login */
 
 
-.login a {
+.login-btn{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
     text-decoration: none;
     color: var(--text);
@@ -159,11 +197,13 @@ header {
 
 }
 
-.login a:hover {
+.login-btn:hover{
 
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
+    background:var(--primary);
+
+    color:#fff;
+
+    border-color:var(--primary);
 
 }
 
