@@ -1,6 +1,4 @@
-/* ===========================
-   Feature Section
-=========================== */
+/* Feature Section */
 
 .feature-section {
     padding: 5rem 0;
@@ -8,9 +6,7 @@
 }
 
 
-/* ===========================
-   Section Header
-=========================== */
+/* Section Header */
 
 .section-header {
     max-width: 700px;
@@ -49,9 +45,7 @@
 }
 
 
-/* ===========================
-   Feature Grid
-=========================== */
+/* Feature Grid */
 
 .feature-grid {
     max-width: 1200px;
@@ -66,9 +60,8 @@
 }
 
 
-/* ===========================
-   Feature Card
-=========================== */
+
+/* Feature Card */
 
 .feature-card {
 
@@ -90,15 +83,14 @@
     transform: translateY(-8px);
 
     box-shadow:
-        0 15px 35px rgba(15,23,42,.08);
+        0 15px 35px rgba(15, 23, 42, .08);
 
-    border-color: rgba(79,142,247,.25);
+    border-color: rgba(79, 142, 247, .25);
 }
 
 
-/* ===========================
-   Feature Icon
-=========================== */
+
+/* Feature Icon */
 
 .feature-icon {
 
@@ -110,7 +102,7 @@
     display: grid;
     place-items: center;
 
-    background: rgba(79,142,247,.10);
+    background: rgba(79, 142, 247, .10);
 
     color: var(--primary);
 
@@ -121,7 +113,7 @@
     transition: .3s;
 }
 
-.feature-card:hover .feature-icon{
+.feature-card:hover .feature-icon {
 
     background: var(--primary);
 
@@ -131,26 +123,25 @@
 }
 
 
-/* ===========================
-   Feature Content
-=========================== */
 
-.feature-card h3{
+/* Feature Content */
 
-    margin-bottom:1rem;
+.feature-card h3 {
 
-    color:var(--heading-color);
+    margin-bottom: 1rem;
 
-    font-size:1.3rem;
+    color: var(--heading-color);
 
-    font-weight:600;
+    font-size: 1.3rem;
+
+    font-weight: 600;
 }
 
-.feature-card p{
+.feature-card p {
 
-    color:var(--text-light);
+    color: var(--text-light);
 
-    line-height:1.7;
+    line-height: 1.7;
 }
 
 
@@ -159,9 +150,8 @@
 
 
 
-/* ===========================
-   Tablet
-=========================== */
+
+/* Tablet */
 
 @media (max-width: 768px) {
 
@@ -187,9 +177,8 @@
 }
 
 
-/* ===========================
-   Mobile
-=========================== */
+
+/* Mobile */
 
 @media (max-width: 480px) {
 
