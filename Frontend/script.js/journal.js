@@ -22,8 +22,7 @@ async function loadNotes() {
             id: note.id,
             title: note.title,
             text: note.note,
-            timestamp: new Date(note.created_at).toLocaleString(),
-            completed: false
+            timestamp: new Date(note.created_at).toLocaleString()
         }));
 
         renderNotes();
@@ -34,6 +33,7 @@ async function loadNotes() {
             "<p class='empty-state'>Unable to load journals.</p>";
     }
 }
+
 async function updateNote(id, title, text) {
 
     try {
@@ -86,100 +86,96 @@ function renderNotes() {
 
     notesContainer.innerHTML = notes.map((note, index) => `
 
-        <article class="note-item ${note.completed ? "completed" : ""}">
+<article class="note-item">
 
-            <div class="note-meta">
-                ${note.timestamp}
-            </div>
+    <div class="note-meta">
+        📅 ${note.timestamp}
+    </div>
 
-            <div class="note-editable">
+    <div class="note-editable">
 
-                <h4
-                    contenteditable="true"
-                    data-field="title"
-                    data-index="${index}">
-                    ${note.title}
-                </h4>
+        <h4
+            id="title-${note.id}"
+            contenteditable="false">
+            ${note.title}
+        </h4>
 
-                <p
-                    contenteditable="true"
-                    data-field="text"
-                    data-index="${index}">
-                    ${note.text}
-                </p>
+        <p
+            id="text-${note.id}"
+            contenteditable="false">
+            ${note.text}
+        </p>
 
-            </div>
+    </div>
 
-            <div class="note-actions">
+    <div class="note-actions">
 
-                <label class="check-label">
+        <button
+            class="edit-btn"
+            data-id="${note.id}"
+            data-index="${index}">
+            ✏️ Edit
+        </button>
 
-                    <input
-                        type="checkbox"
-                        ${note.completed ? "checked" : ""}
-                        data-index="${index}">
+        <button
+            class="delete-btn"
+            data-index="${index}">
+            🗑️ Delete
+        </button>
 
-                    <span>Completed</span>
+    </div>
 
-                </label>
+</article>
 
-                ${
-                    note.completed
-                    ?
-                    `<button
-                        class="delete-btn"
-                        data-index="${index}">
-                        Delete
-                    </button>`
-                    :
-                    ""
-                }
+`).join("");
+  
+// ===== EDIT JOURNAL =====
+ 
+document.querySelectorAll(".edit-btn").forEach(button => {
 
-            </div>
+    button.addEventListener("click", async function () {
 
-        </article>
+        const id = Number(this.dataset.id);
 
-    `).join("");
+        const note = notes.find(n => n.id === id);
 
-    document.querySelectorAll(".check-label input").forEach(input => {
+        const title = document.getElementById(`title-${id}`);
+        const text = document.getElementById(`text-${id}`);
 
-        input.addEventListener("change", function () {
+        // EDIT MODE
+        if (this.dataset.mode !== "edit") {
 
-            const index = Number(this.dataset.index);
+            title.contentEditable = "true";
+            text.contentEditable = "true";
 
-            notes[index].completed = this.checked;
+            title.focus();
 
-            renderNotes();
+            this.textContent = "💾 Save";
+            this.dataset.mode = "edit";
 
-        });
-
-    });
-
-    // ===== UPDATE JOURNAL =====
-
-    document.querySelectorAll(".note-editable").forEach((container, index) => {
-
-        const title = container.querySelector("h4");
-        const text = container.querySelector("p");
-
-        async function saveChanges() {
-
-            notes[index].title = title.textContent.trim();
-            notes[index].text = text.textContent.trim();
-
-            await updateNote(
-                notes[index].id,
-                notes[index].title,
-                notes[index].text
-            );
-
+            return;
         }
 
-        title.addEventListener("blur", saveChanges);
-        text.addEventListener("blur", saveChanges);
+        // SAVE MODE
+
+        title.contentEditable = "false";
+        text.contentEditable = "false";
+
+        note.title = title.textContent.trim();
+        note.text = text.textContent.trim();
+
+        await updateNote(
+            note.id,
+            note.title,
+            note.text
+        );
+
+        this.textContent = "✏️ Edit";
+        this.dataset.mode = "";
 
     });
 
+});
     // ===== DELETE JOURNAL =====
 
     document.querySelectorAll(".delete-btn").forEach(button => {
@@ -266,42 +262,6 @@ async function saveNote() {
         console.error(err);
 
         alert("Failed to save journal.");
-
-    }
-
-}
-async function updateNote(id, title, text) {
-
-    try {
-
-        const response = await fetch(`http://localhost:3000/journal/${id}`, {
-
-            method: "PUT",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                title,
-                note: text
-            })
-
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-
-            alert(data.message);
-            return;
-
-        }
-
-    } catch (err) {
-
-        console.error(err);
-        alert("Failed to update journal.");
 
     }
 
