@@ -60,3 +60,68 @@ document.addEventListener("click", (e) => {
     }
 
 });
+
+// Speech Recognition Setup
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    const userInput = document.getElementById('userInput');
+    const micBtn = document.getElementById('micBtn');
+    
+    // Configuration
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US'; // English language
+    
+    // When recording starts
+    recognition.onstart = () => {
+        micBtn.classList.add('listening');
+    };
+    
+    // When speech is recognized
+    recognition.onresult = (event) => {
+        let transcript = '';
+        
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
+        }
+        
+        // Add the recognized text to the input box
+        userInput.value = transcript.trim();
+        userInput.focus();
+    };
+    
+    // When recording ends
+    recognition.onend = () => {
+        micBtn.classList.remove('listening');
+    };
+    
+    // Handle errors
+    recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        micBtn.classList.remove('listening');
+        
+        if (event.error === 'network') {
+            alert('Network error. Please check your connection.');
+        } else if (event.error === 'no-speech') {
+            alert('No speech detected. Please try again.');
+        }
+    };
+    
+    // Mic button click handler
+    micBtn.addEventListener('click', () => {
+        if (micBtn.classList.contains('listening')) {
+            recognition.stop();
+        } else {
+            userInput.value = ''; // Clear previous text
+            recognition.start();
+        }
+    });
+} else {
+    // If Speech Recognition is not supported
+    const micBtn = document.getElementById('micBtn');
+    micBtn.disabled = true;
+    micBtn.title = 'Speech Recognition not supported in your browser';
+    micBtn.style.opacity = '0.5';
+}
