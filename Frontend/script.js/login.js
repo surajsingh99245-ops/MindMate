@@ -25,7 +25,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
         if (response.ok && data.success) {
             alert(data.message);
-            window.location.href = "main.html";
+            window.location.href = "home.html";
         } else {
             alert(data.message || "Invalid username or password");
         }
