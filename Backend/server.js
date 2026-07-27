@@ -185,6 +185,35 @@ app.delete("/journal/:id", async (req, res) => {
         });
     }
 });
+app.put("/journal/:id", async (req, res) => {
+    try {
+
+        const { id } = req.params;
+        const { title, note } = req.body;
+
+        await pool.query(
+            `UPDATE journals
+             SET title = $1, note = $2
+             WHERE id = $3`,
+            [title, note, id]
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Journal updated successfully!"
+        });
+
+    } catch (err) {
+
+        console.error(err);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to update journal."
+        });
+
+    }
+});
 // Start Server
 app.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
