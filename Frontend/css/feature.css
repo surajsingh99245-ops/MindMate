@@ -78,6 +78,17 @@
     transition: all .3s ease;
 }
 
+.feature-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.feature-card-link:hover,
+.feature-card-link:focus-visible {
+    color: inherit;
+}
+
 .feature-card:hover {
 
     transform: translateY(-8px);
