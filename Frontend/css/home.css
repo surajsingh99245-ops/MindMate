@@ -1,11 +1,8 @@
+body {
 
-body{
-
-    background: linear-gradient(
-        180deg,
-        #f8fbff 0%,
-        #eef4fb 100%
-    );
+    background: linear-gradient(180deg,
+            #f8fbff 0%,
+            #eef4fb 100%);
 
 }
 
@@ -215,9 +212,14 @@ body{
 
     visibility: hidden;
 
+    pointer-events: none;
+
     transform: translateY(10px);
 
-    transition: .25s;
+    transition:
+        opacity .25s ease,
+        transform .25s ease,
+        visibility .25s;
 
 }
 
@@ -227,6 +229,8 @@ body{
 
     visibility: visible;
 
+    pointer-events:auto;
+    
     transform: translateY(0);
 
 }
@@ -357,23 +361,23 @@ main {
 
 }
 
-.chat-input input{
+.chat-input input {
 
-    flex:1;
+    flex: 1;
 
-    border:none;
+    border: none;
 
-    outline:none;
+    outline: none;
 
-    background:transparent;
+    background: transparent;
 
-    font-family:inherit;
+    font-family: inherit;
 
-    font-size:1.15rem;
+    font-size: 1.15rem;
 
-    font-weight:400;
+    font-weight: 400;
 
-    color:var(--text-dark);
+    color: var(--text-dark);
 
 }
 
@@ -450,6 +454,18 @@ main {
 
     filter: brightness(.95);
 
-    box-shadow:0 10px 25px rgba(37,99,235,.28);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, .28);
+
+}
+
+.profile-btn .fa-chevron-down {
+
+    transition: transform .3s ease;
+
+}
+
+.profile.active .fa-chevron-down {
+
+    transform: rotate(180deg);
 
 }
