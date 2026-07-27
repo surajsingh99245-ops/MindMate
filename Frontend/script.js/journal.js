@@ -71,22 +71,59 @@
             });
         }
 
-        function saveNote() {
-            const title = titleInput.value.trim();
-            const text = textInput.value.trim();
+   async function saveNote() {
+    const title = titleInput.value.trim();
+    const text = textInput.value.trim();
 
-            if (!title || !text) return;
+    if (!title || !text) return;
+
+    // Temporary username (we'll improve this later)
+    const username = "suraj123";
+
+    try {
+        const response = await fetch("http://localhost:3000/journal", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username,
+                title,
+                note: text
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(data.message);
 
             const now = new Date();
             const timestamp = now.toLocaleString();
 
-            notes.unshift({ title, text, timestamp, completed: false });
+            // Keep the UI working
+            notes.unshift({
+                title,
+                text,
+                timestamp,
+                completed: false
+            });
+
             saveNotes();
             renderNotes();
+
             form.reset();
             titleInput.focus();
+
+        } else {
+            alert(data.message);
         }
 
+    } catch (err) {
+        console.error(err);
+        alert("Server error");
+    }
+}
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             saveNote();
