@@ -34,6 +34,40 @@ async function loadNotes() {
             "<p class='empty-state'>Unable to load journals.</p>";
     }
 }
+async function updateNote(id, title, text) {
+
+    try {
+
+        const response = await fetch(`http://localhost:3000/journal/${id}`, {
+
+            method: "PUT",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                title,
+                note: text
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message);
+            return;
+        }
+
+    } catch (err) {
+
+        console.error(err);
+        alert("Failed to update journal.");
+
+    }
+
+}
 
 function renderNotes() {
 
@@ -106,7 +140,8 @@ function renderNotes() {
         </article>
 
     `).join("");
-        document.querySelectorAll(".check-label input").forEach(input => {
+
+    document.querySelectorAll(".check-label input").forEach(input => {
 
         input.addEventListener("change", function () {
 
@@ -120,39 +155,66 @@ function renderNotes() {
 
     });
 
- document.querySelectorAll(".delete-btn").forEach(button => {
+    // ===== UPDATE JOURNAL =====
 
-    button.addEventListener("click", async function () {
+    document.querySelectorAll(".note-editable").forEach((container, index) => {
 
-        const index = Number(this.dataset.index);
+        const title = container.querySelector("h4");
+        const text = container.querySelector("p");
 
-        const id = notes[index].id;
+        async function saveChanges() {
 
-        try {
+            notes[index].title = title.textContent.trim();
+            notes[index].text = text.textContent.trim();
 
-            const response = await fetch(`http://localhost:3000/journal/${id}`, {
-                method: "DELETE"
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                alert(data.message);
-                return;
-            }
-
-            await loadNotes();
-
-        } catch (err) {
-
-            console.error(err);
-            alert("Failed to delete journal.");
+            await updateNote(
+                notes[index].id,
+                notes[index].title,
+                notes[index].text
+            );
 
         }
 
+        title.addEventListener("blur", saveChanges);
+        text.addEventListener("blur", saveChanges);
+
     });
 
-});
+    // ===== DELETE JOURNAL =====
+
+    document.querySelectorAll(".delete-btn").forEach(button => {
+
+        button.addEventListener("click", async function () {
+
+            const index = Number(this.dataset.index);
+
+            const id = notes[index].id;
+
+            try {
+
+                const response = await fetch(`http://localhost:3000/journal/${id}`, {
+                    method: "DELETE"
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(data.message);
+                    return;
+                }
+
+                await loadNotes();
+
+            } catch (err) {
+
+                console.error(err);
+                alert("Failed to delete journal.");
+
+            }
+
+        });
+
+    });
 
 }
 
@@ -204,6 +266,42 @@ async function saveNote() {
         console.error(err);
 
         alert("Failed to save journal.");
+
+    }
+
+}
+async function updateNote(id, title, text) {
+
+    try {
+
+        const response = await fetch(`http://localhost:3000/journal/${id}`, {
+
+            method: "PUT",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                title,
+                note: text
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            alert(data.message);
+            return;
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+        alert("Failed to update journal.");
 
     }
 
