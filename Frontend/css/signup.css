@@ -16,6 +16,7 @@ body.auth-page {
   color: var(--auth-text);
   position: relative;
   overflow: hidden;
+  overflow: auto;
 }
 
 body.auth-page::before,
