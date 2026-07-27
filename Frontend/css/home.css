@@ -1,0 +1,455 @@
+
+body{
+
+    background: linear-gradient(
+        180deg,
+        #f8fbff 0%,
+        #eef4fb 100%
+    );
+
+}
+
+
+/*==================== NAVBAR ====================*/
+.navbar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    padding: 0 70px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--surface);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid #e8edf5;
+
+    z-index: 1000;
+
+}
+
+/*==================== LOGO ====================*/
+
+.logo {
+
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logo img {
+
+    width: 56px;
+    height: 56px;
+}
+
+.logo-text {
+
+    font-size: 24px;
+    font-weight: 700;
+
+}
+
+.mind {
+
+    color: var(--logo-blue);
+
+}
+
+.mate {
+
+    color: var(--logo-green);
+
+}
+
+/*==================== NAV LINKS ====================*/
+
+.nav-links {
+
+    display: flex;
+    align-items: center;
+
+    gap: 40px;
+
+    list-style: none;
+
+}
+
+.nav-links a {
+
+    position: relative;
+
+    text-decoration: none;
+
+    color: var(--text-dark);
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    transition: .3s;
+
+}
+
+.nav-links a:hover {
+
+    color: var(--logo-blue);
+
+}
+
+.nav-links a.active {
+
+    color: var(--logo-blue);
+
+}
+
+.nav-links a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -6px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--logo-blue);
+
+    transition: .3s;
+
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+
+    width: 100%;
+
+}
+
+/*==================== PROFILE ====================*/
+
+.profile {
+
+    position: relative;
+
+}
+
+.profile-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.profile-btn:hover {
+
+    background: #f5f7fb;
+
+}
+
+.profile-btn i:first-child {
+
+    font-size: 32px;
+
+    color: var(--logo-blue);
+
+}
+
+.profile-btn i:last-child {
+
+    font-size: 12px;
+
+    color: #777;
+
+}
+
+/*==================== DROPDOWN ====================*/
+
+.profile-dropdown {
+
+    position: absolute;
+
+    top: 60px;
+    right: 0;
+
+    width: 170px;
+
+    background: #fff;
+
+    border-radius: 12px;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+
+    border: 1px solid #edf2f7;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(10px);
+
+    transition: .25s;
+
+}
+
+.profile.active .profile-dropdown {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+.profile-dropdown a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 18px;
+
+    text-decoration: none;
+
+    color: var(--text-dark);
+
+    transition: .3s;
+
+}
+
+.profile-dropdown a:hover {
+
+    background: #f8fafc;
+
+    color: #ef4444;
+
+}
+
+/*==================== MAIN ====================*/
+
+main {
+
+    margin-top: 80px;
+
+    height: calc(100vh - 80px);
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+/*==================== CHAT HOME ====================*/
+
+.chat-box {
+
+    width: 70%;
+
+    display: flex;
+
+    justify-content: center;
+
+}
+
+.chat-home {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 90px;
+
+}
+
+/*==================== HEADING ====================*/
+
+.hero-text {
+
+    margin-top: 140px;
+
+}
+
+.hero-text h1 {
+
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+
+    color: var(--text-dark);
+
+    text-align: center;
+
+}
+
+/*==================== CHAT INPUT ====================*/
+
+.chat-input {
+
+    width: 90%;
+
+    max-width: 1250px;
+
+    /* height: 78px; */
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 10px 16px 10px 28px;
+
+    background: #ffffff;
+
+    border: none;
+
+    border-radius: 999px;
+
+    box-shadow:
+        0 10px 35px rgba(15, 23, 42, .08),
+        0 2px 8px rgba(15, 23, 42, .04);
+
+    transition: .3s ease;
+
+}
+
+.chat-input:focus-within {
+
+    box-shadow:
+        0 15px 40px rgba(37, 99, 235, .12),
+        0 4px 12px rgba(37, 99, 235, .08);
+
+}
+
+.chat-input input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-family:inherit;
+
+    font-size:1.15rem;
+
+    font-weight:400;
+
+    color:var(--text-dark);
+
+}
+
+.chat-input input::placeholder {
+
+    color: #98a2b3;
+
+}
+
+/*==================== BUTTONS ====================*/
+
+.mic-btn,
+.send-btn {
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+/*==================== MIC ====================*/
+
+.mic-btn {
+
+    margin-right: 12px;
+
+    background: #f4f6f8;
+
+    color: #5b6472;
+}
+
+.mic-btn i {
+
+    font-size: 1.4rem;
+
+}
+
+.mic-btn:hover {
+
+    background: #eceff3;
+
+}
+
+/*==================== SEND ====================*/
+
+.send-btn {
+
+    background: var(--logo-blue);
+
+    color: #fff;
+
+}
+
+.send-btn i {
+
+    font-size: 1.45rem;
+
+}
+
+.send-btn:hover {
+
+    transform: scale(1.05);
+
+    filter: brightness(.95);
+
+    box-shadow:0 10px 25px rgba(37,99,235,.28);
+
+}
