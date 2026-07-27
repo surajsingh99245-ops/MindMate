@@ -140,6 +140,28 @@ app.post("/signup", async (req, res) => {
         });
     }
 });
+app.get("/journal/:username", async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        const result = await pool.query(
+            `SELECT * FROM journals
+             WHERE username = $1
+             ORDER BY created_at DESC`,
+            [username]
+        );
+
+        res.status(200).json(result.rows);
+
+    } catch (err) {
+        console.error(err);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch journals."
+        });
+    }
+});
 // Start Server
 app.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
