@@ -52,16 +52,45 @@ app.get("/hello", (req, res) => {
 });
 
 // Login Route
-app.post("/login", (req, res) => {
-    console.log("Request Body:", req.body);
+app.post("/login", async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
-    res.status(200).json({
-        success: true,
-        message: "Login request received!",
-        data: req.body
-    });
+        const result = await pool.query(
+            "SELECT * FROM users WHERE username = $1",
+            [username]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid username or password"
+            });
+        }
+
+        const user = result.rows[0];
+
+        if (user.password !== password) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid username or password"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Login successful!"
+        });
+
+    } catch (err) {
+        console.error(err);
+
+        res.status(500).json({
+            success: false,
+            message: "Server error"
+        });
+    }
 });
-
  
 app.post("/signup", async (req, res) => {
     try {
