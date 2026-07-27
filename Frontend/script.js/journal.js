@@ -120,19 +120,39 @@ function renderNotes() {
 
     });
 
-    document.querySelectorAll(".delete-btn").forEach(button => {
+ document.querySelectorAll(".delete-btn").forEach(button => {
 
-        button.addEventListener("click", function () {
+    button.addEventListener("click", async function () {
 
-            const index = Number(this.dataset.index);
+        const index = Number(this.dataset.index);
 
-            notes.splice(index, 1);
+        const id = notes[index].id;
 
-            renderNotes();
+        try {
 
-        });
+            const response = await fetch(`http://localhost:3000/journal/${id}`, {
+                method: "DELETE"
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.message);
+                return;
+            }
+
+            await loadNotes();
+
+        } catch (err) {
+
+            console.error(err);
+            alert("Failed to delete journal.");
+
+        }
 
     });
+
+});
 
 }
 

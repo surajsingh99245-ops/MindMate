@@ -162,6 +162,29 @@ app.get("/journal/:username", async (req, res) => {
         });
     }
 });
+app.delete("/journal/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await pool.query(
+            "DELETE FROM journals WHERE id = $1",
+            [id]
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Journal deleted successfully!"
+        });
+
+    } catch (err) {
+        console.error(err);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to delete journal."
+        });
+    }
+});
 // Start Server
 app.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
