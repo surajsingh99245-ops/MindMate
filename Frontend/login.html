@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindMate | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body class="auth-page">
+    <div class="auth-shell">
+      <div class="auth-card">
+        <a href="index.html" class="back-home">← Back to Home</a>
+        <div class="auth-brand">
+          <img src="Image Asset/Logo.svg" alt="MindMate Logo" class="brand-logo" />
+          <div>
+            <h1>Welcome Back</h1>
+            <p>Sign in to continue your MindMate journey.</p>
+          </div>
+        </div>
+
+        <form class="auth-form">
+          <label>
+            UserID
+            <input type="text" placeholder="Enter your UserID" required />
+          </label>
+
+          <label>
+            Password
+            <input type="password" placeholder="Enter your password" required />
+          </label>
+
+          <div class="auth-options">
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="auth-btn primary-btn">Log In</button>
+
+          <div class="auth-divider"><span>or</span></div>
+
+          <button type="button" class="auth-btn google-btn">
+            <span class="google-icon">G</span>
+            Continue with Google
+          </button>
+        </form>
+
+        <p class="auth-switch">
+          Don’t have an account?
+          <a href="signup.html"> SignUp</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
