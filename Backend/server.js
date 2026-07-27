@@ -91,6 +91,30 @@ app.post("/login", async (req, res) => {
         });
     }
 });
+app.post("/journal", async (req, res) => {
+    try {
+        const { username, title, note } = req.body;
+
+        await pool.query(
+            `INSERT INTO journals (username, title, note)
+             VALUES ($1, $2, $3)`,
+            [username, title, note]
+        );
+
+        res.status(201).json({
+            success: true,
+            message: "Journal saved successfully!"
+        });
+
+    } catch (err) {
+        console.error(err);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to save journal."
+        });
+    }
+});
  
 app.post("/signup", async (req, res) => {
     try {
