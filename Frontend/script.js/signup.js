@@ -1,10 +1,15 @@
 document.getElementById("signupForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const fullName = document.getElementById("fullName").value;
-    const username = document.getElementById("username").value;
+    const fullName = document.getElementById("fullName").value.trim();
+    const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (!fullName || !username || !password || !confirmPassword) {
+        alert("Please fill all fields.");
+        return;
+    }
 
     if (password !== confirmPassword) {
         alert("Passwords do not match!");
@@ -26,14 +31,15 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
 
         const data = await response.json();
 
-        if (data.success) {
-            alert("Account created successfully!");
+        if (response.ok) {
+            alert(data.message);
             window.location.href = "login.html";
         } else {
             alert(data.error || "Signup failed");
         }
+
     } catch (error) {
         console.error(error);
-        alert("Server error");
+        alert("Cannot connect to the server.");
     }
 });
