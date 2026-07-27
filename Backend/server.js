@@ -62,32 +62,7 @@ app.post("/login", (req, res) => {
     });
 });
 
-// Create Users Table
-app.get("/create-users-table", async (req, res) => {
-    try {
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS users (
-                id SERIAL PRIMARY KEY,
-                name VARCHAR(100) NOT NULL,
-                email VARCHAR(100) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-        `);
-
-        res.json({
-            success: true,
-            message: "Users table created successfully!"
-        });
-    } catch (err) {
-        console.error(err);
-
-        res.status(500).json({
-            success: false,
-            error: err.message
-        });
-    }
-});
+ 
 app.post("/signup", async (req, res) => {
     try {
         const { fullName, username, password } = req.body;
