@@ -226,13 +226,13 @@ header {
 
 
 
-.nav-left{
+.nav-left {
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    gap:12px;
+    gap: 12px;
 
 }
 
@@ -290,6 +290,14 @@ header {
 }
 
 
+
+
+.mobile-menu {
+
+    display: none;
+
+}
+
 /* Mobile phone responsive */
 
 @media (max-width:768px) {
@@ -342,5 +350,82 @@ header {
         font-size: 20px;
 
     }
+
+    .mobile-menu {
+
+        position: fixed;
+
+        top: 118px;
+        left: 50%;
+
+        transform: translate(-50%, -20px);
+
+        width: 90%;
+
+        background: var(--surface);
+
+        border: 1px solid var(--border);
+
+        border-radius: 18px;
+
+        box-shadow: 0 15px 35px rgba(15, 23, 42, .12);
+
+        padding: 20px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 18px;
+
+        z-index: 999;
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        pointer-events: none;
+
+        transition: all .3s ease;
+
+    }
+
+    .mobile-menu a {
+
+        text-decoration: none;
+
+        color: var(--text);
+
+        font-weight: 600;
+
+        padding: 10px 0;
+
+        transition: .3s;
+
+    }
+
+    .mobile-menu a:hover {
+
+        color: var(--primary);
+
+    }
+
+    .mobile-menu.active {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        pointer-events: auto;
+
+        transform: translate(-50%, 0);
+
+    }
+
+}
+
+body.menu-open{
+
+    overflow:hidden;
 
 }
