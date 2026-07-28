@@ -14,8 +14,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-        <link rel="icon" href="Image Asset/favicon.ico">
-        <link rel="icon" type="image/svg+xml" href="Image Asset/Logo.svg">
+    <link rel="icon" href="Image Asset/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="Image Asset/Logo.svg">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
@@ -274,55 +274,57 @@
 
     <!-- Chat Section -->
 
-   <section class="chat-section" id="chat">
+    <section class="chat-section" id="chat">
 
-    <div class="container">
+        <div class="container">
 
-        <div class="section-header">
+            <div class="section-header">
 
-            <span class="section-badge">
-                ✨ AI Companion
-            </span>
+                <span class="section-badge">
+                    ✨ AI Companion
+                </span>
 
-            <h2>Talk to MindMate</h2>
+                <h2>Talk to MindMate</h2>
 
-            <p id="sectionHeader">
-                Share your thoughts, feelings, or concerns. MindMate is here
-                to listen and guide you with AI-powered emotional support.
-            </p>
+                <p id="sectionHeader">
+                    Share your thoughts, feelings, or concerns. MindMate is here
+                    to listen and guide you with AI-powered emotional support.
+                </p>
 
-        </div>
+            </div>
 
-        <div class="chat-container">
+            <div class="chat-container">
 
-            <!-- Messages -->
-            <div class="chat-messages" id="chatMessages">
+                <!-- Messages -->
+                <div class="chat-messages" id="chatMessages">
 
-                <div class="message ai-message">
+                    <div class="message ai-message">
 
-                    <div class="message-avatar">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
+                        <div class="message-avatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
 
-                    <div class="message-content">
+                        <div class="message-content">
 
-                        <h4>MindMate</h4>
+                            <h4>MindMate</h4>
 
-                        <p>Hi 👋
+                            <p>Hi 👋
 
-I'm MindMate.
+                                I'm MindMate.
 
-Tell me how you're feeling today.</p>
+                                Tell me how you're feeling today.</p>
 
-                        <div class="suggestion-chips">
+                            <div class="suggestion-chips">
 
-                            <button class="chip">😊 Happy</button>
+                                <button class="chip">😊 Happy</button>
 
-                            <button class="chip">😔 Stressed</button>
+                                <button class="chip">😔 Stressed</button>
 
-                            <button class="chip">😟 Anxious</button>
+                                <button class="chip">😟 Anxious</button>
 
-                            <button class="chip">😴 Can't sleep</button>
+                                <button class="chip">😴 Can't sleep</button>
+
+                            </div>
 
                         </div>
 
@@ -330,30 +332,22 @@ Tell me how you're feeling today.</p>
 
                 </div>
 
-            </div>
+                <!-- Input -->
+                <div class="chat-input">
 
-            <!-- Input -->
-            <div class="chat-input">
+                    <div class="input-wrapper">
 
-                <div class="input-wrapper">
+                        <input type="text" id="userInput" placeholder="How are you feeling today?">
 
-                    <input
-                        type="text"
-                        id="userInput"
-                        placeholder="How are you feeling today?"
-                    >
+                        <button id="micBtn" class="mic-btn" title="Click to speak">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
 
-                    <button
-                        id="micBtn"
-                        class="mic-btn"
-                        title="Click to speak"
-                    >
-                        <i class="fa-solid fa-microphone"></i>
-                    </button>
+                        <button id="sendBtn">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
 
-                    <button id="sendBtn">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
+                    </div>
 
                 </div>
 
@@ -361,9 +355,7 @@ Tell me how you're feeling today.</p>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
     <!-- Features Section -->
 
@@ -410,16 +402,16 @@ Tell me how you're feeling today.</p>
 
                 <div class="feature-card">
                     <a href="login.html" class="feature-card-link">
-                    <div class="feature-icon">
-                        <i class="fa-solid fa-face-smile"></i>
-                    </div>
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-face-smile"></i>
+                        </div>
 
-                    <h3>Mood Tracking</h3>
+                        <h3>Mood Tracking</h3>
 
-                    <p>
-                        Log your daily emotions and discover patterns in
-                        your mental health journey over time.
-                    </p>
+                        <p>
+                            Log your daily emotions and discover patterns in
+                            your mental health journey over time.
+                        </p>
                     </a>
                 </div>
 
@@ -745,7 +737,7 @@ Tell me how you're feeling today.</p>
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js/landing.js"></script>
 
 </body>
