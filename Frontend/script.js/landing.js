@@ -164,25 +164,49 @@ async function sendMessage() {
     userInput.placeholder = "";
     try {
 
-        const response = await fetch("/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: message
-            })
-        });
+      const response = await fetch("http://localhost:3000/chat", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        message: message
+    })
+});
 
-        const data = await response.json();
+const data = await response.json();
+if (response.ok && data.success) {
 
-        addMessage(data.reply, "ai");
+    addMessage(data.reply, "ai");
 
-    } catch (err) {
+} else {
 
-        console.error("ERROR:", err);
+    if (response.status === 429) {
+
+        addMessage(
+            "⚠️ MindMate has reached its free daily AI limit.\n\nPlease try again in about a minute or use a new Gemini API key.",
+            "ai"
+        );
+
+    } else {
+
+        addMessage(
+            "⚠️ Sorry, something went wrong while contacting MindMate. Please try again.",
+            "ai"
+        );
 
     }
+
+}    } catch (err) {
+
+    console.error("ERROR:", err);
+
+    addMessage(
+        "⚠️ Unable to connect to MindMate. Please check your internet connection and try again.",
+        "ai"
+    );
+
+}
 }
 sendBtn.addEventListener("click", sendMessage);
 userInput.addEventListener("keypress", (e) => {

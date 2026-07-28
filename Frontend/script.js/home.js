@@ -63,7 +63,7 @@ async function sendMessage() {
     input.value = "";
 
     try {
-
+        const typingIndicator = showTypingIndicator();
         const response = await fetch("http://localhost:3000/chat", {
 
             method: "POST",
@@ -80,17 +80,49 @@ async function sendMessage() {
 
         const data = await response.json();
 
+        typingIndicator.remove();
+
         addMessage(data.reply, "ai");
 
     } catch (error) {
 
         console.error(error);
 
+        if (typingIndicator) {
+
+            typingIndicator.remove();
+
+        }
+
         addMessage("Sorry, something went wrong.", "ai");
 
     }
 
 }
+
+
+function showTypingIndicator() {
+
+    const typing = document.createElement("div");
+
+    typing.className = "ai-message typing-indicator";
+
+    typing.innerHTML = `
+        <div class="message-content">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    `;
+
+    messages.appendChild(typing);
+
+    messages.scrollTop = messages.scrollHeight;
+
+    return typing;
+
+}
+
 
 sendBtn.addEventListener("click", sendMessage);
 
