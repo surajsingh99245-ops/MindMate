@@ -1,15 +1,19 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
 const { Pool } = require("pg");
-
+const { GoogleGenAI } = require("@google/genai");
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
 });
-
+const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY
+});
 const app = express();
-
+app.use(express.json());
+app.use(cors());
 // Test Database Connection
 pool.connect()
     .then(() => {
@@ -115,7 +119,7 @@ app.post("/journal", async (req, res) => {
         });
     }
 });
- 
+
 app.post("/signup", async (req, res) => {
     try {
         const { fullName, username, password } = req.body;
@@ -213,6 +217,61 @@ app.put("/journal/:id", async (req, res) => {
         });
 
     }
+});
+app.post("/chat", async (req, res) => {
+
+    try {
+
+        const { message } = req.body;
+
+        const response = await ai.models.generateContent({
+
+            model: "gemini-2.5-flash",
+
+            contents: `
+You are MindMate AI.
+
+You are a supportive mental wellness companion.
+
+Be empathetic.
+
+Never diagnose diseases.
+
+Never prescribe medicines.
+
+Keep responses friendly, encouraging, and concise.
+
+User:
+${message}
+`
+
+        });
+
+        res.status(200).json({
+
+            success: true,
+
+            reply: response.text
+
+        });
+
+    } catch (err) {
+
+        console.error(err);
+
+        res.status(500).json({
+
+            success: false,
+
+            message: "Failed to generate AI response."
+
+        });
+
+    }
+
+});
+app.get("/test", (req, res) => {
+    res.send("Backend is working!");
 });
 // Start Server
 app.listen(PORT, () => {
