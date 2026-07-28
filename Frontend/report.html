@@ -9,7 +9,8 @@
     <title>MindMate | Report</title>
 
     <link rel="stylesheet" href="CSS/global.css">
-    <link rel="stylesheet" href="CSS/home.css">
+    <!-- <link rel="stylesheet" href="CSS/home.css"> -->
+    <link rel="stylesheet" href="CSS/report.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,7 +79,263 @@
 
     </header>
 
+    <main>
+
+        <main>
+
+            <section class="report-hero">
+
+                <h1>Mental Wellness Report</h1>
+
+                <p>
+                    Track your emotional well-being through your daily check-ins and journal activity.
+                </p>
+
+                <!-- Weekly / Monthly Toggle -->
+
+                <div class="report-toggle">
+
+                    <button id="weeklyBtn" class="active">
+
+                        Weekly
+
+                    </button>
+
+                    <button id="monthlyBtn">
+
+                        Monthly
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- 👇 PUT THE SUMMARY CARDS HERE -->
+
+            <section class="summary-cards">
+
+                <div class="summary-card">
+
+                    <div class="card-icon">
+                        😊
+                    </div>
+
+                    <h3>Average Mood</h3>
+
+                    <p id="avgMood">Happy</p>
+
+                </div>
+
+                <div class="summary-card">
+
+                    <div class="card-icon">
+                        📅
+                    </div>
+
+                    <h3>Daily Check-ins</h3>
+
+                    <p id="checkins">6 / 7 Days</p>
+
+                </div>
+
+                <div class="summary-card">
+
+                    <div class="card-icon">
+                        🔥
+                    </div>
+
+                    <h3>Current Streak</h3>
+
+                    <p id="streak">12 Days</p>
+
+                </div>
+
+                <div class="summary-card">
+
+                    <div class="card-icon">
+                        📖
+                    </div>
+
+                    <h3>Journal Entries</h3>
+
+                    <p id="journalEntries">18 Entries</p>
+
+                </div>
+
+            </section>
 
 
+            <!-- Mood Char Section -->
+            <section class="mood-chart">
+
+                <div class="chart-header">
+
+                    <h2>Mood Trend</h2>
+
+                    <p>Your emotional journey over the selected period.</p>
+
+                </div>
+
+                <div class="chart-container">
+
+                    <canvas id="moodChart"></canvas>
+
+                </div>
+
+            </section>
+
+            <!-- analytics section -->
+
+            <section class="analytics-grid">
+
+                <!-- Mood Distribution -->
+
+                <div class="analytics-card">
+
+                    <h2>Mood Distribution</h2>
+
+                    <div class="mood-item">
+
+                        <span>😊 Happy</span>
+
+                        <strong>45%</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-fill happy"></div>
+
+                    </div>
+
+                    <div class="mood-item">
+
+                        <span>😌 Calm</span>
+
+                        <strong>25%</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-fill calm"></div>
+
+                    </div>
+
+                    <div class="mood-item">
+
+                        <span>😐 Neutral</span>
+
+                        <strong>15%</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-fill neutral"></div>
+
+                    </div>
+
+                    <div class="mood-item">
+
+                        <span>😔 Sad</span>
+
+                        <strong>10%</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-fill sad"></div>
+
+                    </div>
+
+                    <div class="mood-item">
+
+                        <span>😰 Anxious</span>
+
+                        <strong>5%</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-fill anxious"></div>
+
+                    </div>
+
+                </div>
+
+                <!-- Journal Activity -->
+
+                <div class="analytics-card">
+
+                    <h2>Journal Activity</h2>
+
+                    <canvas id="journalChart"></canvas>
+
+                </div>
+
+            </section>
+
+
+
+            <section class="ai-summary">
+
+                <div class="summary-header">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    <h2>AI Wellness Insights</h2>
+
+                </div>
+
+                <div class="insight-list">
+
+                    <div class="insight-item">
+
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+
+                        <p>Your mood improved compared to last week.</p>
+
+                    </div>
+
+                    <div class="insight-item">
+
+                        <i class="fa-solid fa-calendar-check"></i>
+
+                        <p>You completed 6 of 7 daily check-ins this week.</p>
+
+                    </div>
+
+                    <div class="insight-item">
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                        <p>You wrote 18 journal entries this month.</p>
+
+                    </div>
+
+                    <div class="insight-item">
+
+                        <i class="fa-solid fa-lightbulb"></i>
+
+                        <p>Try maintaining your streak for another week to build consistency.</p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js/home.js"></script>
+    <script src="script.js/report.js"></script>
 </body>
