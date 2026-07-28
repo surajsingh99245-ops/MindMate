@@ -1,59 +1,185 @@
 const weeklyData = {
 
-    averageMood: "Happy",
+    summary: {
+        averageMood: "Happy",
 
-    checkins: "6 / 7 Days",
+        checkins: "6 / 7 Days",
 
-    streak: "12 Days",
+        streak: "12 Days",
 
-    journalEntries: "18 Entries",
+        journalEntries: "18 Entries",
+    },
 
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    charts: {
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 
-    moodTrend: [4, 3, 2, 4, 5, 4, 5],
+        moodTrend: [4, 3, 2, 4, 5, 4, 5],
 
-    journalActivity: [2, 1, 3, 2, 4, 1, 3]
+        journalActivity: [2, 1, 3, 2, 4, 1, 3],
+    },
+
+    distribution: {
+
+        happy: 45,
+
+        calm: 25,
+
+        neutral: 15,
+
+        sad: 10,
+
+        anxious: 5
+
+    },
+
+    insights: [
+
+        "😊 Your mood has improved compared to last week.",
+
+        "🔥 You completed 6 out of 7 daily check-ins.",
+
+        "📖 You wrote 18 journal entries this week.",
+
+        "💡 Keep maintaining your journaling streak."],
 
 };
 
 const monthlyData = {
 
-    averageMood: "Calm",
+    summary: {
 
-    checkins: "26 / 30 Days",
+        averageMood: "Calm",
 
-    streak: "28 Days",
+        checkins: "26 / 30 Days",
 
-    journalEntries: "72 Entries",
+        streak: "28 Days",
 
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+        journalEntries: "72 Entries"
 
-    moodTrend: [3, 4, 4, 5],
+    },
 
-    journalActivity: [18, 22, 15, 17]
+    charts: {
+
+        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+
+        moodTrend: [3, 4, 4, 5],
+
+        journalActivity: [18, 22, 15, 17]
+
+    },
+
+    distribution: {
+
+        happy: 38,
+
+        calm: 30,
+
+        neutral: 18,
+
+        sad: 9,
+
+        anxious: 5
+
+    },
+
+    insights: [
+
+        "😊 Your overall mood remained positive this month.",
+
+        "🏆 You completed 26 daily check-ins.",
+
+        "📖 You wrote 72 journal entries this month.",
+
+        "💙 Continue checking in daily for better insights."
+
+    ]
 
 };
 
+
+function renderMoodDistribution(distribution) {
+
+    document.getElementById("happyPercent").textContent =
+        distribution.happy + "%";
+
+    document.getElementById("calmPercent").textContent =
+        distribution.calm + "%";
+
+    document.getElementById("neutralPercent").textContent =
+        distribution.neutral + "%";
+
+    document.getElementById("sadPercent").textContent =
+        distribution.sad + "%";
+
+    document.getElementById("anxiousPercent").textContent =
+        distribution.anxious + "%";
+
+
+    document.getElementById("happyBar").style.width =
+        distribution.happy + "%";
+
+    document.getElementById("calmBar").style.width =
+        distribution.calm + "%";
+
+    document.getElementById("neutralBar").style.width =
+        distribution.neutral + "%";
+
+    document.getElementById("sadBar").style.width =
+        distribution.sad + "%";
+
+    document.getElementById("anxiousBar").style.width =
+        distribution.anxious + "%";
+
+}
+
+
 function updateReport(data) {
 
+    // Summary Cards
+
     document.getElementById("avgMood").textContent =
-        data.averageMood;
+        data.summary.averageMood;
 
     document.getElementById("checkins").textContent =
-        data.checkins;
+        data.summary.checkins;
 
     document.getElementById("streak").textContent =
-        data.streak;
+        data.summary.streak;
 
     document.getElementById("journalEntries").textContent =
-        data.journalEntries;
+        data.summary.journalEntries;
 
+    // Charts
 
     renderMoodChart(
 
-        data.labels,
+        data.charts.labels,
 
-        data.moodTrend
+        data.charts.moodTrend
+
+    );
+
+    renderJournalChart(
+
+        data.charts.labels,
+
+        data.charts.journalActivity
+
+    );
+
+    // Mood Distribution
+
+    renderMoodDistribution(
+
+        data.distribution
+
+    );
+
+    // AI Insights
+
+    renderInsights(
+
+        data.insights
 
     );
 
@@ -297,55 +423,158 @@ function renderMoodChart(labels, data) {
 
 const journalCtx = document.getElementById("journalChart");
 
-new Chart(journalCtx, {
+let journalChart;
 
-    type: "bar",
+function renderJournalChart(labels, data) {
 
-    data: {
+    if (journalChart) {
 
-        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        journalChart.destroy();
 
-        datasets: [{
+    }
 
-            data: [2, 1, 3, 2, 4, 1, 3],
+    journalChart = new Chart(journalCtx, {
 
-            backgroundColor: "#4F8EF7",
+        type: "bar",
 
-            borderRadius: 8
+        data: {
 
-        }]
+            labels: labels,
 
-    },
+            datasets: [{
 
-    options: {
+                data: data,
 
-        responsive: true,
+                backgroundColor: "#4F8EF7",
 
-        plugins: {
+                borderRadius: 8,
 
-            legend: {
+                borderSkipped: false
 
-                display: false
-
-            }
+            }]
 
         },
 
-        scales: {
+        options: {
 
-            y: {
+            responsive: true,
 
-                beginAtZero: true
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+
+                    display: false
+
+                }
+
+            },
+
+            scales: {
+
+                x: {
+
+                    grid: {
+
+                        display: false
+
+                    }
+
+                },
+
+                y: {
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        stepSize: 1
+
+                    }
+
+                }
 
             }
 
         }
 
-    }
+    });
 
-});
+}
+
+// new Chart(journalCtx, {
+
+//     type: "bar",
+
+//     data: {
+
+//         labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+
+//         datasets: [{
+
+//             data: [2, 1, 3, 2, 4, 1, 3],
+
+//             backgroundColor: "#4F8EF7",
+
+//             borderRadius: 8
+
+//         }]
+
+//     },
+
+//     options: {
+
+//         responsive: true,
+
+//         plugins: {
+
+//             legend: {
+
+//                 display: false
+
+//             }
+
+//         },
+
+//         scales: {
+
+//             y: {
+
+//                 beginAtZero: true
+
+//             }
+
+//         }
+
+//     }
+
+// });
 
 
+function renderInsights(insights) {
+
+    const container = document.querySelector(".insight-list");
+
+    container.innerHTML = "";
+
+    insights.forEach((text) => {
+
+        container.innerHTML += `
+
+        <div class="insight-item">
+
+            <i class="fa-solid fa-lightbulb"></i>
+
+            <p>${text}</p>
+
+        </div>
+
+        `;
+
+    });
+
+}
 
 
 
