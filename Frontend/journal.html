@@ -1,34 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindMate | Personal Journal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header class="journal-header">
+
+    <!-- Navbar -->
+
+    <!-- <header class="journal-header">
+
         <div class="container journal-nav">
+
             <a href="home.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back</a>
             <div class="logo">
+
                 <img src="Image Asset/Logo.svg" alt="MindMate Logo">
                 <span class="logo-text"><span class="mind">Mind</span><span class="mate">Mate</span></span>
+
             </div>
+
         </div>
+
+    </header> -->
+
+
+    <header>
+
+        <nav class="navbar-journal">
+
+            <div class="logo-journal">
+
+                <img src="Image Asset/Logo.svg" alt="MindMate Logo">
+
+                <span class="logo-text-journal">
+                    <span class="mind-journal">Mind</span><span class="mate-journal">Mate</span>
+                </span>
+
+            </div>
+
+            <ul class="nav-links-journal">
+
+                <li><a href="home.html">Home</a></li>
+
+                <li><a href="journal.html" class="active">Journal</a></li>
+
+                <li><a href="wellness.html">Wellness</a></li>
+
+                <li><a href="report.html">Report</a></li>
+
+            </ul>
+
+            <div class="profile-journal">
+
+                <button class="profile-btn-journal">
+
+                    <i class="fa-solid fa-circle-user"></i>
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+                <div class="profile-dropdown-journal">
+
+                    <a href="index.html">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Logout
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
     </header>
 
+
+
+    <!-- Main page OR Hero page -->
+
     <main class="journal-page">
+
         <section class="journal-hero">
+
             <div class="container journal-layout">
+
                 <div class="journal-editor">
+
                     <div class="journal-header-block">
+
                         <span class="section-badge">📝 Personal Journal</span>
                         <h1>Write your thoughts clearly.</h1>
                         <p>Capture a note with a title, then save it with the exact date and time.</p>
+
                     </div>
 
                     <form class="journal-form" id="journalForm">
@@ -40,19 +116,32 @@
 
                         <button type="submit">Save Note</button>
                     </form>
+
                 </div>
 
                 <aside class="journal-list">
+
                     <div class="journal-list-header">
+
                         <h3>Saved Notes</h3>
                         <span id="noteCount">0 notes</span>
+
                     </div>
                     <div id="notesContainer" class="notes-container"></div>
+
                 </aside>
+
             </div>
+
         </section>
+
     </main>
-<script src="./script.js/journal.js"></script>
+
+
+
+    <script src="./script.js/journal.js"></script>
+    
 
 </body>
+
 </html>
