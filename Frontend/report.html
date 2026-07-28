@@ -199,13 +199,13 @@
 
                         <span>😊 Happy</span>
 
-                        <strong>45%</strong>
+                        <strong id="happyPercent">45%</strong>
 
                     </div>
 
                     <div class="progress">
 
-                        <div class="progress-fill happy"></div>
+                        <div class="progress-fill happy" id="happyBar"></div>
 
                     </div>
 
@@ -213,13 +213,13 @@
 
                         <span>😌 Calm</span>
 
-                        <strong>25%</strong>
+                       <strong id="calmPercent">25%</strong>
 
                     </div>
 
                     <div class="progress">
 
-                        <div class="progress-fill calm"></div>
+                        <div class="progress-fill calm" id="calmBar"></div>
 
                     </div>
 
@@ -227,13 +227,13 @@
 
                         <span>😐 Neutral</span>
 
-                        <strong>15%</strong>
+                        <strong id="neutralPercent">15%</strong>
 
                     </div>
 
                     <div class="progress">
 
-                        <div class="progress-fill neutral"></div>
+                        <div class="progress-fill neutral" id="neutralBar"></div>
 
                     </div>
 
@@ -241,27 +241,28 @@
 
                         <span>😔 Sad</span>
 
-                        <strong>10%</strong>
+                        <strong id="sadPercent">10%</strong>
+
 
                     </div>
 
                     <div class="progress">
 
-                        <div class="progress-fill sad"></div>
+                        <div class="progress-fill sad" id="sadBar"></div>
 
-                    </div>
+                    </div><strong id="anxiousPercent">5%</strong>
 
                     <div class="mood-item">
 
                         <span>😰 Anxious</span>
 
-                        <strong>5%</strong>
+                       <strong id="anxiousPercent">5%</strong>
 
                     </div>
 
                     <div class="progress">
 
-                        <div class="progress-fill anxious"></div>
+                        <div class="progress-fill anxious" id="anxiousBar"></div>
 
                     </div>
 
@@ -273,7 +274,11 @@
 
                     <h2>Journal Activity</h2>
 
-                    <canvas id="journalChart"></canvas>
+                    <div class="journal-chart-container">
+
+                        <canvas id="journalChart"></canvas>
+
+                    </div>
 
                 </div>
 
