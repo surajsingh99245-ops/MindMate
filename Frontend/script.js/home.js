@@ -1,3 +1,7 @@
+const heroText = document.getElementById("heroText");
+const chatHome = document.getElementById("chatHome");
+
+
 const profile = document.querySelector(".profile");
 const profileBtn = document.querySelector(".profile-btn");
 
@@ -48,11 +52,19 @@ async function sendMessage() {
     // Show user's message
     addMessage(message, "user");
 
+    if (!heroText.classList.contains("hidden")) {
+
+        heroText.classList.add("hidden");
+
+    }
+
+    chatHome.classList.add("chat-started");
+
     input.value = "";
 
     try {
 
-       const response = await fetch("http://localhost:3000/chat", {
+        const response = await fetch("http://localhost:3000/chat", {
 
             method: "POST",
 
