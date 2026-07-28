@@ -135,3 +135,41 @@ input.addEventListener("keypress", function (e) {
     }
 
 });
+const micBtn = document.querySelector(".mic-btn");
+
+const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.continuous = false;
+
+    micBtn.addEventListener("click", () => {
+
+        recognition.start();
+
+        micBtn.innerHTML = `<i class="fa-solid fa-microphone-lines"></i>`;
+
+    });
+
+    recognition.onresult = (event) => {
+
+        input.value = event.results[0][0].transcript;
+
+    };
+
+    recognition.onend = () => {
+
+        micBtn.innerHTML = `<i class="fa-solid fa-microphone"></i>`;
+
+    };
+
+} else {
+
+    micBtn.style.display = "none";
+
+}
