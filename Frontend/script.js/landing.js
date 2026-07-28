@@ -139,16 +139,15 @@ function addMessage(text, sender) {
 
     message.innerHTML = `
       <div class="message-avatar">
-    ${
-        sender === "ai"
+    ${sender === "ai"
             ? `<img src="Image Asset/robot.png" alt="MindMate">`
             : `<i class="fa-solid fa-user"></i>`
-    }
+        }
 </div>
 
-        <div class="message-content">
-            <p>${text}</p>
-        </div>
+       <div class="message-content">
+    ${marked.parse(text)}
+</div>
     `;
 
     chatMessages.appendChild(message);
