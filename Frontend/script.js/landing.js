@@ -138,9 +138,13 @@ function addMessage(text, sender) {
     message.className = `message ${sender}-message`;
 
     message.innerHTML = `
-        <div class="message-avatar">
-            <i class="fa-solid ${sender === "ai" ? "fa-robot" : "fa-user"}"></i>
-        </div>
+      <div class="message-avatar">
+    ${
+        sender === "ai"
+            ? `<img src="Image Asset/robot.png" alt="MindMate">`
+            : `<i class="fa-solid fa-user"></i>`
+    }
+</div>
 
         <div class="message-content">
             <p>${text}</p>
