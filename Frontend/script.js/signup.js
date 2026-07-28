@@ -1,3 +1,4 @@
+const API = "http://localhost:3000";
 document.getElementById("signupForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -17,7 +18,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
     }
 
     try {
-        const response = await fetch("http://localhost:3000/signup", {
+        const response = await fetch(`${API}/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -1,3 +1,4 @@
+const path = require("path");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -27,7 +28,7 @@ pool.connect()
 // Middleware
 app.use(cors());
 app.use(express.json());
-
+app.use("/Frontend", express.static(path.join(__dirname, "../Frontend")));
 const PORT = 3000;
 
 // Home Route
@@ -219,15 +220,14 @@ app.put("/journal/:id", async (req, res) => {
     }
 });
 app.post("/chat", async (req, res) => {
-
     try {
-
         const { message } = req.body;
 
+        console.log("Using model: gemini-flash-latest");
+        console.log("User Message:", message);
+
         const response = await ai.models.generateContent({
-
-            model: "gemini-2.5-flash",
-
+            model: "gemini-flash-latest",
             contents: `
 You are MindMate AI.
 
@@ -244,34 +244,35 @@ Keep responses friendly, encouraging, and concise.
 User:
 ${message}
 `
-
         });
 
+        console.log("Gemini Response:", response);
+
         res.status(200).json({
-
             success: true,
-
-            reply: response.text
-
+            reply: response.candidates[0].content.parts[0].text
         });
 
     } catch (err) {
-
+        console.error("========== GEMINI ERROR ==========");
         console.error(err);
+        console.error("=================================");
 
         res.status(500).json({
-
             success: false,
-
-            message: "Failed to generate AI response."
-
+            error: err.message
         });
-
     }
-
 });
-app.get("/test", (req, res) => {
-    res.send("Backend is working!");
+app.get("/models", async (req, res) => {
+    try {
+        const models = await ai.models.list();
+
+        res.json(models);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
 });
 // Start Server
 app.listen(PORT, () => {
