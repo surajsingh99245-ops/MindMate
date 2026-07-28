@@ -10,6 +10,7 @@
  .chat-container {
 
      max-width: 850px;
+     height: 550px;
      margin: 0 auto;
      background: var(--surface);
 
@@ -22,6 +23,10 @@
          0 2px 8px rgba(15, 23, 42, .05);
 
      overflow: hidden;
+
+     display: flex;
+
+     flex-direction: column;
  }
 
 
@@ -29,14 +34,38 @@
  /* Messages Area */
 
  .chat-messages {
-     min-height: 450px;
+
+     flex: 1;
+
      padding: 2rem;
 
      overflow-y: auto;
 
      display: flex;
+
      flex-direction: column;
+
      gap: 1.5rem;
+
+     min-height: 0;
+
+ }
+
+
+ /* Hide Scrollbar */
+
+ .chat-messages {
+
+     scrollbar-width: none;
+
+     -ms-overflow-style: none;
+
+ }
+
+ .chat-messages::-webkit-scrollbar {
+
+     display: none;
+
  }
 
 
@@ -68,6 +97,17 @@
 
      font-size: 1.1rem;
  }
+
+
+ .message-avatar img{
+
+    width: 48px;
+
+    height: 48px;
+
+    object-fit:contain;
+
+}
 
 
  /* Message Bubble */
@@ -216,9 +256,11 @@
      0% {
          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
      }
+
      50% {
          box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
      }
+
      100% {
          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
      }
@@ -475,6 +517,7 @@
      }
 
  }
+
  .message-content p {
-    white-space: pre-wrap;
-}
+     white-space: pre-wrap;
+ }
