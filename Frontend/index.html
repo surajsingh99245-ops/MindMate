@@ -272,76 +272,55 @@
 
     <!-- Chat Section -->
 
-    <section class="chat-section" id="chat">
+   <section class="chat-section" id="chat">
 
-        <div class="container">
+    <div class="container">
 
-            <div class="section-header">
+        <div class="section-header">
 
-                <span class="section-badge">
-                    ✨ AI Companion
-                </span>
+            <span class="section-badge">
+                ✨ AI Companion
+            </span>
 
-                <h2>Talk to MindMate</h2>
+            <h2>Talk to MindMate</h2>
 
-                <p id="sectionHeader">
-                    Share your thoughts, feelings, or concerns. MindMate is here
-                    to listen and guide you with AI-powered emotional support.
-                </p>
+            <p id="sectionHeader">
+                Share your thoughts, feelings, or concerns. MindMate is here
+                to listen and guide you with AI-powered emotional support.
+            </p>
 
-            </div>
+        </div>
 
-            <div class="chat-container">
+        <div class="chat-container">
 
-                <!-- Messages -->
+            <!-- Messages -->
+            <div class="chat-messages" id="chatMessages">
 
-                <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
 
-                    <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
 
-                        <div class="message-avatar">
+                    <div class="message-content">
 
-                            <i class="fa-solid fa-robot"></i>
+                        <h4>MindMate</h4>
 
-                        </div>
+                        <p>Hi 👋
 
-                        <div class="message-content">
+I'm MindMate.
 
-                            <h4>MindMate</h4>
+Tell me how you're feeling today.</p>
 
-                            <p>
+                        <div class="suggestion-chips">
 
-                                Hi 👋
+                            <button class="chip">😊 Happy</button>
 
-                                <br><br>
+                            <button class="chip">😔 Stressed</button>
 
-                                I'm MindMate.
+                            <button class="chip">😟 Anxious</button>
 
-                                <br>
-
-                                Tell me how you're feeling today.
-
-                            </p>
-
-                            <div class="suggestion-chips">
-
-                                <button class="chip">
-                                    😊 Happy
-                                </button>
-
-                                <button class="chip">
-                                    😔 Stressed
-                                </button>
-
-                                <button class="chip">
-                                    😟 Anxious
-                                </button>
-
-                                <button class="chip">
-                                    😴 Can't sleep
-                                </button>
-
-                            </div>
+                            <button class="chip">😴 Can't sleep</button>
 
                         </div>
 
@@ -349,27 +328,30 @@
 
                 </div>
 
-                <!-- Input -->
+            </div>
 
-                <div class="chat-input">
+            <!-- Input -->
+            <div class="chat-input">
 
-                    <div class="input-wrapper">
+                <div class="input-wrapper">
 
-                        <input type="text" id="userInput" placeholder="How are you feeling today?">
+                    <input
+                        type="text"
+                        id="userInput"
+                        placeholder="How are you feeling today?"
+                    >
 
-                        <button id="micBtn" class="mic-btn" title="Click to speak">
+                    <button
+                        id="micBtn"
+                        class="mic-btn"
+                        title="Click to speak"
+                    >
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
 
-                            <i class="fa-solid fa-microphone"></i>
-
-                        </button>
-
-                        <button id="sendBtn">
-
-                            <i class="fa-solid fa-paper-plane"></i>
-
-                        </button>
-
-                    </div>
+                    <button id="sendBtn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
 
                 </div>
 
@@ -377,8 +359,9 @@
 
         </div>
 
-    </section>
+    </div>
 
+</section>
 
     <!-- Features Section -->
 

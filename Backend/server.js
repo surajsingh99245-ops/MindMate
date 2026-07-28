@@ -219,12 +219,10 @@ app.put("/journal/:id", async (req, res) => {
 
     }
 });
+
 app.post("/chat", async (req, res) => {
     try {
         const { message } = req.body;
-
-        console.log("Using model: gemini-flash-latest");
-        console.log("User Message:", message);
 
         const response = await ai.models.generateContent({
             model: "gemini-flash-latest",
@@ -246,17 +244,13 @@ ${message}
 `
         });
 
-        console.log("Gemini Response:", response);
-
         res.status(200).json({
             success: true,
             reply: response.candidates[0].content.parts[0].text
         });
 
     } catch (err) {
-        console.error("========== GEMINI ERROR ==========");
         console.error(err);
-        console.error("=================================");
 
         res.status(500).json({
             success: false,

@@ -68,47 +68,47 @@ if (SpeechRecognition) {
     const recognition = new SpeechRecognition();
     const userInput = document.getElementById('userInput');
     const micBtn = document.getElementById('micBtn');
-    
+
     // Configuration
     recognition.continuous = false;
     recognition.interimResults = false;
     recognition.lang = 'en-US'; // English language
-    
+
     // When recording starts
     recognition.onstart = () => {
         micBtn.classList.add('listening');
     };
-    
+
     // When speech is recognized
     recognition.onresult = (event) => {
         let transcript = '';
-        
+
         for (let i = event.resultIndex; i < event.results.length; i++) {
             transcript += event.results[i][0].transcript;
         }
-        
+
         // Add the recognized text to the input box
         userInput.value = transcript.trim();
         userInput.focus();
     };
-    
+
     // When recording ends
     recognition.onend = () => {
         micBtn.classList.remove('listening');
     };
-    
+
     // Handle errors
     recognition.onerror = (event) => {
         console.error('Speech recognition error:', event.error);
         micBtn.classList.remove('listening');
-        
+
         if (event.error === 'network') {
             alert('Network error. Please check your connection.');
         } else if (event.error === 'no-speech') {
             alert('No speech detected. Please try again.');
         }
     };
-    
+
     // Mic button click handler
     micBtn.addEventListener('click', () => {
         if (micBtn.classList.contains('listening')) {
@@ -125,3 +125,83 @@ if (SpeechRecognition) {
     micBtn.title = 'Speech Recognition not supported in your browser';
     micBtn.style.opacity = '0.5';
 }
+const chatMessages = document.getElementById("chatMessages");
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+const chips = document.querySelectorAll(".chip");
+
+// Create message bubble
+function addMessage(text, sender) {
+
+    const message = document.createElement("div");
+
+    message.className = `message ${sender}-message`;
+
+    message.innerHTML = `
+        <div class="message-avatar">
+            <i class="fa-solid ${sender === "ai" ? "fa-robot" : "fa-user"}"></i>
+        </div>
+
+        <div class="message-content">
+            <p>${text}</p>
+        </div>
+    `;
+
+    chatMessages.appendChild(message);
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Send message
+async function sendMessage() {
+
+    const message = userInput.value.trim();
+
+    if (!message) return;
+
+    addMessage(message, "user");
+    userInput.value = "";
+    userInput.placeholder = "";
+    try {
+
+        const response = await fetch("/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: message
+            })
+        });
+
+        const data = await response.json();
+
+        addMessage(data.reply, "ai");
+
+    } catch (err) {
+
+        console.error("ERROR:", err);
+
+    }
+}
+sendBtn.addEventListener("click", sendMessage);
+userInput.addEventListener("keypress", (e) => {
+
+    if (e.key === "Enter") {
+
+        sendMessage();
+
+    }
+
+});
+chips.forEach((chip) => {
+
+    chip.addEventListener("click", () => {
+
+        userInput.value = chip.innerText;
+
+        sendMessage();
+
+    });
+
+});
