@@ -16,7 +16,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 // Test Database Connection
-pool.connect()
+// Test Database Connection
+pool.query("SELECT NOW()")
     .then(() => {
         console.log("✅ Connected to PostgreSQL");
     })
@@ -51,7 +52,7 @@ app.get("/about", (req, res) => {
 // Hello Route
 app.get("/hello", (req, res) => {
     res.json({
-        message: "Hello Suraj!",
+        message: "Hello Devloper!",
         learning: "Backend is fun 🚀"
     });
 });
@@ -219,7 +220,6 @@ app.put("/journal/:id", async (req, res) => {
 
     }
 });
-
 app.post("/chat", async (req, res) => {
     try {
         const { message } = req.body;
@@ -250,7 +250,9 @@ ${message}
         });
 
     } catch (err) {
+        console.error("========== GEMINI ERROR ==========");
         console.error(err);
+        console.error("=================================");
 
         res.status(500).json({
             success: false,
