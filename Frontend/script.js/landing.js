@@ -152,6 +152,34 @@ function addMessage(text, sender) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+function showTypingIndicator() {
+
+    const typing = document.createElement("div");
+
+    typing.className = "message ai-message typing-indicator";
+
+    typing.innerHTML = `
+        <div class="message-avatar">
+            <img src="Image Asset/robot.png" alt="MindMate AI">
+        </div>
+
+        <div class="message-content typing-content">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+    `;
+
+    chatMessages.appendChild(typing);
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    return typing;
+
+}
+
 // Send message
 async function sendMessage() {
 
@@ -163,50 +191,59 @@ async function sendMessage() {
     userInput.value = "";
     userInput.placeholder = "";
     try {
+        let typingIndicator = showTypingIndicator();
+        const response = await fetch("http://localhost:3000/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: message
+            })
+        });
 
-      const response = await fetch("http://localhost:3000/chat", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        message: message
-    })
-});
+        const data = await response.json();
+        typingIndicator.remove();
+        chatMessages.scrollTo({
 
-const data = await response.json();
-if (response.ok && data.success) {
+            top: chatMessages.scrollHeight,
 
-    addMessage(data.reply, "ai");
+            behavior: "smooth"
 
-} else {
+        });
+        if (response.ok && data.success) {
 
-    if (response.status === 429) {
+            addMessage(data.reply, "ai");
 
+        } else {
+
+            if (response.status === 429) {
+
+                addMessage(
+                    "⚠️ MindMate has reached its free daily AI limit.\n\nPlease try again in about a minute or use a new Gemini API key.",
+                    "ai"
+                );
+
+            } else {
+
+                addMessage(
+                    "⚠️ Sorry, something went wrong while contacting MindMate. Please try again.",
+                    "ai"
+                );
+
+            }
+
+        }
+    } catch (err) {
+
+        console.error("ERROR:", err);
+        document.querySelector(".typing-indicator")?.remove();
         addMessage(
-            "⚠️ MindMate has reached its free daily AI limit.\n\nPlease try again in about a minute or use a new Gemini API key.",
-            "ai"
-        );
-
-    } else {
-
-        addMessage(
-            "⚠️ Sorry, something went wrong while contacting MindMate. Please try again.",
+            "⚠️ Unable to connect to MindMate. Please check your internet connection and try again.",
             "ai"
         );
 
     }
-
-}    } catch (err) {
-
-    console.error("ERROR:", err);
-
-    addMessage(
-        "⚠️ Unable to connect to MindMate. Please check your internet connection and try again.",
-        "ai"
-    );
-
-}
 }
 sendBtn.addEventListener("click", sendMessage);
 userInput.addEventListener("keypress", (e) => {
