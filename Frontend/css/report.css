@@ -1,0 +1,685 @@
+.navbar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    padding: 0 70px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--surface);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid #e8edf5;
+
+    z-index: 1000;
+
+}
+
+/*==================== LOGO ====================*/
+
+.logo {
+
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logo img {
+
+    width: 56px;
+    height: 56px;
+}
+
+.logo-text {
+
+    font-size: 24px;
+    font-weight: 700;
+
+}
+
+.mind {
+
+    color: var(--logo-blue);
+
+}
+
+.mate {
+
+    color: var(--logo-green);
+
+}
+
+/*==================== NAV LINKS ====================*/
+
+.nav-links {
+
+    display: flex;
+    align-items: center;
+
+    gap: 40px;
+
+    list-style: none;
+
+}
+
+.nav-links a {
+
+    position: relative;
+
+    text-decoration: none;
+
+    color: var(--text-dark);
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    transition: .3s;
+
+}
+
+.nav-links a:hover {
+
+    color: var(--logo-blue);
+
+}
+
+.nav-links a.active {
+
+    color: var(--logo-blue);
+
+}
+
+.nav-links a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -6px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--logo-blue);
+
+    transition: .3s;
+
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+
+    width: 100%;
+
+}
+
+/*==================== PROFILE ====================*/
+
+.profile {
+
+    position: relative;
+
+}
+
+.profile-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.profile-btn:hover {
+
+    background: #f5f7fb;
+
+}
+
+.profile-btn i:first-child {
+
+    font-size: 32px;
+
+    color: var(--logo-blue);
+
+}
+
+.profile-btn i:last-child {
+
+    font-size: 12px;
+
+    color: #777;
+
+}
+
+/*==================== DROPDOWN ====================*/
+
+.profile-dropdown {
+
+    position: absolute;
+
+    top: 60px;
+    right: 0;
+
+    width: 170px;
+
+    background: #fff;
+
+    border-radius: 12px;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+
+    border: 1px solid #edf2f7;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform: translateY(10px);
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease,
+        visibility .25s;
+
+}
+
+.profile.active .profile-dropdown {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform: translateY(0);
+
+}
+
+.profile-dropdown a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 18px;
+
+    text-decoration: none;
+
+    color: var(--text-dark);
+
+    transition: .3s;
+
+}
+
+.profile-dropdown a:hover {
+
+    background: #f8fafc;
+
+    color: #ef4444;
+
+}
+
+
+main {
+
+    margin-top: 60px;
+
+    min-height: 100vh;
+
+    padding: 50px 0;
+
+}
+
+.report-hero {
+
+    width: min(92%, 1200px);
+
+    margin: 0 auto;
+
+    text-align: center;
+
+}
+
+.report-hero h1 {
+
+    font-size: 2.8rem;
+
+    font-weight: 700;
+
+    color: var(--text-dark);
+
+}
+
+.report-hero p {
+
+    margin-top: 15px;
+
+    font-size: 1.1rem;
+
+    color: #6b7280;
+
+}
+
+
+.report-toggle {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 35px;
+
+}
+
+.report-toggle button {
+
+    padding: 12px 28px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #edf2f7;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.report-toggle button.active {
+
+    background: var(--logo-blue);
+
+    color: #fff;
+
+}
+
+.report-toggle button:hover {
+
+    transform: translateY(-2px);
+
+}
+
+/*==================== SUMMARY CARDS ====================*/
+
+.summary-cards {
+
+    width: min(92%, 1200px);
+
+    margin: 50px auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
+
+}
+
+.summary-card {
+
+    background: #fff;
+
+    border: 1px solid #edf2f7;
+
+    border-radius: 20px;
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
+
+    transition: .3s;
+
+}
+
+.summary-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 15px 35px rgba(15, 23, 42, .10);
+
+}
+
+.card-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 1.8rem;
+
+    background: #eef5ff;
+
+}
+
+.summary-card h3 {
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    color: #6b7280;
+
+}
+
+.summary-card p {
+
+    margin-top: 10px;
+
+    font-size: 1.4rem;
+
+    font-weight: 700;
+
+    color: var(--text-dark);
+
+}
+
+
+/*==================== MOOD CHART ====================*/
+
+.mood-chart {
+
+    width: min(92%, 1200px);
+
+    margin: 50px auto;
+
+    background: #fff;
+
+    border-radius: 22px;
+
+    padding: 35px;
+
+    border: 1px solid #edf2f7;
+
+    box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
+
+}
+
+.chart-header {
+
+    margin-bottom: 30px;
+
+}
+
+.chart-header h2 {
+
+    font-size: 1.6rem;
+
+    font-weight: 700;
+
+    color: var(--text-dark);
+
+}
+
+.chart-header p {
+
+    margin-top: 8px;
+
+    color: #6b7280;
+
+}
+
+.chart-container {
+
+    height: 420px;
+
+}
+
+/*==================== ANALYTICS GRID ====================*/
+
+.analytics-grid {
+
+    width: min(92%, 1200px);
+
+    margin: 40px auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+
+}
+
+.analytics-card {
+
+    background: #fff;
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    border: 1px solid #edf2f7;
+
+    box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
+
+}
+
+.analytics-card h2 {
+
+    margin-bottom: 25px;
+
+    font-size: 1.5rem;
+
+}
+
+/* Mood Distribution */
+
+.mood-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 18px;
+
+    font-weight: 600;
+
+}
+
+.progress {
+
+    height: 10px;
+
+    background: #eef2f7;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-top: 8px;
+
+}
+
+.progress-fill {
+
+    height: 100%;
+
+    border-radius: 20px;
+
+}
+
+.happy {
+
+    width: 45%;
+
+    background: #4F8EF7;
+
+}
+
+.calm {
+
+    width: 25%;
+
+    background: #7BC8A4;
+
+}
+
+.neutral {
+
+    width: 15%;
+
+    background: #FBBF24;
+
+}
+
+.sad {
+
+    width: 10%;
+
+    background: #F97316;
+
+}
+
+.anxious {
+
+    width: 5%;
+
+    background: #EF4444;
+
+}
+
+
+
+/*==================== AI SUMMARY ====================*/
+
+.ai-summary{
+
+    width:min(92%,1200px);
+
+    margin:40px auto 80px;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:35px;
+
+    border:1px solid #edf2f7;
+
+    box-shadow:0 8px 25px rgba(15,23,42,.05);
+
+}
+
+.summary-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.summary-header i{
+
+    font-size:30px;
+
+    color:var(--logo-blue);
+
+}
+
+.summary-header h2{
+
+    font-size:1.7rem;
+
+    color:var(--text-dark);
+
+}
+
+.insight-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.insight-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+    padding:18px 20px;
+
+    background:#f8fbff;
+
+    border-radius:16px;
+
+}
+
+.insight-item i{
+
+    font-size:20px;
+
+    color:var(--logo-blue);
+
+    margin-top:3px;
+
+}
+
+.insight-item p{
+
+    color:#4b5563;
+
+    line-height:1.7;
+
+}
