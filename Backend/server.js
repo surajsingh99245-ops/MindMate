@@ -100,7 +100,7 @@ app.post("/login", async (req, res) => {
 app.post("/journal", async (req, res) => {
     try {
         const { username, title, note } = req.body;
-
+ 
         await pool.query(
             `INSERT INTO journals (username, title, note)
              VALUES ($1, $2, $3)`,
