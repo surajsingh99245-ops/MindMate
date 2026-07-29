@@ -721,6 +721,10 @@ main {
     color:#333;
 }
 
+.logged-user i{
+    color:#4F8EF7;
+}
+
 .profile-dropdown hr{
     border:none;
     border-top:1px solid #e5e7eb;
