@@ -222,33 +222,62 @@ app.put("/journal/:id", async (req, res) => {
 });
 app.post("/chat", async (req, res) => {
     try {
-        const { message } = req.body;
+        const { username, message } = req.body;
 
         const response = await ai.models.generateContent({
             model: "gemini-flash-latest",
-            contents: `
-You are MindMate AI.
+  contents: `
+You are MindMate AI, a supportive mental wellness companion.
 
-You are a supportive mental wellness companion.
+Your task is to respond ONLY with valid JSON.
 
-Be empathetic.
+Return this exact format:
 
-Never diagnose diseases.
+{
+  "reply": "Your supportive response",
+  "mood": "Happy | Calm | Neutral | Sad | Anxious | Angry | Stressed",
+  "stressLevel": 1,
+  "sentiment": "Positive | Neutral | Negative"
+}
 
-Never prescribe medicines.
+Rules:
+- reply should be empathetic and supportive.
+- Never diagnose diseases.
+- Never prescribe medicines.
+- stressLevel must be an integer from 1 to 10.
+- Return ONLY JSON.
+- Do not use markdown.
+- Do not wrap the JSON in \`\`\`.
 
-Keep responses friendly, encouraging, and concise.
-
-User:
+User message:
 ${message}
 `
         });
 
-        res.status(200).json({
-            success: true,
-            reply: response.candidates[0].content.parts[0].text
-        });
+const aiText = response.candidates[0].content.parts[0].text;
 
+const aiData = JSON.parse(aiText);
+await pool.query(
+    `INSERT INTO chat_history
+    (username, user_message, ai_reply, mood, stress_level, sentiment)
+    VALUES ($1, $2, $3, $4, $5, $6)`,
+    [
+        username,
+        message,
+        aiData.reply,
+        aiData.mood,
+        aiData.stressLevel,
+        aiData.sentiment
+    ]
+);
+
+res.status(200).json({
+    success: true,
+    reply: aiData.reply,
+    mood: aiData.mood,
+    stressLevel: aiData.stressLevel,
+    sentiment: aiData.sentiment
+});
     } catch (err) {
         console.error("========== GEMINI ERROR ==========");
         console.error(err);
