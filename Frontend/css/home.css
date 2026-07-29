@@ -723,3 +723,17 @@ main {
     }
 
 }
+.logged-user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 16px;
+    font-weight:600;
+    color:#333;
+}
+
+.profile-dropdown hr{
+    border:none;
+    border-top:1px solid #e5e7eb;
+    margin:0;
+}
