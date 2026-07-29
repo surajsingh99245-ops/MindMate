@@ -682,6 +682,8 @@ app.get("/report/monthly/:username", async (req, res) => {
         });
     }
 });
+const dailyCheckinRoutes = require("./daily-checkin.routes.js");
+app.use("/", dailyCheckinRoutes(pool));
 // Start Server
 app.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
