@@ -248,12 +248,52 @@ async function sendMessage() {
 
     }
 }
-sendBtn.addEventListener("click", sendMessage);
+
+// Limitation of prompt for the chatbot(landing)
+
+const MAX_FREE_PROMPTS = 5;
+let promptCount = Number(localStorage.getItem("landingPromptCount")) || 0;
+
+async function sendLimitedMessage() {
+
+    if (promptCount >= MAX_FREE_PROMPTS) {
+
+        addMessage(
+            "🔒 Your 5 free messages are over.\n\nPlease log in to continue chatting with MindMate.",
+            "ai"
+        );
+
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 2000);
+
+        return;
+    }
+
+    // Remember how many messages existed before sending
+    const before = chatMessages.querySelectorAll(".user-message").length;
+
+    // Call your teammate's original function
+    await sendMessage();
+
+    // Check if a new user message was actually sent
+    const after = chatMessages.querySelectorAll(".user-message").length;
+
+    if (after > before) {
+        promptCount++;
+        localStorage.setItem("landingPromptCount", promptCount);
+    }
+
+}
+
+
+
+sendBtn.addEventListener("click", sendLimitedMessage);
 userInput.addEventListener("keypress", (e) => {
 
     if (e.key === "Enter") {
 
-        sendMessage();
+        sendLimitedMessage();
 
     }
 
@@ -264,7 +304,7 @@ chips.forEach((chip) => {
 
         userInput.value = chip.innerText;
 
-        sendMessage();
+        sendLimitedMessage();
 
     });
 
