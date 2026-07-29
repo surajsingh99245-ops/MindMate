@@ -226,7 +226,7 @@ app.post("/chat", async (req, res) => {
 
         const response = await ai.models.generateContent({
             model: "gemini-flash-latest",
-  contents: `
+            contents: `
 You are MindMate AI, a supportive mental wellness companion.
 
 Your task is to respond ONLY with valid JSON.
@@ -254,30 +254,30 @@ ${message}
 `
         });
 
-const aiText = response.candidates[0].content.parts[0].text;
+        const aiText = response.candidates[0].content.parts[0].text;
 
-const aiData = JSON.parse(aiText);
-await pool.query(
-    `INSERT INTO chat_history
+        const aiData = JSON.parse(aiText);
+        await pool.query(
+            `INSERT INTO chat_history
     (username, user_message, ai_reply, mood, stress_level, sentiment)
     VALUES ($1, $2, $3, $4, $5, $6)`,
-    [
-        username,
-        message,
-        aiData.reply,
-        aiData.mood,
-        aiData.stressLevel,
-        aiData.sentiment
-    ]
-);
+            [
+                username,
+                message,
+                aiData.reply,
+                aiData.mood,
+                aiData.stressLevel,
+                aiData.sentiment
+            ]
+        );
 
-res.status(200).json({
-    success: true,
-    reply: aiData.reply,
-    mood: aiData.mood,
-    stressLevel: aiData.stressLevel,
-    sentiment: aiData.sentiment
-});
+        res.status(200).json({
+            success: true,
+            reply: aiData.reply,
+            mood: aiData.mood,
+            stressLevel: aiData.stressLevel,
+            sentiment: aiData.sentiment
+        });
     } catch (err) {
         console.error("========== GEMINI ERROR ==========");
         console.error(err);
@@ -297,6 +297,190 @@ app.get("/models", async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json(err);
+    }
+});
+app.get("/report/weekly/:username", async (req, res) => {
+
+    try {
+
+        const { username } = req.params;
+
+        const result = await pool.query(
+            `SELECT *
+     FROM chat_history
+     WHERE username = $1
+     AND created_at >= CURRENT_DATE - INTERVAL '6 days'
+     ORDER BY created_at`,
+            [username]
+        );
+
+        const rows = result.rows;
+        const uniqueDays = new Set();
+
+        rows.forEach((row) => {
+            const date = new Date(row.created_at)
+                .toISOString()
+                .split("T")[0];
+
+            uniqueDays.add(date);
+        });
+
+        const checkins = uniqueDays.size;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        let streak = 0;
+
+        for (let i = 0; i < 7; i++) {
+            const currentDate = new Date(today);
+            currentDate.setDate(today.getDate() - i);
+
+            const dateString = currentDate.toISOString().split("T")[0];
+
+            if (uniqueDays.has(dateString)) {
+                streak++;
+            } else {
+                break;
+            }
+        }
+
+        if (rows.length === 0) {
+            return res.json({
+                summary: {
+                    averageMood: "Neutral",
+                    checkins: `${checkins} / 7 Days`,
+                    streak: `${streak} Days`,
+                    journalEntries: `0 Entries`
+                },
+                charts: {
+                    labels: [],
+                    moodTrend: [],
+                    journalActivity: []
+                },
+                distribution: {
+                    happy: 0,
+                    calm: 0,
+                    neutral: 0,
+                    sad: 0,
+                    anxious: 0
+                },
+                insights: [
+                    "Start chatting with MindMate to generate your first report."
+                ]
+            });
+        }
+
+        const moodMap = {
+            Happy: 5,
+            Calm: 4,
+            Neutral: 3,
+            Sad: 2,
+            Anxious: 1
+        };
+
+        let distribution = {
+            happy: 0,
+            calm: 0,
+            neutral: 0,
+            sad: 0,
+            anxious: 0
+        };
+
+        const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+        const dayData = {
+            Mon: { moodSum: 0, moodCount: 0, journal: 0 },
+            Tue: { moodSum: 0, moodCount: 0, journal: 0 },
+            Wed: { moodSum: 0, moodCount: 0, journal: 0 },
+            Thu: { moodSum: 0, moodCount: 0, journal: 0 },
+            Fri: { moodSum: 0, moodCount: 0, journal: 0 },
+            Sat: { moodSum: 0, moodCount: 0, journal: 0 },
+            Sun: { moodSum: 0, moodCount: 0, journal: 0 }
+        };
+
+        let stressTotal = 0;
+
+        rows.forEach((row) => {
+
+            const day = new Date(row.created_at)
+                .toLocaleDateString("en-US", { weekday: "short" });
+
+            const moodValue = moodMap[row.mood] || 3;
+
+            dayData[day].moodSum += moodValue;
+            dayData[day].moodCount++;
+            dayData[day].journal++;
+
+            stressTotal += row.stress_level;
+
+            if (row.mood) {
+                const key = row.mood.toLowerCase();
+
+                if (distribution[key] !== undefined) {
+                    distribution[key]++;
+                }
+            }
+
+        });
+
+        const labels = days;
+
+        const moodTrend = days.map(day => {
+            if (dayData[day].moodCount === 0) return 0;
+
+            return Number(
+                (dayData[day].moodSum / dayData[day].moodCount).toFixed(1)
+            );
+        });
+
+        const journalActivity = days.map(day => dayData[day].journal);
+        const total = rows.length;
+
+        Object.keys(distribution).forEach(key => {
+            distribution[key] = Math.round(distribution[key] * 100 / total);
+        });
+
+        const moodAverage =
+            moodTrend.reduce((a, b) => a + b, 0) / moodTrend.length;
+
+        const moodText =
+            moodAverage >= 4.5 ? "Happy" :
+                moodAverage >= 3.5 ? "Calm" :
+                    moodAverage >= 2.5 ? "Neutral" :
+                        moodAverage >= 1.5 ? "Sad" :
+                            "Anxious";
+
+        res.json({
+
+            summary: {
+                averageMood: moodText,
+                checkins: `${checkins} / 7 Days`,
+                streak: `${streak} Days`,
+                journalEntries: `${total} Entries`
+            },
+
+            charts: {
+                labels,
+                moodTrend,
+                journalActivity
+            },
+
+            distribution,
+
+            insights: [
+                `Average stress level: ${(stressTotal / total).toFixed(1)}/10`,
+                `You completed ${total} check-ins.`,
+                `Your dominant mood is ${moodText}.`,
+                "Keep checking in daily for better insights."
+            ]
+
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: "Server Error"
+        });
     }
 });
 // Start Server

@@ -197,7 +197,7 @@ weeklyBtn.addEventListener("click", () => {
 
     monthlyBtn.classList.remove("active");
 
-    updateReport(weeklyData);
+    loadWeeklyReport();
 
 });
 
@@ -317,110 +317,7 @@ function renderMoodChart(labels, data) {
     });
 
 }
-
-// new Chart(ctx, {
-
-//     type: "line",
-
-//     data: {
-
-//         labels: [
-
-//             "Mon",
-//             "Tue",
-//             "Wed",
-//             "Thu",
-//             "Fri",
-//             "Sat",
-//             "Sun"
-
-//         ],
-
-//         datasets: [
-
-//             {
-
-//                 label: "Mood",
-
-//                 data: [4,3,2,4,5,4,5],
-
-//                 borderColor:"#4F8EF7",
-
-//                 backgroundColor:"rgba(79,142,247,.15)",
-
-//                 fill:true,
-
-//                 tension:.4,
-
-//                 pointRadius:6,
-
-//                 pointBackgroundColor:"#4F8EF7"
-
-//             }
-
-//         ]
-
-//     },
-
-//     options:{
-
-//         responsive:true,
-
-//         maintainAspectRatio:false,
-
-//         plugins:{
-
-//             legend:{
-
-//                 display:false
-
-//             }
-
-//         },
-
-//         scales:{
-
-//             y:{
-
-//                 min:1,
-
-//                 max:5,
-
-//                 ticks:{
-
-//                     stepSize:1,
-
-//                     callback:function(value){
-
-//                         const moods={
-
-//                             1:"😢",
-
-//                             2:"😔",
-
-//                             3:"😐",
-
-//                             4:"😊",
-
-//                             5:"😁"
-
-//                         };
-
-//                         return moods[value];
-
-//                     }
-
-//                 }
-
-//             }
-
-//         }
-
-//     }
-
-// });
-
-
+ 
 const journalCtx = document.getElementById("journalChart");
 
 let journalChart;
@@ -502,56 +399,7 @@ function renderJournalChart(labels, data) {
     });
 
 }
-
-// new Chart(journalCtx, {
-
-//     type: "bar",
-
-//     data: {
-
-//         labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-
-//         datasets: [{
-
-//             data: [2, 1, 3, 2, 4, 1, 3],
-
-//             backgroundColor: "#4F8EF7",
-
-//             borderRadius: 8
-
-//         }]
-
-//     },
-
-//     options: {
-
-//         responsive: true,
-
-//         plugins: {
-
-//             legend: {
-
-//                 display: false
-
-//             }
-
-//         },
-
-//         scales: {
-
-//             y: {
-
-//                 beginAtZero: true
-
-//             }
-
-//         }
-
-//     }
-
-// });
-
-
+ 
 function renderInsights(insights) {
 
     const container = document.querySelector(".insight-list");
@@ -575,11 +423,25 @@ function renderInsights(insights) {
     });
 
 }
+async function loadWeeklyReport() {
 
+    try {
 
+        const username = localStorage.getItem("username");
 
+        const response = await fetch(
+            `http://localhost:3000/report/weekly/${username}`
+        );
 
+        const data = await response.json();
 
+        updateReport(data);
 
+    } catch (err) {
 
-updateReport(weeklyData);
+        console.log(err);
+
+    }
+
+}
+loadWeeklyReport();
