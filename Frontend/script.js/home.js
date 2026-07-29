@@ -64,19 +64,19 @@ async function sendMessage() {
 
     try {
         const typingIndicator = showTypingIndicator();
-        const response = await fetch("http://localhost:3000/chat", {
+        
+    const username = localStorage.getItem("username");
 
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                message: message
-            })
-
-        });
+const response = await fetch("http://localhost:3000/chat", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        username: username,
+        message: message
+    })
+});
 
         const data = await response.json();
 

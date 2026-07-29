@@ -25,7 +25,11 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         const data = await response.json();
 
         if (response.ok && data.success) {
+
+            localStorage.setItem("username", username);
+
             alert(data.message);
+
             window.location.href = "home.html";
         } else {
             alert(data.message || "Invalid username or password");
