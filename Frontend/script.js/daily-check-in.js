@@ -1,5 +1,31 @@
+const profileCheckin = document.querySelector(".profile-checkin");
+const profileBtnCheckin = document.querySelector(".profile-btn-checkin");
+
 const loggedUser = document.getElementById("loggedUser");
 
+// Open / close profile dropdown
+if (profileCheckin && profileBtnCheckin) {
+
+    profileBtnCheckin.addEventListener("click", (e) => {
+
+        e.stopPropagation();
+
+        profileCheckin.classList.toggle("active");
+
+    });
+
+
+    document.addEventListener("click", (e) => {
+
+        if (!profileCheckin.contains(e.target)) {
+
+            profileCheckin.classList.remove("active");
+
+        }
+
+    });
+
+}
 
 if (loggedUser) {
     loggedUser.textContent = localStorage.getItem("username");
@@ -187,7 +213,7 @@ if (logoutBtn) {
             submitBtn.disabled = true;
             submitBtn.classList.add("loading");
 
-            const res = await fetch("http://localhost:3000/daily-checkin",  {
+            const res = await fetch("http://localhost:3000/daily-checkin", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
