@@ -252,6 +252,25 @@
 }
 
 
+
+.profile-btn .fa-chevron-down {
+
+    transition: transform .3s ease;
+
+}
+
+.profile.active .fa-chevron-down {
+
+    transform: rotate(180deg);
+
+}
+
+
+
+
+
+
+
 main {
 
     margin-top: 60px;
