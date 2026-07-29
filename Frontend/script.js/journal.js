@@ -4,6 +4,28 @@ const textInput = document.getElementById("noteText");
 const notesContainer = document.getElementById("notesContainer");
 const noteCount = document.getElementById("noteCount");
 
+
+const profileJournal = document.querySelector(".profile-journal");
+const profileBtnJournal = document.querySelector(".profile-btn-journal");
+
+profileBtnJournal.addEventListener("click", (e) => {
+
+    e.stopPropagation();
+
+    profileJournal.classList.toggle("active");
+
+});
+
+document.addEventListener("click", (e) => {
+
+    if (!profileJournal.contains(e.target)) {
+
+        profileJournal.classList.remove("active");
+
+    }
+
+});
+
 let notes = [];
 
 const username = "suraj123";
