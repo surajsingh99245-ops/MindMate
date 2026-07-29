@@ -44,59 +44,7 @@ const weeklyData = {
 
 };
 
-const monthlyData = {
-
-    summary: {
-
-        averageMood: "Calm",
-
-        checkins: "26 / 30 Days",
-
-        streak: "28 Days",
-
-        journalEntries: "72 Entries"
-
-    },
-
-    charts: {
-
-        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-
-        moodTrend: [3, 4, 4, 5],
-
-        journalActivity: [18, 22, 15, 17]
-
-    },
-
-    distribution: {
-
-        happy: 38,
-
-        calm: 30,
-
-        neutral: 18,
-
-        sad: 9,
-
-        anxious: 5
-
-    },
-
-    insights: [
-
-        "😊 Your overall mood remained positive this month.",
-
-        "🏆 You completed 26 daily check-ins.",
-
-        "📖 You wrote 72 journal entries this month.",
-
-        "💙 Continue checking in daily for better insights."
-
-    ]
-
-};
-
-
+ 
 function renderMoodDistribution(distribution) {
 
     document.getElementById("happyPercent").textContent =
@@ -207,10 +155,9 @@ monthlyBtn.addEventListener("click", () => {
 
     weeklyBtn.classList.remove("active");
 
-    updateReport(monthlyData);
+    loadMonthlyReport();
 
 });
-
 
 
 
@@ -445,3 +392,24 @@ async function loadWeeklyReport() {
 
 }
 loadWeeklyReport();
+async function loadMonthlyReport() {
+
+    try {
+
+        const username = localStorage.getItem("username");
+
+        const response = await fetch(
+            `http://localhost:3000/report/monthly/${username}`
+        );
+
+        const data = await response.json();
+
+        updateReport(data);
+
+    } catch (err) {
+
+        console.log(err);
+
+    }
+
+}
