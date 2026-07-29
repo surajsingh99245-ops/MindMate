@@ -55,28 +55,38 @@
 
             </ul>
 
-<div class="profile">
+            <div class="profile-checkin">
 
-    <button class="profile-btn">
+                <button class="profile-btn-checkin">
 
-        <i class="fa-solid fa-circle-user"></i>
-        <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-solid fa-circle-user"></i>
+                    <i class="fa-solid fa-chevron-down"></i>
 
-    </button>
+                </button>
 
-    <div class="profile-dropdown">
+                <div class="profile-dropdown-checkin">
 
-        <a href="index.html">
+                    <div class="logged-user">
 
-            <i class="fa-solid fa-right-from-bracket"></i>
+                        <i class="fa-solid fa-user"></i>
 
-            Logout
+                        <span id="loggedUser"></span>
 
-        </a>
+                    </div>
 
-    </div>
+                    <hr>
 
-</div>
+                    <a href="index.html" id="logoutBtn">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Logout
+
+                    </a>
+
+                </div>
+
+            </div>
         </nav>
 
     </header>
@@ -88,7 +98,7 @@
 
             <!-- ================= HEADER ================= -->
 
-            <div class="checkin-header"  id="checkinHeader">
+            <div class="checkin-header" id="checkinHeader">
 
                 <span class="section-badge">
                     🌿 Daily Check-In
@@ -447,6 +457,6 @@
 
         </section>
 
-    </main> 
-    <script src="daily-check-in.js"></script>
+    </main>
+    <script src="script.js/daily-check-in.js"></script>
 </body>

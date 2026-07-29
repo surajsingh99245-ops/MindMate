@@ -1,6 +1,5 @@
-const profile = document.querySelector(".profile");
-const profileBtn = document.querySelector(".profile-btn");
 const loggedUser = document.getElementById("loggedUser");
+
 
 if (loggedUser) {
     loggedUser.textContent = localStorage.getItem("username");
