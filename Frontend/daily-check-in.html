@@ -83,6 +83,374 @@
     </header>
 
 
+    <main class="checkin-page">
+
+        <section class="checkin-container">
+
+            <!-- ================= HEADER ================= -->
+
+            <div class="checkin-header"  id="checkinHeader">
+
+                <span class="section-badge">
+                    🌿 Daily Check-In
+                </span>
+
+                <h1>How are you feeling today?</h1>
+
+                <p>
+                    Take a moment to check in with yourself.
+                    Your responses will help MindMate understand your wellbeing.
+                </p>
+
+            </div>
+
+
+            <!-- ================= CHECK-IN FORM ================= -->
+
+            <form class="checkin-form" id="checkinForm">
+
+
+                <!-- ================= MOOD ================= -->
+
+                <div class="checkin-card mood-card">
+
+                    <div class="card-heading">
+
+                        <div>
+                            <h2>How is your mood?</h2>
+                            <p>Choose the option that best describes how you feel.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="mood-options">
+
+                        <button type="button" class="mood-option" data-mood="Great" data-value="5">
+
+                            <span class="mood-emoji">😄</span>
+                            <span>Great</span>
+
+                        </button>
+
+
+                        <button type="button" class="mood-option" data-mood="Happy" data-value="4">
+
+                            <span class="mood-emoji">😊</span>
+                            <span>Happy</span>
+
+                        </button>
+
+
+                        <button type="button" class="mood-option" data-mood="Neutral" data-value="3">
+
+                            <span class="mood-emoji">😐</span>
+                            <span>Neutral</span>
+
+                        </button>
+
+
+                        <button type="button" class="mood-option" data-mood="Sad" data-value="2">
+
+                            <span class="mood-emoji">😔</span>
+                            <span>Sad</span>
+
+                        </button>
+
+
+                        <button type="button" class="mood-option" data-mood="Very Sad" data-value="1">
+
+                            <span class="mood-emoji">😢</span>
+                            <span>Very Sad</span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= STRESS & ENERGY ================= -->
+
+                <div class="checkin-card">
+
+                    <div class="levels-grid">
+
+                        <!-- STRESS LEVEL -->
+
+                        <div class="level-section">
+
+                            <div class="level-heading">
+
+                                <div>
+                                    <h2>Stress Level</h2>
+                                    <p>How stressed do you feel right now?</p>
+                                </div>
+
+                                <span class="level-value" id="stressValue">
+                                    3 / 5
+                                </span>
+
+                            </div>
+
+                            <div class="slider-wrapper">
+
+                                <input type="range" id="stressLevel" name="stressLevel" min="1" max="5" value="3"
+                                    step="1">
+
+                                <div class="slider-labels">
+                                    <span>😌 Low</span>
+                                    <span>High 😫</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ENERGY LEVEL -->
+
+                        <div class="level-section">
+
+                            <div class="level-heading">
+
+                                <div>
+                                    <h2>Energy Level</h2>
+                                    <p>How energetic do you feel today?</p>
+                                </div>
+
+                                <span class="level-value" id="energyValue">
+                                    3 / 5
+                                </span>
+
+                            </div>
+
+                            <div class="slider-wrapper">
+
+                                <input type="range" id="energyLevel" name="energyLevel" min="1" max="5" value="3"
+                                    step="1">
+
+                                <div class="slider-labels">
+                                    <span>🪫 Low</span>
+                                    <span>High 🔋</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ================= SLEEP QUALITY ================= -->
+
+                <div class="checkin-card sleep-card">
+
+                    <div class="card-heading">
+
+                        <h2>How did you sleep?</h2>
+
+                        <p>Choose the option that best describes your sleep quality.</p>
+
+                    </div>
+
+                    <div class="sleep-options">
+
+                        <button type="button" class="sleep-option" data-sleep="Poor" data-value="1">
+
+                            <span class="sleep-emoji">😵</span>
+                            <span>Poor</span>
+
+                        </button>
+
+                        <button type="button" class="sleep-option" data-sleep="Fair" data-value="2">
+
+                            <span class="sleep-emoji">😴</span>
+                            <span>Fair</span>
+
+                        </button>
+
+                        <button type="button" class="sleep-option" data-sleep="Good" data-value="3">
+
+                            <span class="sleep-emoji">🙂</span>
+                            <span>Good</span>
+
+                        </button>
+
+                        <button type="button" class="sleep-option" data-sleep="Excellent" data-value="4">
+
+                            <span class="sleep-emoji">😌</span>
+                            <span>Excellent</span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= TODAY'S EMOTIONS ================= -->
+
+                <div class="checkin-card emotion-card">
+
+                    <div class="card-heading">
+
+                        <h2>What emotions are you feeling?</h2>
+
+                        <p>Select up to 3 emotions that best describe how you feel today.</p>
+
+                    </div>
+
+                    <div class="emotion-options">
+
+                        <button type="button" class="emotion-option" data-emotion="Happy">
+                            😊 Happy
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Calm">
+                            😌 Calm
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Excited">
+                            🤩 Excited
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Motivated">
+                            💪 Motivated
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Focused">
+                            🎯 Focused
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Relaxed">
+                            🌿 Relaxed
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Anxious">
+                            😟 Anxious
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Overwhelmed">
+                            😵 Overwhelmed
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Lonely">
+                            🥺 Lonely
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Sad">
+                            😔 Sad
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Frustrated">
+                            😣 Frustrated
+                        </button>
+
+                        <button type="button" class="emotion-option" data-emotion="Angry">
+                            😠 Angry
+                        </button>
+
+                    </div>
+
+                    <p class="emotion-limit" id="emotionLimit">
+                        0 / 3 selected
+                    </p>
+
+                </div>
+
+
+                <!-- ================= DAILY REFLECTION ================= -->
+
+                <div class="checkin-card reflection-card">
+
+                    <div class="card-heading">
+
+                        <h2>What's on your mind today?</h2>
+
+                        <p>
+                            Write anything you'd like to reflect on.
+                            This is completely optional.
+                        </p>
+
+                    </div>
+
+                    <div class="reflection-wrapper">
+
+                        <textarea id="reflection" name="reflection" maxlength="500"
+                            placeholder="Share your thoughts, feelings, or anything that happened today..."></textarea>
+
+                        <div class="reflection-footer">
+
+                            <span>Optional</span>
+
+                            <span id="characterCount">
+                                0 / 500
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= SUBMIT ================= -->
+
+                <div class="checkin-submit">
+
+                    <button type="submit" class="submit-checkin-btn" id="submitCheckin">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Submit Today's Check-In
+
+                    </button>
+
+                    <p>
+                        Your check-in helps MindMate understand your wellbeing over time.
+                    </p>
+
+                </div>
+
+            </form>
+
+
+
+            <!-- ================= CHECK-IN COMPLETED ================= -->
+
+            <div class="checkin-completed" id="checkinSuccess">
+
+                <div class="completed-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+                <h2>Today's Check-In is Complete!</h2>
+
+                <p>
+                    Thanks for taking a moment to check in with yourself.
+                    Your responses will help MindMate understand your wellbeing over time.
+                </p>
+
+                <div class="completed-actions">
+
+                    <a href="report.html" class="report-btn">
+                        <i class="fa-solid fa-chart-line"></i>
+                        View My Report
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
 
 
 
