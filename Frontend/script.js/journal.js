@@ -7,6 +7,9 @@ const noteCount = document.getElementById("noteCount");
 
 const profileJournal = document.querySelector(".profile-journal");
 const profileBtnJournal = document.querySelector(".profile-btn-journal");
+const loggedUser = document.getElementById("loggedUser");
+
+loggedUser.textContent = localStorage.getItem("username");
 
 profileBtnJournal.addEventListener("click", (e) => {
 
@@ -25,11 +28,13 @@ document.addEventListener("click", (e) => {
     }
 
 });
+document.getElementById("logoutBtn").addEventListener("click", function () {
 
+    localStorage.removeItem("username");
+
+});
 let notes = [];
-
-const username = "suraj123";
-
+const username = localStorage.getItem("username");
 async function loadNotes() {
     try {
         const response = await fetch(`http://localhost:3000/journal/${username}`);

@@ -576,3 +576,21 @@
         padding-top: 2rem;
     }
 }
+.logged-user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 18px;
+    font-weight:600;
+    color:#333;
+}
+
+.logged-user i{
+    color:#4F8EF7;
+}
+
+.profile-dropdown-journal hr{
+    border:none;
+    border-top:1px solid #e5e7eb;
+    margin:0;
+}
