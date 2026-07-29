@@ -357,7 +357,112 @@ const exercises = {
         title: "Quick Focus Reset",
 
         description:
-            "Clear distractions and gently bring your attention back."
+            "Clear distractions and gently bring your attention back.",
+
+        content: `
+
+        <div class="focus-exercise">
+
+            <div class="focus-intro">
+
+                <h3>5-Minute Focus Reset</h3>
+
+                <p>
+                    Choose one small task, remove distractions,
+                    and give it your full attention for five minutes.
+                </p>
+
+            </div>
+
+
+            <div class="focus-timer-wrapper">
+
+                <div class="focus-timer" id="focusTimer">
+
+                    <span class="focus-status" id="focusStatus">
+                        Ready
+                    </span>
+
+                    <strong id="focusTime">
+                        05:00
+                    </strong>
+
+                    <small>
+                        focus time
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="focus-progress-track">
+
+                <div
+                    class="focus-progress-bar"
+                    id="focusProgressBar">
+                </div>
+
+            </div>
+
+
+            <p class="focus-tip" id="focusTip">
+
+                Pick one thing you want to focus on.
+
+            </p>
+
+
+            <div class="focus-actions">
+
+                <button
+                    type="button"
+                    class="focus-btn primary"
+                    id="focusStartBtn">
+
+                    <i class="fa-solid fa-play"></i>
+
+                    Start
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="focus-btn secondary"
+                    id="focusResetBtn">
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    Reset
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="focus-complete"
+                id="focusComplete">
+
+                <div class="focus-complete-icon">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+                <h3>Focus session complete</h3>
+
+                <p>
+                    Nice work. Take a short pause before
+                    deciding what you want to do next.
+                </p>
+
+            </div>
+
+        </div>
+
+    `
 
     },
 
@@ -369,7 +474,67 @@ const exercises = {
         title: "Self-Compassion Break",
 
         description:
-            "Take a short pause and respond to yourself with kindness."
+            "Take a short pause and respond to yourself with kindness.",
+
+        content: `
+
+        <div class="selfcare-exercise">
+
+            <div class="selfcare-header">
+
+                <span class="selfcare-step-label" id="selfcareStepLabel">
+                    Step 1 of 3
+                </span>
+
+                <div class="selfcare-progress-track">
+
+                    <div
+                        class="selfcare-progress-bar"
+                        id="selfcareProgressBar">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="selfcare-content"
+                id="selfcareContent">
+            </div>
+
+
+            <div class="selfcare-actions">
+
+                <button
+                    type="button"
+                    class="selfcare-btn secondary"
+                    id="selfcarePreviousBtn"
+                    disabled>
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Previous
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="selfcare-btn primary"
+                    id="selfcareNextBtn">
+
+                    Next
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `
 
     },
 
@@ -496,7 +661,11 @@ function renderExercises(need) {
 
     stopBreathingExercise();
 
+    clearInterval(focusInterval);
 
+    focusRunning = false;
+
+    focusTimeRemaining = focusTotalTime;
 
     const selected =
         needExercises[need];
@@ -644,6 +813,10 @@ function renderExercises(need) {
     setupGroundingExercise();
 
     setupSleepExercise();
+
+    setupFocusExercise();
+
+    setupSelfcareExercise();
 
 
     // Smoothly move toward exercises
@@ -1436,6 +1609,644 @@ function setupSleepExercise() {
     updateSleepProgress();
 
 }
+
+
+// ==================================================
+// QUICK FOCUS RESET
+// ==================================================
+
+let focusInterval = null;
+
+let focusRunning = false;
+
+let focusTimeRemaining = 5 * 60;
+
+const focusTotalTime = 5 * 60;
+
+
+function setupFocusExercise() {
+
+    const startBtn =
+        document.getElementById("focusStartBtn");
+
+    const resetBtn =
+        document.getElementById("focusResetBtn");
+
+    const timeDisplay =
+        document.getElementById("focusTime");
+
+    const status =
+        document.getElementById("focusStatus");
+
+    const timer =
+        document.getElementById("focusTimer");
+
+    const progressBar =
+        document.getElementById("focusProgressBar");
+
+    const tip =
+        document.getElementById("focusTip");
+
+    const complete =
+        document.getElementById("focusComplete");
+
+
+    // Focus exercise may not currently be rendered
+
+    if (
+        !startBtn ||
+        !resetBtn ||
+        !timeDisplay ||
+        !status ||
+        !timer ||
+        !progressBar ||
+        !tip ||
+        !complete
+    ) {
+
+        return;
+
+    }
+
+
+    // Reset values whenever exercise is freshly rendered
+
+    clearInterval(focusInterval);
+
+    focusRunning = false;
+
+    focusTimeRemaining = focusTotalTime;
+
+
+    updateFocusDisplay(
+        timeDisplay,
+        progressBar
+    );
+
+
+    // ================= START / PAUSE =================
+
+    startBtn.addEventListener("click", () => {
+
+        if (focusRunning) {
+
+            pauseFocusTimer(
+                startBtn,
+                status,
+                timer,
+                tip
+            );
+
+        } else {
+
+            startFocusTimer(
+                startBtn,
+                status,
+                timer,
+                timeDisplay,
+                progressBar,
+                tip,
+                complete
+            );
+
+        }
+
+    });
+
+
+    // ================= RESET =================
+
+    resetBtn.addEventListener("click", () => {
+
+        resetFocusTimer(
+            startBtn,
+            status,
+            timer,
+            timeDisplay,
+            progressBar,
+            tip,
+            complete
+        );
+
+    });
+
+}
+
+
+function startFocusTimer(
+    startBtn,
+    status,
+    timer,
+    timeDisplay,
+    progressBar,
+    tip,
+    complete
+) {
+
+    if (focusTimeRemaining <= 0) {
+
+        focusTimeRemaining =
+            focusTotalTime;
+
+    }
+
+
+    focusRunning = true;
+
+
+    complete.classList.remove("show");
+
+
+    timer.classList.add("running");
+
+
+    status.textContent =
+        "Focusing";
+
+
+    tip.textContent =
+        "Stay with your chosen task until the timer finishes.";
+
+
+    startBtn.innerHTML = `
+
+        <i class="fa-solid fa-pause"></i>
+
+        Pause
+
+    `;
+
+
+    clearInterval(focusInterval);
+
+
+    focusInterval = setInterval(() => {
+
+        focusTimeRemaining--;
+
+
+        updateFocusDisplay(
+            timeDisplay,
+            progressBar
+        );
+
+
+        if (focusTimeRemaining <= 0) {
+
+            completeFocusTimer(
+                startBtn,
+                status,
+                timer,
+                timeDisplay,
+                progressBar,
+                tip,
+                complete
+            );
+
+        }
+
+    }, 1000);
+
+}
+
+
+function pauseFocusTimer(
+    startBtn,
+    status,
+    timer,
+    tip
+) {
+
+    focusRunning = false;
+
+
+    clearInterval(focusInterval);
+
+
+    timer.classList.remove("running");
+
+
+    status.textContent =
+        "Paused";
+
+
+    tip.textContent =
+        "Take a moment, then resume when you're ready.";
+
+
+    startBtn.innerHTML = `
+
+        <i class="fa-solid fa-play"></i>
+
+        Resume
+
+    `;
+
+}
+
+
+function resetFocusTimer(
+    startBtn,
+    status,
+    timer,
+    timeDisplay,
+    progressBar,
+    tip,
+    complete
+) {
+
+    clearInterval(focusInterval);
+
+
+    focusRunning = false;
+
+
+    focusTimeRemaining =
+        focusTotalTime;
+
+
+    timer.classList.remove("running");
+
+
+    status.textContent =
+        "Ready";
+
+
+    tip.textContent =
+        "Pick one thing you want to focus on.";
+
+
+    complete.classList.remove("show");
+
+
+    startBtn.innerHTML = `
+
+        <i class="fa-solid fa-play"></i>
+
+        Start
+
+    `;
+
+
+    updateFocusDisplay(
+        timeDisplay,
+        progressBar
+    );
+
+}
+
+
+function updateFocusDisplay(
+    timeDisplay,
+    progressBar
+) {
+
+    const minutes =
+        Math.floor(
+            focusTimeRemaining / 60
+        );
+
+
+    const seconds =
+        focusTimeRemaining % 60;
+
+
+    timeDisplay.textContent =
+        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+
+    const completedTime =
+        focusTotalTime - focusTimeRemaining;
+
+
+    const percentage =
+        (completedTime / focusTotalTime) * 100;
+
+
+    progressBar.style.width =
+        `${percentage}%`;
+
+}
+
+
+function completeFocusTimer(
+    startBtn,
+    status,
+    timer,
+    timeDisplay,
+    progressBar,
+    tip,
+    complete
+) {
+
+    clearInterval(focusInterval);
+
+
+    focusRunning = false;
+
+    focusTimeRemaining = 0;
+
+
+    timer.classList.remove("running");
+
+
+    status.textContent =
+        "Complete";
+
+
+    tip.textContent =
+        "You gave five minutes of focused attention.";
+
+
+    updateFocusDisplay(
+        timeDisplay,
+        progressBar
+    );
+
+
+    complete.classList.add("show");
+
+
+    startBtn.innerHTML = `
+
+        <i class="fa-solid fa-rotate-right"></i>
+
+        Start Again
+
+    `;
+
+
+    setTimeout(() => {
+
+        complete.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "nearest"
+
+        });
+
+    }, 150);
+
+}
+
+// ==================================================
+// SELF-COMPASSION BREAK
+// ==================================================
+
+const selfcareSteps = [
+
+    {
+        icon: "🌧️",
+
+        title: "Acknowledge the Moment",
+
+        text:
+            "Notice what you're feeling without trying to immediately change or push it away.",
+
+        phrase:
+            "This is a difficult moment for me right now."
+    },
+
+
+    {
+        icon: "🤝",
+
+        title: "Remember You're Human",
+
+        text:
+            "Difficult emotions are part of being human. You do not have to handle every moment perfectly.",
+
+        phrase:
+            "Difficult moments are something everyone experiences."
+    },
+
+
+    {
+        icon: "💙",
+
+        title: "Respond With Kindness",
+
+        text:
+            "Think about how you would speak to someone you care about, then offer yourself that same patience.",
+
+        phrase:
+            "May I give myself the patience and kindness I need right now."
+    }
+
+];
+function setupSelfcareExercise() {
+
+    const content =
+        document.getElementById("selfcareContent");
+
+    const stepLabel =
+        document.getElementById("selfcareStepLabel");
+
+    const progressBar =
+        document.getElementById("selfcareProgressBar");
+
+    const previousBtn =
+        document.getElementById("selfcarePreviousBtn");
+
+    const nextBtn =
+        document.getElementById("selfcareNextBtn");
+
+
+    if (
+        !content ||
+        !stepLabel ||
+        !progressBar ||
+        !previousBtn ||
+        !nextBtn
+    ) {
+
+        return;
+
+    }
+
+
+    let currentStep = 0;
+
+    let completed = false;
+
+
+    function renderSelfcareStep() {
+
+        completed = false;
+
+        const step =
+            selfcareSteps[currentStep];
+
+
+        stepLabel.textContent =
+            `Step ${currentStep + 1} of ${selfcareSteps.length}`;
+
+
+        progressBar.style.width =
+            `${((currentStep + 1) / selfcareSteps.length) * 100}%`;
+
+
+        content.innerHTML = `
+
+            <div class="selfcare-icon">
+                ${step.icon}
+            </div>
+
+            <h3>
+                ${step.title}
+            </h3>
+
+            <p>
+                ${step.text}
+            </p>
+
+            <div class="selfcare-phrase">
+                “${step.phrase}”
+            </div>
+
+        `;
+
+
+        previousBtn.style.display =
+            "";
+
+
+        previousBtn.disabled =
+            currentStep === 0;
+
+
+        if (
+            currentStep ===
+            selfcareSteps.length - 1
+        ) {
+
+            nextBtn.innerHTML = `
+
+                Complete
+
+                <i class="fa-solid fa-check"></i>
+
+            `;
+
+        } else {
+
+            nextBtn.innerHTML = `
+
+                Next
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            `;
+
+        }
+
+    }
+
+
+    renderSelfcareStep();
+    previousBtn.addEventListener("click", () => {
+
+        if (completed) {
+
+            return;
+
+        }
+
+
+        if (currentStep > 0) {
+
+            currentStep--;
+
+            renderSelfcareStep();
+
+        }
+
+    });
+
+    nextBtn.addEventListener("click", () => {
+
+
+        // Restart after completion
+
+        if (completed) {
+
+            currentStep = 0;
+
+            completed = false;
+
+            renderSelfcareStep();
+
+            return;
+
+        }
+
+
+        // Move to next step
+
+        if (
+            currentStep <
+            selfcareSteps.length - 1
+        ) {
+
+            currentStep++;
+
+            renderSelfcareStep();
+
+            return;
+
+        }
+
+
+        // ================= COMPLETE =================
+
+        completed = true;
+
+
+        stepLabel.textContent =
+            "Complete";
+
+
+        progressBar.style.width =
+            "100%";
+
+
+        content.innerHTML = `
+
+            <div class="selfcare-complete-icon">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+            <h3>
+                Self-Compassion Break Complete
+            </h3>
+
+            <p>
+                Take one slow breath. You gave yourself
+                a moment of patience and kindness.
+            </p>
+
+        `;
+
+
+        previousBtn.style.display =
+            "none";
+
+
+        nextBtn.innerHTML = `
+
+            <i class="fa-solid fa-rotate-right"></i>
+
+            Start Again
+
+        `;
+
+    });
+
+}
+
 
 
 
