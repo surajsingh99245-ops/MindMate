@@ -546,7 +546,140 @@ const exercises = {
         title: "Gratitude Exercise",
 
         description:
-            "Take a moment to notice something positive in your day."
+            "Take a moment to notice something positive in your day.",
+
+        content: `
+
+        <div class="gratitude-exercise">
+
+            <div class="gratitude-intro">
+
+                <div class="gratitude-main-icon">
+                    🙏
+                </div>
+
+                <h3>Three Good Things</h3>
+
+                <p>
+                    Think of three things you appreciate right now.
+                    They can be big, small, or very simple.
+                </p>
+
+            </div>
+
+
+            <div class="gratitude-progress">
+
+                <span id="gratitudeProgressText">
+                    0 of 3 completed
+                </span>
+
+                <div class="gratitude-progress-track">
+
+                    <div
+                        class="gratitude-progress-bar"
+                        id="gratitudeProgressBar">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="gratitude-inputs">
+
+                <div class="gratitude-item">
+
+                    <span class="gratitude-number">
+                        1
+                    </span>
+
+                    <input
+                        type="text"
+                        class="gratitude-input"
+                        placeholder="Something you're grateful for...">
+
+                </div>
+
+
+                <div class="gratitude-item">
+
+                    <span class="gratitude-number">
+                        2
+                    </span>
+
+                    <input
+                        type="text"
+                        class="gratitude-input"
+                        placeholder="Something that made today better...">
+
+                </div>
+
+
+                <div class="gratitude-item">
+
+                    <span class="gratitude-number">
+                        3
+                    </span>
+
+                    <input
+                        type="text"
+                        class="gratitude-input"
+                        placeholder="Someone or something you appreciate...">
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="gratitude-complete-btn"
+                id="gratitudeCompleteBtn"
+                disabled>
+
+                <i class="fa-solid fa-check"></i>
+
+                Complete Exercise
+
+            </button>
+
+
+            <div
+                class="gratitude-complete"
+                id="gratitudeComplete">
+
+                <div class="gratitude-complete-icon">
+
+                    <i class="fa-solid fa-heart"></i>
+
+                </div>
+
+                <h3>
+                    Gratitude Exercise Complete
+                </h3>
+
+                <p>
+                    Take a moment to notice how it feels
+                    to remember the good things around you.
+                </p>
+
+                <button
+                    type="button"
+                    class="gratitude-again-btn"
+                    id="gratitudeAgainBtn">
+
+                    <i class="fa-solid fa-rotate-right"></i>
+
+                    Start Again
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `
 
     },
 
@@ -817,6 +950,8 @@ function renderExercises(need) {
     setupFocusExercise();
 
     setupSelfcareExercise();
+
+    setupGratitudeExercise();
 
 
     // Smoothly move toward exercises
@@ -2242,6 +2377,160 @@ function setupSelfcareExercise() {
             Start Again
 
         `;
+
+    });
+
+}
+
+
+// ==================================================
+// GRATITUDE EXERCISE
+// ==================================================
+
+function setupGratitudeExercise() {
+
+    const inputs =
+        document.querySelectorAll(".gratitude-input");
+
+    const progressText =
+        document.getElementById("gratitudeProgressText");
+
+    const progressBar =
+        document.getElementById("gratitudeProgressBar");
+
+    const completeBtn =
+        document.getElementById("gratitudeCompleteBtn");
+
+    const completeMessage =
+        document.getElementById("gratitudeComplete");
+
+    const againBtn =
+        document.getElementById("gratitudeAgainBtn");
+
+
+    // Gratitude may not currently be rendered
+
+    if (
+        inputs.length === 0 ||
+        !progressText ||
+        !progressBar ||
+        !completeBtn ||
+        !completeMessage ||
+        !againBtn
+    ) {
+
+        return;
+
+    }
+
+
+    function updateGratitudeProgress() {
+
+        const completed =
+            [...inputs].filter((input) => {
+
+                return input.value.trim() !== "";
+
+            }).length;
+
+
+        const total =
+            inputs.length;
+
+
+        progressText.textContent =
+            `${completed} of ${total} completed`;
+
+
+        progressBar.style.width =
+            `${(completed / total) * 100}%`;
+
+
+        completeBtn.disabled =
+            completed !== total;
+
+    }
+
+
+    inputs.forEach((input) => {
+
+        input.addEventListener(
+            "input",
+            updateGratitudeProgress
+        );
+
+    });
+
+
+    updateGratitudeProgress();
+
+    completeBtn.addEventListener("click", () => {
+
+        const allCompleted =
+            [...inputs].every((input) => {
+
+                return input.value.trim() !== "";
+
+            });
+
+
+        if (!allCompleted) {
+
+            return;
+
+        }
+
+
+        completeMessage.classList.add("show");
+
+
+        completeBtn.style.display =
+            "none";
+
+
+        inputs.forEach((input) => {
+
+            input.disabled = true;
+
+        });
+
+
+        setTimeout(() => {
+
+            completeMessage.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "nearest"
+
+            });
+
+        }, 150);
+
+    });
+
+    againBtn.addEventListener("click", () => {
+
+        inputs.forEach((input) => {
+
+            input.value = "";
+
+            input.disabled = false;
+
+        });
+
+
+        completeMessage.classList.remove("show");
+
+
+        completeBtn.style.display =
+            "flex";
+
+
+        updateGratitudeProgress();
+
+
+        inputs[0].focus();
 
     });
 
