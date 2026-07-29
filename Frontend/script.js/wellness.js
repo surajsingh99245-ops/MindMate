@@ -165,7 +165,187 @@ const exercises = {
         title: "Sleep Relaxation",
 
         description:
-            "Slow down and prepare your body and mind for rest."
+            "Slow down and prepare your body and mind for rest.",
+
+        content: `
+
+        <div class="sleep-exercise">
+
+            <div class="sleep-intro">
+
+                <h3>Wind-Down Routine</h3>
+
+                <p>
+                    Complete these small steps to help your
+                    mind and body prepare for rest.
+                </p>
+
+            </div>
+
+
+            <div class="sleep-progress">
+
+                <div class="sleep-progress-info">
+
+                    <span>Progress</span>
+
+                    <span id="sleepProgressText">
+                        0 / 5
+                    </span>
+
+                </div>
+
+                <div class="sleep-progress-track">
+
+                    <div
+                        class="sleep-progress-bar"
+                        id="sleepProgressBar">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="sleep-checklist">
+
+                <label class="sleep-step">
+
+                    <input type="checkbox">
+
+                    <span class="sleep-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="sleep-step-content">
+
+                        <strong>
+                            Put distractions aside
+                        </strong>
+
+                        <small>
+                            Set your phone or other distractions aside for a moment.
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+                <label class="sleep-step">
+
+                    <input type="checkbox">
+
+                    <span class="sleep-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="sleep-step-content">
+
+                        <strong>
+                            Make your space comfortable
+                        </strong>
+
+                        <small>
+                            Lower the lights and settle into a comfortable position.
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+                <label class="sleep-step">
+
+                    <input type="checkbox">
+
+                    <span class="sleep-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="sleep-step-content">
+
+                        <strong>
+                            Relax your body
+                        </strong>
+
+                        <small>
+                            Let your shoulders drop and release tension from your jaw.
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+                <label class="sleep-step">
+
+                    <input type="checkbox">
+
+                    <span class="sleep-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="sleep-step-content">
+
+                        <strong>
+                            Take five slow breaths
+                        </strong>
+
+                        <small>
+                            Breathe gently and allow your breathing to become slower.
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+                <label class="sleep-step">
+
+                    <input type="checkbox">
+
+                    <span class="sleep-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="sleep-step-content">
+
+                        <strong>
+                            Let today be finished
+                        </strong>
+
+                        <small>
+                            Give yourself permission to leave unfinished thoughts for tomorrow.
+                        </small>
+
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <div
+                class="sleep-complete"
+                id="sleepComplete">
+
+                <div class="sleep-complete-icon">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+
+                <h3>You're ready to wind down</h3>
+
+                <p>
+                    Nice work. Keep things quiet and give
+                    yourself some time to rest.
+                </p>
+
+            </div>
+
+        </div>
+
+    `
 
     },
 
@@ -462,6 +642,8 @@ function renderExercises(need) {
     setupBreathingExercise();
 
     setupGroundingExercise();
+
+    setupSleepExercise();
 
 
     // Smoothly move toward exercises
@@ -1141,6 +1323,117 @@ function setupGroundingExercise() {
         };
 
     });
+
+}
+
+
+
+// ==================================================
+// SLEEP RELAXATION
+// ==================================================
+
+function setupSleepExercise() {
+
+    const sleepSteps =
+        document.querySelectorAll(
+            ".sleep-step input"
+        );
+
+    const progressBar =
+        document.getElementById(
+            "sleepProgressBar"
+        );
+
+    const progressText =
+        document.getElementById(
+            "sleepProgressText"
+        );
+
+    const completeMessage =
+        document.getElementById(
+            "sleepComplete"
+        );
+
+
+    // Sleep exercise may not currently be rendered
+
+    if (
+        sleepSteps.length === 0 ||
+        !progressBar ||
+        !progressText ||
+        !completeMessage
+    ) {
+
+        return;
+
+    }
+
+
+    function updateSleepProgress() {
+
+        const completed =
+            [...sleepSteps].filter(
+                (step) => step.checked
+            ).length;
+
+
+        const total =
+            sleepSteps.length;
+
+
+        const percentage =
+            (completed / total) * 100;
+
+
+        progressText.textContent =
+            `${completed} / ${total}`;
+
+
+        progressBar.style.width =
+            `${percentage}%`;
+
+
+        if (completed === total) {
+
+            completeMessage.classList.add(
+                "show"
+            );
+
+
+            setTimeout(() => {
+
+                completeMessage.scrollIntoView({
+
+                    behavior: "smooth",
+
+                    block: "nearest"
+
+                });
+
+            }, 150);
+
+        } else {
+
+            completeMessage.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+
+
+    sleepSteps.forEach((step) => {
+
+        step.addEventListener(
+            "change",
+            updateSleepProgress
+        );
+
+    });
+
+
+    updateSleepProgress();
 
 }
 
