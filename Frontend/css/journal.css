@@ -268,7 +268,7 @@
 
 }
 
-.profile.active .profile-dropdown-journal {
+.profile-journal.active .profile-dropdown-journal {
 
     opacity: 1;
 
@@ -303,6 +303,19 @@
     background: #f8fafc;
 
     color: #ef4444;
+}
+
+
+.profile-btn-journal .fa-chevron-down {
+
+    transition: transform .3s ease;
+
+}
+
+.profile-journal.active .fa-chevron-down {
+
+    transform: rotate(180deg);
+
 }
 
 
