@@ -81,12 +81,39 @@ function renderMoodDistribution(distribution) {
 }
 
 
+const MOOD_EMOJI_MAP = {
+    "Great": "😄",
+    "Happy": "😊",
+    "Calm": "😌",
+    "Neutral": "😐",
+    "Sad": "😔",
+    "Very Sad": "😢",
+    "Anxious": "😰",
+    "Overwhelmed": "😵",
+    "Lonely": "🥺",
+    "Frustrated": "😣",
+    "Angry": "😠",
+    "Excited": "🤩",
+    "Motivated": "💪",
+    "Focused": "🎯",
+    "Relaxed": "🌿"
+};
+
+const DEFAULT_MOOD_EMOJI = "🙂";
+
+function getMoodEmoji(mood) {
+    return MOOD_EMOJI_MAP[mood] || DEFAULT_MOOD_EMOJI;
+}
+
 function updateReport(data) {
 
     // Summary Cards
 
     document.getElementById("avgMood").textContent =
         data.summary.averageMood;
+
+    document.getElementById("avgMoodEmoji").textContent =
+        getMoodEmoji(data.summary.averageMood);
 
     document.getElementById("checkins").textContent =
         data.summary.checkins;

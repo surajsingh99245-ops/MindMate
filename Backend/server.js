@@ -440,8 +440,12 @@ app.get("/report/weekly/:username", async (req, res) => {
             distribution[key] = Math.round(distribution[key] * 100 / total);
         });
 
-        const moodAverage =
-            moodTrend.reduce((a, b) => a + b, 0) / moodTrend.length;
+      const validMoodDays = moodTrend.filter(value => value > 0);
+
+const moodAverage =
+    validMoodDays.length > 0
+        ? validMoodDays.reduce((a, b) => a + b, 0) / validMoodDays.length
+        : 3;
 
         const moodText =
             moodAverage >= 4.5 ? "Happy" :
