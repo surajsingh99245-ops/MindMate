@@ -483,6 +483,201 @@ app.get("/report/weekly/:username", async (req, res) => {
         });
     }
 });
+app.get("/report/monthly/:username", async (req, res) => {
+
+    try {
+
+        const { username } = req.params;
+
+        const result = await pool.query(
+            `SELECT *
+     FROM chat_history
+     WHERE username = $1
+     AND created_at >= CURRENT_DATE - INTERVAL '29 days'
+     ORDER BY created_at`,
+            [username]
+        );
+
+        const rows = result.rows;
+        const uniqueDays = new Set();
+
+        rows.forEach((row) => {
+            const date = new Date(row.created_at)
+                .toISOString()
+                .split("T")[0];
+
+            uniqueDays.add(date);
+        });
+
+        const checkins = uniqueDays.size;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        let streak = 0;
+
+        for (let i = 0; i < 30; i++) {
+            const currentDate = new Date(today);
+            currentDate.setDate(today.getDate() - i);
+
+            const dateString = currentDate.toISOString().split("T")[0];
+
+            if (uniqueDays.has(dateString)) {
+                streak++;
+            } else {
+                break;
+            }
+        }
+
+        if (rows.length === 0) {
+            return res.json({
+                summary: {
+                    averageMood: "Neutral",
+                    checkins: `${checkins} / 30 Days`,
+                    streak: `${streak} Days`,
+                    journalEntries: `0 Entries`
+                },
+                charts: {
+                    labels: [],
+                    moodTrend: [],
+                    journalActivity: []
+                },
+                distribution: {
+                    happy: 0,
+                    calm: 0,
+                    neutral: 0,
+                    sad: 0,
+                    anxious: 0
+                },
+                insights: [
+                    "Start chatting with MindMate to generate your first report."
+                ]
+            });
+        }
+
+        const moodMap = {
+            Happy: 5,
+            Calm: 4,
+            Neutral: 3,
+            Sad: 2,
+            Anxious: 1
+        };
+
+        let distribution = {
+            happy: 0,
+            calm: 0,
+            neutral: 0,
+            sad: 0,
+            anxious: 0
+        };
+
+        const weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"];
+
+        const weekData = {
+            "Week 1": { moodSum: 0, moodCount: 0, journal: 0 },
+            "Week 2": { moodSum: 0, moodCount: 0, journal: 0 },
+            "Week 3": { moodSum: 0, moodCount: 0, journal: 0 },
+            "Week 4": { moodSum: 0, moodCount: 0, journal: 0 },
+            "Week 5": { moodSum: 0, moodCount: 0, journal: 0 }
+        };
+
+        let stressTotal = 0;
+
+        rows.forEach((row) => {
+
+            const dayOfMonth = new Date(row.created_at).getDate();
+
+            let week;
+
+            if (dayOfMonth <= 7) {
+                week = "Week 1";
+            } else if (dayOfMonth <= 14) {
+                week = "Week 2";
+            } else if (dayOfMonth <= 21) {
+                week = "Week 3";
+            } else if (dayOfMonth <= 28) {
+                week = "Week 4";
+            } else {
+                week = "Week 5";
+            }
+
+            const moodValue = moodMap[row.mood] || 3;
+
+            weekData[week].moodSum += moodValue;
+            weekData[week].moodCount++;
+            weekData[week].journal++;
+
+            stressTotal += row.stress_level;
+
+            if (row.mood) {
+                const key = row.mood.toLowerCase();
+
+                if (distribution[key] !== undefined) {
+                    distribution[key]++;
+                }
+            }
+
+        });
+
+        const labels = weeks;
+
+        const moodTrend = weeks.map(week => {
+            if (weekData[week].moodCount === 0) return 0;
+
+            return Number(
+                (weekData[week].moodSum / weekData[week].moodCount).toFixed(1)
+            );
+        });
+
+        const journalActivity = weeks.map(week => weekData[week].journal);
+        const total = rows.length;
+
+        Object.keys(distribution).forEach(key => {
+            distribution[key] = Math.round(distribution[key] * 100 / total);
+        });
+
+        const moodAverage =
+            moodTrend.reduce((a, b) => a + b, 0) / moodTrend.length;
+
+        const moodText =
+            moodAverage >= 4.5 ? "Happy" :
+                moodAverage >= 3.5 ? "Calm" :
+                    moodAverage >= 2.5 ? "Neutral" :
+                        moodAverage >= 1.5 ? "Sad" :
+                            "Anxious";
+
+        res.json({
+
+            summary: {
+                averageMood: moodText,
+                checkins: `${checkins} / 30 Days`,
+                streak: `${streak} Days`,
+                journalEntries: `${total} Entries`
+            },
+
+            charts: {
+                labels,
+                moodTrend,
+                journalActivity
+            },
+
+            distribution,
+
+            insights: [
+                `Average stress level: ${(stressTotal / total).toFixed(1)}/10`,
+                `You completed ${total} check-ins.`,
+                `Your dominant mood is ${moodText}.`,
+                "Keep checking in daily for better insights."
+            ]
+
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: "Server Error"
+        });
+    }
+});
 // Start Server
 app.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
