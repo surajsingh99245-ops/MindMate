@@ -1,7 +1,6 @@
 const heroText = document.getElementById("heroText");
 const chatHome = document.getElementById("chatHome");
 
-
 const profile = document.querySelector(".profile");
 const profileBtn = document.querySelector(".profile-btn");
 const loggedUser = document.getElementById("loggedUser");
@@ -18,171 +17,172 @@ if (logoutBtn) {
     });
 }
 
-profileBtn.addEventListener("click", (e) => {
+if (profileBtn && profile) {
+    profileBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        profile.classList.toggle("active");
+    });
 
-    e.stopPropagation();
+    document.addEventListener("click", (e) => {
+        if (!profile.contains(e.target)) {
+            profile.classList.remove("active");
+        }
+    });
+}
 
-    profile.classList.toggle("active");
-
-});
-
-document.addEventListener("click", (e) => {
-
-    if (!profile.contains(e.target)) {
-
-        profile.classList.remove("active");
-
-    }
-
-});
 // ================= AI CHAT =================
 
 const messages = document.querySelector(".messages");
 const input = document.querySelector(".chat-input input");
 const sendBtn = document.querySelector(".send-btn");
 
-function addMessage(text, sender) {
-    const message = document.createElement("div");
+if (messages && input && sendBtn) {
 
-    message.className = sender === "user" ? "user-message" : "ai-message";
+    function addMessage(text, sender) {
+        const message = document.createElement("div");
 
-    message.innerHTML = `
-        <div class="message-content">
-            <p>${text}</p>
-        </div>
-    `;
+        message.className = sender === "user" ? "user-message" : "ai-message";
 
-    messages.appendChild(message);
-    messages.scrollTop = messages.scrollHeight;
-}
+        message.innerHTML = `
+            <div class="message-content">
+                <p>${text}</p>
+            </div>
+        `;
 
-async function sendMessage() {
-
-    const message = input.value.trim();
-
-    if (message === "") return;
-
-    // Show user's message
-    addMessage(message, "user");
-
-    if (!heroText.classList.contains("hidden")) {
-
-        heroText.classList.add("hidden");
-
+        messages.appendChild(message);
+        messages.scrollTop = messages.scrollHeight;
     }
 
-    chatHome.classList.add("chat-started");
+    async function sendMessage() {
 
-    input.value = "";
+        const message = input.value.trim();
 
-    try {
-        const typingIndicator = showTypingIndicator();
-        
-    const username = localStorage.getItem("username");
+        if (message === "") return;
 
-const response = await fetch("http://localhost:3000/chat", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        username: username,
-        message: message
-    })
-});
+        // Show user's message
+        addMessage(message, "user");
 
-        const data = await response.json();
+        if (heroText && !heroText.classList.contains("hidden")) {
+            heroText.classList.add("hidden");
+        }
 
-        typingIndicator.remove();
+        if (chatHome) chatHome.classList.add("chat-started");
 
-        addMessage(data.reply, "ai");
+        input.value = "";
 
-    } catch (error) {
+        let typingIndicator;
 
-        console.error(error);
+        try {
+            typingIndicator = showTypingIndicator();
 
-        if (typingIndicator) {
+            const username = localStorage.getItem("username");
+
+            const response = await fetch("http://localhost:3000/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: username,
+                    message: message
+                })
+            });
+
+            const data = await response.json();
 
             typingIndicator.remove();
 
+            addMessage(data.reply, "ai");
+
+        } catch (error) {
+
+            console.error(error);
+
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+
+            addMessage("Sorry, something went wrong.", "ai");
+
         }
 
-        addMessage("Sorry, something went wrong.", "ai");
+    }
+
+    function showTypingIndicator() {
+
+        const typing = document.createElement("div");
+
+        typing.className = "ai-message typing-indicator";
+
+        typing.innerHTML = `
+            <div class="message-content">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        `;
+
+        messages.appendChild(typing);
+
+        messages.scrollTop = messages.scrollHeight;
+
+        return typing;
 
     }
 
-}
+    sendBtn.addEventListener("click", sendMessage);
 
+    input.addEventListener("keypress", function (e) {
 
-function showTypingIndicator() {
+        if (e.key === "Enter") {
 
-    const typing = document.createElement("div");
+            sendMessage();
 
-    typing.className = "ai-message typing-indicator";
-
-    typing.innerHTML = `
-        <div class="message-content">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    `;
-
-    messages.appendChild(typing);
-
-    messages.scrollTop = messages.scrollHeight;
-
-    return typing;
-
-}
-
-
-sendBtn.addEventListener("click", sendMessage);
-
-input.addEventListener("keypress", function (e) {
-
-    if (e.key === "Enter") {
-
-        sendMessage();
-
-    }
-
-});
-const micBtn = document.querySelector(".mic-btn");
-
-const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
-
-if (SpeechRecognition) {
-
-    const recognition = new SpeechRecognition();
-
-    recognition.lang = "en-US";
-    recognition.interimResults = false;
-    recognition.continuous = false;
-
-    micBtn.addEventListener("click", () => {
-
-        recognition.start();
-
-        micBtn.innerHTML = `<i class="fa-solid fa-microphone-lines"></i>`;
+        }
 
     });
 
-    recognition.onresult = (event) => {
+}
 
-        input.value = event.results[0][0].transcript;
+const micBtn = document.querySelector(".mic-btn");
 
-    };
+if (micBtn) {
 
-    recognition.onend = () => {
+    const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
 
-        micBtn.innerHTML = `<i class="fa-solid fa-microphone"></i>`;
+    if (SpeechRecognition) {
 
-    };
+        const recognition = new SpeechRecognition();
 
-} else {
+        recognition.lang = "en-US";
+        recognition.interimResults = false;
+        recognition.continuous = false;
 
-    micBtn.style.display = "none";
+        micBtn.addEventListener("click", () => {
+
+            recognition.start();
+
+            micBtn.innerHTML = `<i class="fa-solid fa-microphone-lines"></i>`;
+
+        });
+
+        recognition.onresult = (event) => {
+
+            input.value = event.results[0][0].transcript;
+
+        };
+
+        recognition.onend = () => {
+
+            micBtn.innerHTML = `<i class="fa-solid fa-microphone"></i>`;
+
+        };
+
+    } else {
+
+        micBtn.style.display = "none";
+
+    }
 
 }

@@ -1,18 +1,3 @@
-const profile = document.querySelector(".profile");
-const profileBtn = document.querySelector(".profile-btn");
-const loggedUser = document.getElementById("loggedUser");
-
-if (loggedUser) {
-    loggedUser.textContent = localStorage.getItem("username");
-}
-
-const logoutBtn = document.getElementById("logoutBtn");
-
-if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("username");
-    });
-}
 const weeklyData = {
 
     summary: {
@@ -154,25 +139,29 @@ const weeklyBtn =
 const monthlyBtn =
     document.getElementById("monthlyBtn");
 
-weeklyBtn.addEventListener("click", () => {
+if (weeklyBtn && monthlyBtn) {
 
-    weeklyBtn.classList.add("active");
+    weeklyBtn.addEventListener("click", () => {
 
-    monthlyBtn.classList.remove("active");
+        weeklyBtn.classList.add("active");
 
-    loadWeeklyReport();
+        monthlyBtn.classList.remove("active");
 
-});
+        loadWeeklyReport();
 
-monthlyBtn.addEventListener("click", () => {
+    });
 
-    monthlyBtn.classList.add("active");
+    monthlyBtn.addEventListener("click", () => {
 
-    weeklyBtn.classList.remove("active");
+        monthlyBtn.classList.add("active");
 
-    loadMonthlyReport();
+        weeklyBtn.classList.remove("active");
 
-});
+        loadMonthlyReport();
+
+    });
+
+}
 
 
 
