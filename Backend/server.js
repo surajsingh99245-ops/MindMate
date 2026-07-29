@@ -1,6 +1,6 @@
 const path = require("path");
 require("dotenv").config();
-const express = require("express");
+const express = require("express"); 
 const cors = require("cors");
 require("dotenv").config();
 
@@ -100,7 +100,7 @@ app.post("/login", async (req, res) => {
 app.post("/journal", async (req, res) => {
     try {
         const { username, title, note } = req.body;
- 
+
         await pool.query(
             `INSERT INTO journals (username, title, note)
              VALUES ($1, $2, $3)`,
@@ -299,45 +299,70 @@ app.get("/models", async (req, res) => {
         res.status(500).json(err);
     }
 });
-app.get("/report/weekly/:username", async (req, res) => {
+app.get("/report/weekly/:username", async (req, res) => { 
 
     try {
-
         const { username } = req.params;
+ 
+        const test = await pool.query(
+            `SELECT COUNT(DISTINCT checkin_date) AS total
+     FROM daily_checkins
+     WHERE username = $1`,
+            [username]
+        );
 
+       
+        // AI Chat Data
         const result = await pool.query(
             `SELECT *
-     FROM chat_history
-     WHERE username = $1
-     AND created_at >= CURRENT_DATE - INTERVAL '6 days'
-     ORDER BY created_at`,
+             FROM chat_history
+             WHERE username = $1
+             AND created_at >= CURRENT_DATE - INTERVAL '6 days'
+             ORDER BY created_at`,
             [username]
         );
 
         const rows = result.rows;
-        const uniqueDays = new Set();
 
-        rows.forEach((row) => {
-            const date = new Date(row.created_at)
-                .toISOString()
-                .split("T")[0];
+        // Daily Check-ins Count
+        const dailyCheckinResult = await pool.query(
+            `SELECT COUNT(DISTINCT checkin_date) AS total
+             FROM daily_checkins
+             WHERE username = $1
+             AND checkin_date >= CURRENT_DATE - INTERVAL '6 days'`,
+            [username]
+        );
 
-            uniqueDays.add(date);
-        });
+        const checkins = Number(dailyCheckinResult.rows[0].total);
 
-        const checkins = uniqueDays.size;
+        // Current Streak (Daily Check-ins)
+        const streakResult = await pool.query(
+            `SELECT checkin_date
+             FROM daily_checkins
+             WHERE username = $1
+             ORDER BY checkin_date DESC`,
+            [username]
+        );
+
+        const checkinDates = new Set(
+            streakResult.rows.map(row =>
+                row.checkin_date.toISOString().split("T")[0]
+            )
+        );
+
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
         let streak = 0;
 
         for (let i = 0; i < 7; i++) {
+
             const currentDate = new Date(today);
             currentDate.setDate(today.getDate() - i);
 
             const dateString = currentDate.toISOString().split("T")[0];
 
-            if (uniqueDays.has(dateString)) {
+            if (checkinDates.has(dateString)) {
                 streak++;
             } else {
                 break;
@@ -345,6 +370,7 @@ app.get("/report/weekly/:username", async (req, res) => {
         }
 
         if (rows.length === 0) {
+      
             return res.json({
                 summary: {
                     averageMood: "Neutral",
@@ -440,12 +466,12 @@ app.get("/report/weekly/:username", async (req, res) => {
             distribution[key] = Math.round(distribution[key] * 100 / total);
         });
 
-      const validMoodDays = moodTrend.filter(value => value > 0);
+        const validMoodDays = moodTrend.filter(value => value > 0);
 
-const moodAverage =
-    validMoodDays.length > 0
-        ? validMoodDays.reduce((a, b) => a + b, 0) / validMoodDays.length
-        : 3;
+        const moodAverage =
+            validMoodDays.length > 0
+                ? validMoodDays.reduce((a, b) => a + b, 0) / validMoodDays.length
+                : 3;
 
         const moodText =
             moodAverage >= 4.5 ? "Happy" :
@@ -473,7 +499,7 @@ const moodAverage =
 
             insights: [
                 `Average stress level: ${(stressTotal / total).toFixed(1)}/10`,
-                `You completed ${total} check-ins.`,
+                `You completed ${checkins} daily check-ins.`,
                 `Your dominant mood is ${moodText}.`,
                 "Keep checking in daily for better insights."
             ]
@@ -501,62 +527,91 @@ app.get("/report/monthly/:username", async (req, res) => {
      ORDER BY created_at`,
             [username]
         );
+ const rows = result.rows;
 
-        const rows = result.rows;
-        const uniqueDays = new Set();
+// Daily Check-ins Count
+const dailyCheckinResult = await pool.query(
+    `SELECT COUNT(DISTINCT checkin_date) AS total
+     FROM daily_checkins
+     WHERE username = $1
+     AND checkin_date >= CURRENT_DATE - INTERVAL '29 days'`,
+    [username]
+);
 
-        rows.forEach((row) => {
-            const date = new Date(row.created_at)
-                .toISOString()
-                .split("T")[0];
+const checkins = Number(dailyCheckinResult.rows[0].total);
 
-            uniqueDays.add(date);
-        });
+// AI Chat Days (keep for mood calculations)
+const uniqueDays = new Set();
 
-        const checkins = uniqueDays.size;
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+rows.forEach((row) => {
+    const date = new Date(row.created_at)
+        .toISOString()
+        .split("T")[0];
 
-        let streak = 0;
+    uniqueDays.add(date);
+});
 
-        for (let i = 0; i < 30; i++) {
-            const currentDate = new Date(today);
-            currentDate.setDate(today.getDate() - i);
+// Current Streak (Daily Check-ins)
+const streakResult = await pool.query(
+    `SELECT checkin_date
+     FROM daily_checkins
+     WHERE username = $1
+     ORDER BY checkin_date DESC`,
+    [username]
+);
 
-            const dateString = currentDate.toISOString().split("T")[0];
+const checkinDates = new Set(
+    streakResult.rows.map(row =>
+        row.checkin_date.toISOString().split("T")[0]
+    )
+);
 
-            if (uniqueDays.has(dateString)) {
-                streak++;
-            } else {
-                break;
-            }
-        }
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
-        if (rows.length === 0) {
-            return res.json({
-                summary: {
-                    averageMood: "Neutral",
-                    checkins: `${checkins} / 30 Days`,
-                    streak: `${streak} Days`,
-                    journalEntries: `0 Entries`
-                },
-                charts: {
-                    labels: [],
-                    moodTrend: [],
-                    journalActivity: []
-                },
-                distribution: {
-                    happy: 0,
-                    calm: 0,
-                    neutral: 0,
-                    sad: 0,
-                    anxious: 0
-                },
-                insights: [
-                    "Start chatting with MindMate to generate your first report."
-                ]
-            });
-        }
+let streak = 0;
+
+for (let i = 0; i < 30; i++) {
+
+    const currentDate = new Date(today);
+    currentDate.setDate(today.getDate() - i);
+
+    const dateString = currentDate
+        .toISOString()
+        .split("T")[0];
+
+    if (checkinDates.has(dateString)) {
+        streak++;
+    } else {
+        break;
+    }
+}
+
+  if (rows.length === 0 && checkins === 0) {
+    return res.json({
+        summary: {
+            averageMood: "Neutral",
+            checkins: `${checkins} / 30 Days`,
+            streak: `${streak} Days`,
+            journalEntries: `0 Entries`
+        },
+        charts: {
+            labels: [],
+            moodTrend: [],
+            journalActivity: []
+        },
+        distribution: {
+            happy: 0,
+            calm: 0,
+            neutral: 0,
+            sad: 0,
+            anxious: 0
+        },
+        insights: [
+            "Start chatting with MindMate to generate your first report."
+        ]
+    });
+}
 
         const moodMap = {
             Happy: 5,
