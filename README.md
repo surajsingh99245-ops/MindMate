@@ -372,3 +372,108 @@ Daily Check-In functionality is separated into `daily-checkin.routes.js`, which 
 > **Note:** The current prototype uses a relatively compact backend structure suitable for hackathon development. Further modularization into controllers, services, middleware, and data-access layers is a potential future improvement.
 
 ---
+
+## 🔌 API Overview
+
+MindMate's frontend communicates with the Node.js/Express backend through HTTP requests using JSON.
+
+During local development, the backend runs on:
+
+```text
+http://localhost:3000
+```
+
+The API handles user registration and login, AI conversations, journal operations, Daily Check-In data, and wellness report generation.
+
+### Core API Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `GET` | `/` | Backend health check |
+| `POST` | `/signup` | Register a new user |
+| `POST` | `/login` | Validate user login credentials |
+| `POST` | `/chat` | Send a message to the MindMate AI companion |
+| `POST` | `/journal` | Create a journal entry |
+| `GET` | `/journal/:username` | Retrieve a user's journal entries |
+| `PUT` | `/journal/:id` | Update an existing journal entry |
+| `DELETE` | `/journal/:id` | Delete a journal entry |
+| `POST` | `/daily-checkin` | Create or update a Daily Check-In |
+| `GET` | `/daily-checkin/:username/today` | Retrieve the user's check-in for the current day |
+| `GET` | `/report/weekly/:username` | Generate the user's weekly wellness report |
+| `GET` | `/report/monthly/:username` | Generate the user's monthly wellness report |
+
+### AI Chat Request
+
+The frontend sends the user's message to the backend through:
+
+```http
+POST /chat
+```
+
+Example request:
+
+```json
+{
+  "username": "exampleUser",
+  "message": "I feel a little stressed today."
+}
+```
+
+The backend processes the message using Google Gemini and returns both the conversational reply and structured emotional information.
+
+Example response structure:
+
+```json
+{
+  "success": true,
+  "reply": "AI-generated supportive response",
+  "mood": "Stressed",
+  "stressLevel": 6,
+  "sentiment": "Negative"
+}
+```
+
+When a username is available, the conversation and derived emotional metadata are stored in the `chat_history` table for later analysis.
+
+### Daily Check-In API
+
+The Daily Check-In endpoint accepts structured wellness information and performs server-side validation before writing it to PostgreSQL.
+
+The submitted data can include:
+
+```json
+{
+  "username": "exampleUser",
+  "mood": "calm",
+  "moodValue": 4,
+  "stressLevel": 3,
+  "energyLevel": 4,
+  "sleepQuality": "good",
+  "sleepValue": 4,
+  "selectedEmotions": ["calm", "hopeful"],
+  "reflection": "Today felt more manageable than yesterday."
+}
+```
+
+The backend validates the submitted values and uses a per-user, per-day record model to prevent duplicate Daily Check-In entries for the same date.
+
+### Reports API
+
+Weekly and monthly report endpoints aggregate stored information from the AI conversation history and Daily Check-In records.
+
+The generated report data is used by the frontend to display:
+
+- Summary metrics
+- Mood trends
+- Activity information
+- Mood distribution
+- Check-in consistency
+- Current streak information
+- Chart-ready datasets
+- Textual wellness insights
+
+Report calculations are performed on demand when the corresponding endpoint is requested.
+
+> **API Status:** MindMate currently uses a prototype-oriented REST-style API. API versioning and an OpenAPI/Swagger specification are not yet implemented.
+
+---
