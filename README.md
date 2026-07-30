@@ -783,3 +783,48 @@ The Reports module presents weekly and monthly wellness information through summ
 ![MindMate Reports and Analytics](Project-SS/report-ss.png)
 
 ---
+
+
+## 🚧 Current Limitations
+
+MindMate is currently a functional hackathon prototype designed to demonstrate the integration of conversational AI, structured wellness tracking, journaling, and analytics. While the core workflows are operational, several areas require further development before the platform would be suitable for production use.
+
+### Authentication & Security
+
+The current login system provides basic user registration and credential validation but does not yet implement production-grade authentication mechanisms such as JWT-based authentication or server-side sessions.
+
+Additional security improvements are required, including:
+
+- Secure password hashing
+- Server-side session or token-based authentication
+- Stronger authorization and ownership validation
+- Protected API routes
+- Production-level security configuration
+
+### Database Management
+
+The current repository does not include a dedicated database migration system, ORM layer, or standalone schema setup script.
+
+Formal schema management and automated migrations would improve deployment consistency and maintainability.
+
+### AI Safety
+
+The current Gemini prompt includes wellness-oriented behavioral constraints, such as avoiding medical diagnosis and medication recommendations.
+
+However, a dedicated crisis or self-harm detection and escalation system is not currently implemented.
+
+### Rate Limiting
+
+The landing-page AI demo includes a client-side usage limit, but the backend does not currently provide a production-grade server-side rate-limiting mechanism.
+
+### Backend Modularity
+
+Most backend functionality is currently concentrated within `server.js`, with Daily Check-In routing separated into its own module.
+
+A larger production implementation would benefit from further separation into routes, controllers, services, middleware, validation, and data-access layers.
+
+### Prototype Scope
+
+MindMate has been developed primarily as a hackathon prototype. Production deployment would require additional work in areas such as security hardening, automated testing, database migration management, monitoring, scalability, accessibility, and AI safety.
+
+---
