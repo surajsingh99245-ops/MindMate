@@ -207,7 +207,7 @@ MindMate follows a three-tier client-server architecture consisting of a static 
              │                  │   │ Sentiment Analysis  │
              └──────────────────┘   └─────────────────────┘
 
-             User Message
+User Message
      │
      ▼
 Frontend Chat Interface
@@ -235,3 +235,71 @@ PostgreSQL
      │
      ▼
 Wellness Analytics
+
+
+---
+
+## 🛠️ Technology Stack
+
+MindMate uses a lightweight full-stack architecture built with standard web technologies, a Node.js backend, PostgreSQL for persistent storage, and Google Gemini for AI-powered conversation and emotional analysis.
+
+### Frontend
+
+| Technology | Purpose |
+|---|---|
+| **HTML5** | Defines the structure and content of the application pages |
+| **CSS3** | Handles styling, responsive layouts, animations, and visual design |
+| **JavaScript (Vanilla)** | Controls frontend interactions, API communication, forms, chat behavior, and wellness exercises |
+| **Fetch API** | Communicates with the Express backend through HTTP requests |
+| **Chart.js** | Renders interactive charts in the Reports module |
+| **Web Speech API** | Provides speech-to-text functionality for AI chat |
+| **Font Awesome** | Provides icons used throughout the interface |
+
+The frontend does not use a JavaScript framework or build system. Each page is implemented using standard HTML, CSS, and JavaScript.
+
+### Backend
+
+| Technology | Purpose |
+|---|---|
+| **Node.js** | JavaScript runtime for the backend |
+| **Express.js** | Handles HTTP routing and server-side application logic |
+| **pg** | Provides connectivity between Node.js and PostgreSQL |
+| **@google/genai** | Integrates Google Gemini with the MindMate backend |
+| **cors** | Enables controlled cross-origin communication between frontend and backend |
+| **dotenv** | Loads environment variables and sensitive configuration |
+| **Nodemon** | Automatically restarts the backend server during development |
+
+### Database
+
+**PostgreSQL** is used as MindMate's relational database.
+
+It stores application data associated with:
+
+- User accounts
+- Journal entries
+- AI conversation history
+- AI-derived emotional metadata
+- Daily wellness check-ins
+
+### Artificial Intelligence
+
+MindMate integrates **Google Gemini** through the official `@google/genai` SDK.
+
+The AI layer is used for:
+
+- Generating supportive conversational responses
+- Classifying user mood
+- Estimating stress level
+- Identifying overall sentiment
+- Converting conversational input into structured wellness information
+
+AI requests are handled by the backend so that the Gemini API key is not exposed in frontend code.
+
+### Development & Version Control
+
+- **Git** — source version control
+- **GitHub** — collaborative repository hosting
+- **NPM** — backend package and dependency management
+- **Nodemon** — backend development workflow
+
+---
