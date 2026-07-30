@@ -303,3 +303,72 @@ AI requests are handled by the backend so that the Gemini API key is not exposed
 - **Nodemon** — backend development workflow
 
 ---
+
+## 📁 Project Structure
+
+MindMate follows a page-based frontend structure with a Node.js backend. The frontend consists of independent HTML pages supported by their respective CSS and JavaScript files, while the backend handles API routes, database communication, AI integration, and application logic.
+
+```text
+MindMate/
+│
+├── Frontend/
+│   ├── HTML Pages
+│   │   ├── Landing Page
+│   │   ├── Login / Registration
+│   │   ├── Home / AI Chat
+│   │   ├── Daily Check-In
+│   │   ├── Journal
+│   │   ├── Wellness
+│   │   └── Reports
+│   │
+│   ├── CSS/
+│   │   └── Page-specific stylesheets
+│   │
+│   ├── JavaScript/
+│   │   └── Page-specific scripts and frontend logic
+│   │
+│   └── Image Assets/
+│       └── Logos, icons, and interface assets
+│
+├── Backend/
+│   ├── server.js
+│   ├── daily-checkin.routes.js
+│   ├── package.json
+│   └── .env
+│
+└── README.md
+```
+
+### Frontend Organization
+
+MindMate uses a multi-page frontend architecture rather than a single-page application framework.
+
+Each major feature is represented through a dedicated page and supporting JavaScript logic. These pages communicate with the backend using the browser's Fetch API.
+
+The main frontend modules include:
+
+- **Landing Page** — introduces MindMate and provides limited access to the AI chat experience.
+- **Login / Registration** — provides account creation and login functionality.
+- **Home / AI Chat** — contains the primary AI wellness companion experience.
+- **Daily Check-In** — collects structured daily wellness information.
+- **Journal** — provides personal journal creation and management.
+- **Wellness** — contains interactive client-side wellness exercises.
+- **Reports** — displays aggregated wellness information and visualizations.
+
+### Backend Organization
+
+The backend is implemented primarily through `server.js`, which contains the majority of MindMate's server-side functionality, including:
+
+- Express server configuration
+- PostgreSQL connectivity
+- User registration and login endpoints
+- Journal API operations
+- AI chat integration
+- Report generation
+- Gemini communication
+
+Daily Check-In functionality is separated into `daily-checkin.routes.js`, which provides dedicated routing and validation for check-in operations.
+
+> **Note:** The current prototype uses a relatively compact backend structure suitable for hackathon development. Further modularization into controllers, services, middleware, and data-access layers is a potential future improvement.
+
+---
