@@ -944,3 +944,64 @@ Future versions could introduce a complete production deployment workflow includ
 - Backup and recovery strategies
 
 ---
+
+## 👥 Team & Contributions
+
+MindMate was developed collaboratively as a hackathon project, with team members contributing across frontend development, backend development, AI integration, database management, user experience, testing, and documentation.
+
+| Team Member | Role / Contribution |
+|---|---|
+| **[Suraj Singh]** | [Backend & AI Integration] |
+| **[Salim Ali]** | [Frontend & UI-UX] |
+| **[Vicky Kumar]** | [Research & Testing] |
+
+The project was built through collaborative development using Git and GitHub for source control and team coordination.
+
+---
+
+## 🏆 Hackathon
+
+MindMate was developed as a hackathon project to explore how generative AI can be combined with structured wellness tracking and self-reflection tools to create a more interactive mental wellness experience.
+
+The prototype demonstrates the integration of:
+
+- Conversational Generative AI
+- Structured emotional data extraction
+- Daily wellness tracking
+- Personal journaling
+- Interactive wellness activities
+- Persistent data storage
+- Wellness analytics and visualization
+
+**Hackathon:** Mercer | Mettl AI Arena 3.0
+
+---
+
+## ⚠️ Disclaimer
+
+MindMate is designed for **general wellness, emotional self-reflection, and educational purposes only**.
+
+It is **not a medical device** and is not intended to diagnose, treat, cure, or prevent any mental health or medical condition. MindMate should not be considered a replacement for professional medical advice, diagnosis, therapy, counseling, or treatment.
+
+AI-generated responses may be incomplete, inaccurate, or inappropriate for an individual's specific circumstances. Users should exercise judgment when interacting with AI-generated wellness content.
+
+The current MindMate prototype does not implement a dedicated crisis-intervention or emergency-response system.
+
+If someone is experiencing an immediate mental health emergency or is at risk of harm, they should seek appropriate professional or emergency assistance rather than relying on MindMate.
+
+---
+
+## 📄 Project Status
+
+**MindMate is currently a hackathon prototype.**
+
+The project demonstrates a functional end-to-end implementation of AI-assisted wellness conversations, structured Daily Check-Ins, personal journaling, interactive wellness activities, persistent data storage, and wellness reporting.
+
+Further development is required before the platform would be suitable for production use, particularly in the areas of authentication, security, AI safety, automated testing, scalability, and deployment infrastructure.
+
+---
+
+<p align="center">
+  <strong>🧠 MindMate</strong><br>
+  AI-Powered Mental Wellness & Self-Reflection Platform
+</p>
