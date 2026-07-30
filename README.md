@@ -477,3 +477,100 @@ Report calculations are performed on demand when the corresponding endpoint is r
 > **API Status:** MindMate currently uses a prototype-oriented REST-style API. API versioning and an OpenAPI/Swagger specification are not yet implemented.
 
 ---
+
+## 🗄️ Database Overview
+
+MindMate uses **PostgreSQL** as its relational database for persistent application and wellness data.
+
+The backend communicates with PostgreSQL using the Node.js `pg` package and uses parameterized SQL queries for database operations.
+
+### Core Data Entities
+
+The current application works with four primary data areas:
+
+| Entity | Purpose |
+|---|---|
+| **`users`** | Stores registered user account information |
+| **`journals`** | Stores personal journal entries created by users |
+| **`chat_history`** | Stores user messages, AI responses, and AI-derived emotional metadata |
+| **`daily_checkins`** | Stores structured daily wellness check-in information |
+
+### `users`
+
+The `users` data represents registered MindMate accounts and includes information required by the current registration and login flow.
+
+It acts as the primary user identity referenced by other user-specific functionality.
+
+### `journals`
+
+The `journals` data stores personal journal entries associated with users.
+
+Journal records support the application's CRUD functionality, allowing entries to be created, retrieved, updated, and deleted.
+
+### `chat_history`
+
+The `chat_history` data connects MindMate's conversational AI functionality with its wellness analytics.
+
+A conversation record can contain:
+
+- Username
+- User message
+- AI-generated reply
+- Detected mood
+- Estimated stress level
+- Detected sentiment
+- Creation timestamp
+
+This allows AI conversations to contribute structured emotional information to the reporting system.
+
+### `daily_checkins`
+
+The `daily_checkins` data stores structured wellness information submitted through the Daily Check-In module.
+
+The stored information can include:
+
+- Mood and mood value
+- Stress level
+- Energy level
+- Sleep quality and sleep value
+- Selected emotions
+- Written reflection
+- Check-in date
+- Creation and update timestamps
+
+MindMate follows a per-user, per-day check-in model so that a user has one Daily Check-In record for a given date.
+
+### Data Relationships
+
+At a conceptual level, the application's data relationships can be represented as:
+
+```text
+                         USER
+                          │
+            ┌─────────────┼─────────────┐
+            │             │             │
+            ▼             ▼             ▼
+       JOURNALS      CHAT HISTORY   DAILY CHECK-INS
+                         │
+                         ▼
+                Emotional Metadata
+               ┌─────────┼─────────┐
+               │         │         │
+               ▼         ▼         ▼
+              Mood     Stress   Sentiment
+                         │
+                         ▼
+                 Reports & Analytics
+```
+
+The reporting layer combines information from `chat_history` and `daily_checkins` to calculate wellness summaries and chart-ready data.
+
+### Database Security
+
+Database queries use **parameterized placeholders** such as `$1`, `$2`, and subsequent parameters instead of directly concatenating user input into SQL statements. This provides an important defense against SQL injection.
+
+Database connection information is loaded through the `DATABASE_URL` environment variable rather than being hard-coded into frontend files.
+
+> **Schema Note:** The current repository does not include a dedicated database migration system, ORM model layer, or standalone `schema.sql` file. The database structure is represented through the SQL operations used by the backend. Adding formal migrations and schema management is a recommended future improvement.
+
+---
