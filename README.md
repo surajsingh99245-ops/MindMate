@@ -731,3 +731,55 @@ Once both the frontend and backend are running, verify the major application flo
 If these operations work successfully, the core MindMate application is running correctly.
 
 ---
+
+## 📸 Application Preview
+
+MindMate provides a unified interface for AI-assisted conversation, self-reflection, wellness tracking, and interactive wellness activities.
+
+### 🏠 Landing Page
+
+The landing page introduces users to MindMate and provides a limited AI chat experience before account access.
+
+![MindMate Landing Page](Project-SS/landingPage-ss.png)
+
+---
+
+### 🤖 AI Wellness Companion
+
+The AI Wellness Companion allows users to interact with MindMate through text or supported voice input while the backend processes conversations using Google Gemini.
+
+![MindMate AI Wellness Companion](Project-SS/mainAIChat-ss.png)
+
+---
+
+### 📅 Daily Check-In
+
+The Daily Check-In provides a structured interface for users to record their mood, stress level, energy level, sleep quality, emotions, and personal reflections.
+
+![MindMate Daily Check-In](Project-SS/dailyCheck-In-ss.jpeg)
+
+---
+
+### 📝 Personal Journal
+
+The Personal Journal provides users with a dedicated space to create, review, update, and manage their personal reflections.
+
+![MindMate Personal Journal](Project-SS/journal-ss.png)
+
+---
+
+### 🌿 Wellness Hub
+
+The Wellness Hub provides interactive, self-guided wellness activities designed to support different everyday wellness needs.
+
+![MindMate Wellness Hub](Project-SS/wellness-ss.png)
+
+---
+
+### 📊 Reports & Analytics
+
+The Reports module presents weekly and monthly wellness information through summary metrics, generated insights, and interactive visualizations.
+
+![MindMate Reports and Analytics](Project-SS/report-ss.png)
+
+---
