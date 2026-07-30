@@ -574,3 +574,160 @@ Database connection information is loaded through the `DATABASE_URL` environment
 > **Schema Note:** The current repository does not include a dedicated database migration system, ORM model layer, or standalone `schema.sql` file. The database structure is represented through the SQL operations used by the backend. Adding formal migrations and schema management is a recommended future improvement.
 
 ---
+
+## 🚀 Installation & Setup
+
+Follow the steps below to run MindMate locally.
+
+### Prerequisites
+
+Before setting up the project, make sure the following are installed or available:
+
+- **Node.js**
+- **npm**
+- **PostgreSQL**
+- **Google Gemini API Key**
+- A modern web browser
+
+---
+
+### 1. Clone the Repository
+
+Clone the MindMate repository and navigate into the project directory:
+
+```bash
+git clone <repository-url>
+cd MindMate
+```
+
+Replace `<repository-url>` with the URL of your MindMate GitHub repository.
+
+---
+
+### 2. Install Backend Dependencies
+
+Navigate to the backend directory:
+
+```bash
+cd Backend
+```
+
+Install the required Node.js packages:
+
+```bash
+npm install
+```
+
+The backend uses dependencies including:
+
+- `express`
+- `pg`
+- `cors`
+- `dotenv`
+- `@google/genai`
+
+Nodemon is included as a development dependency.
+
+---
+
+### 3. Configure Environment Variables
+
+Create a `.env` file inside the `Backend` directory.
+
+Add the required environment variables:
+
+```env
+DATABASE_URL=your_postgresql_connection_string
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+#### `DATABASE_URL`
+
+Provides the PostgreSQL connection string used by the backend.
+
+Example format:
+
+```text
+postgresql://username:password@localhost:5432/database_name
+```
+
+#### `GEMINI_API_KEY`
+
+Provides the API key used by the backend to communicate with Google Gemini.
+
+> Never commit your `.env` file or expose API keys and database credentials in frontend JavaScript.
+
+---
+
+### 4. Prepare the PostgreSQL Database
+
+Create a PostgreSQL database for MindMate and configure its connection through `DATABASE_URL`.
+
+The application expects database structures corresponding to:
+
+- `users`
+- `journals`
+- `chat_history`
+- `daily_checkins`
+
+> **Important:** The current repository does not include an automated migration system or standalone database schema script. The required database tables must therefore exist before all backend features can operate correctly.
+
+---
+
+### 5. Start the Backend Server
+
+For normal execution:
+
+```bash
+npm start
+```
+
+For development with automatic server restart:
+
+```bash
+npm run dev
+```
+
+The backend runs locally on:
+
+```text
+http://localhost:3000
+```
+
+A successful backend health check should be available through the root endpoint:
+
+```text
+GET /
+```
+
+---
+
+### 6. Run the Frontend
+
+The MindMate frontend is built using static HTML, CSS, and JavaScript and therefore does not require a package installation or build process.
+
+Open the frontend through a local development server, such as the **Live Server** extension in Visual Studio Code, and navigate to the landing page.
+
+The frontend will communicate with the backend running on:
+
+```text
+http://localhost:3000
+```
+
+---
+
+### 7. Verify the Application
+
+Once both the frontend and backend are running, verify the major application flows:
+
+1. Create a user account.
+2. Log in using the registered account.
+3. Send a message to the MindMate AI companion.
+4. Create and manage a journal entry.
+5. Complete a Daily Check-In.
+6. Open the Reports page to view available wellness analytics.
+7. Explore the interactive Wellness Hub.
+
+If these operations work successfully, the core MindMate application is running correctly.
+
+---
