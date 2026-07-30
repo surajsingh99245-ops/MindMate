@@ -151,3 +151,60 @@ The interface includes responsive layouts for:
 Navigation, chat components, wellness activities, forms, and other interface elements adapt according to the available screen space.
 
 ---
+
+## 🔄 How MindMate Works
+
+MindMate is designed around a simple user journey that allows users to move between conversational support, self-reflection, wellness activities, and personal insights from a unified interface.
+
+### User Workflow
+
+1. **Visit MindMate**  
+   A user begins on the MindMate landing page, where they can explore the platform and interact with the limited-access AI companion.
+
+2. **Create an Account or Sign In**  
+   To access the complete MindMate experience, the user can register or sign in to their account.
+
+3. **Access the MindMate Dashboard**  
+   After authentication, the user can navigate between the core modules of the platform.
+
+4. **Talk to the AI Companion**  
+   Users can share thoughts, feelings, or concerns with the AI wellness companion through text or voice input.
+
+5. **Complete a Daily Check-In**  
+   The Daily Check-In provides a structured way for users to reflect on their current emotional state.
+
+6. **Write in the Journal**  
+   Users can record thoughts, experiences, and personal reflections through the Journal module.
+
+7. **Explore the Wellness Hub**  
+   Users can select what they currently need and access relevant interactive wellness exercises.
+
+8. **Review Wellness Reports**  
+   The Reports module provides a structured view of available wellness-related information and insights.
+
+### Application Flow
+
+```mermaid
+flowchart TD
+
+    A[Landing Page] --> B{User Account}
+
+    B -->|Sign In| C[Authentication]
+    B -->|Create Account| C
+
+    C --> D[MindMate Home]
+
+    D --> E[AI Wellness Companion]
+    D --> F[Daily Check-In]
+    D --> G[Personal Journal]
+    D --> H[Wellness Hub]
+    D --> I[Wellness Reports]
+
+    H --> J[Choose Current Need]
+    J --> K[Interactive Wellness Exercise]
+
+    E --> D
+    F --> D
+    G --> D
+    K --> D
+    I --> D
