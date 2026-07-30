@@ -1,53 +1,73 @@
 # 🧠 MindMate
 
-### AI-Powered Mental Wellness Companion
+### AI-Powered Mental Wellness & Self-Reflection Platform
 
-MindMate is an AI-powered mental wellness platform designed to provide users with an accessible and supportive digital space for emotional reflection, self-awareness, and everyday well-being.
+MindMate is a full-stack mental wellness platform designed to help users understand and reflect on their emotional well-being through AI-assisted conversations, personal journaling, structured daily check-ins, wellness activities, and interactive analytics.
 
-The platform brings together conversational AI and practical wellness tools within a unified experience. Users can interact with an AI wellness companion, complete daily emotional check-ins, maintain personal journal entries, access guided wellness exercises, and review wellness-related reports and insights.
+The platform integrates **Google Gemini AI** with a **Node.js, Express.js, and PostgreSQL** backend to transform conversational input into structured emotional insights such as **mood, stress level, and sentiment**. These insights can then be combined with daily check-in data to help users observe patterns in their emotional well-being over time.
 
-MindMate is designed around the idea that small, consistent moments of reflection can help individuals become more aware of their emotional well-being. Rather than focusing on a single wellness activity, the platform provides multiple tools that users can access based on their needs.
+MindMate was developed as a hackathon project to explore how generative AI can be integrated with traditional wellness tracking to create a more interactive and insightful self-reflection experience.
 
----
-
-## 🎯 Problem Statement
-
-Stress, anxiety, loneliness, sleep difficulties, lack of focus, and emotional overwhelm are increasingly common experiences in everyday life. However, individuals may not always have immediate access to simple and approachable tools that help them pause, reflect on their emotions, and take constructive steps toward improving their well-being.
-
-Many existing digital wellness solutions also focus on individual activities in isolation. Users may need separate tools for conversational support, journaling, daily emotional tracking, relaxation exercises, and wellness insights.
-
-This creates an opportunity for a unified platform that brings these experiences together while remaining simple, accessible, and easy to use.
+> **Disclaimer:** MindMate is intended for self-reflection and general wellness support. It is not a substitute for professional medical or mental health care.
 
 ---
 
-## 💡 Proposed Solution
+## 📌 Project Overview
 
-MindMate addresses this challenge by combining conversational AI, structured self-reflection, and interactive wellness activities within a single platform.
+Traditional journaling provides space for personal reflection, but the information recorded often remains unstructured and difficult to analyze over time. On the other hand, conventional mood trackers provide structured data but may fail to capture the context and nuance behind a person's emotions.
 
-The platform provides users with multiple ways to engage with their well-being:
+MindMate brings these approaches together.
 
-- 🤖 **AI Wellness Companion** for supportive, conversational interactions
-- 📅 **Daily Check-In** for structured emotional self-reflection
-- 📓 **Personal Journal** for recording thoughts and experiences
-- 🌿 **Wellness Hub** containing guided and interactive wellness exercises
-- 📊 **Wellness Reports** for presenting wellness-related information and insights
-- 🎙️ **Voice Input** for a more convenient conversational experience
+The platform allows users to:
 
-By bringing these capabilities together, MindMate aims to make everyday emotional self-reflection and wellness support more accessible and engaging.
+- 💬 Have supportive conversations with an AI wellness companion
+- 🧠 Automatically derive mood, stress, and sentiment signals from conversations
+- 📝 Maintain a private personal journal
+- 📅 Complete structured daily mental wellness check-ins
+- 📊 View weekly and monthly emotional wellness reports
+- 📈 Visualize mood and activity patterns through interactive charts
+- 🌿 Access interactive wellness and self-care exercises
+- 🎙️ Use voice input for AI conversations
+
+By combining conversational AI with structured wellness data, MindMate turns everyday reflection into information that users can review and understand over time.
 
 ---
 
-## 🎯 Project Objectives
+## ❓ Problem Statement
 
-The primary objectives of MindMate are to:
+People who want to understand their emotional patterns often have to choose between two different types of tools.
 
-- Provide an accessible digital environment for everyday emotional self-reflection.
-- Use conversational AI to create a supportive and interactive user experience.
-- Encourage users to build a consistent habit of checking in with their emotional well-being.
-- Provide structured tools for journaling and daily wellness check-ins.
-- Offer practical wellness exercises that users can perform directly within the platform.
-- Present wellness-related information through an intuitive reporting experience.
-- Maintain a simple, responsive, and user-friendly interface across different devices.
+**Traditional journaling applications** allow users to express themselves freely, but the information remains largely unstructured. Identifying patterns across weeks or months requires manually rereading previous entries.
+
+**Traditional mood trackers**, in contrast, generate structured information that can easily be visualized, but they often reduce complex emotional experiences to a small number of predefined values and require repetitive manual input.
+
+General-purpose AI chatbots introduce another limitation: although they can provide conversational support, their conversations are typically disconnected from a persistent personal wellness tracking system.
+
+MindMate addresses this gap by combining:
+
+1. **Conversational AI** for natural emotional reflection
+2. **Structured daily check-ins** for consistent wellness tracking
+3. **Personal journaling** for longer-form reflection
+4. **Persistent wellness data** stored in PostgreSQL
+5. **Analytics and visualization** for identifying emotional patterns over time
+
+---
+
+## 💡 Our Solution
+
+MindMate creates a unified mental wellness experience where different forms of self-reflection contribute to a broader picture of the user's emotional well-being.
+
+When a user interacts with the AI companion, the backend sends the message to **Google Gemini** using a carefully constrained prompt. In addition to generating a supportive response, the AI returns structured emotional information:
+
+- **Mood** — Happy, Calm, Neutral, Sad, Anxious, Angry, or Stressed
+- **Stress Level** — represented on a numerical scale
+- **Sentiment** — Positive, Neutral, or Negative
+
+This information can be stored alongside the conversation and later incorporated into wellness analytics.
+
+Users can independently complete structured daily check-ins containing information such as mood, stress, energy, sleep quality, selected emotions, and a written reflection.
+
+Together, these features allow MindMate to combine **unstructured conversation** with **structured wellness tracking**, creating data that can be transformed into meaningful weekly and monthly insights.
 
 ---
 
@@ -55,156 +75,163 @@ The primary objectives of MindMate are to:
 
 ### 🤖 AI Wellness Companion
 
-MindMate provides an AI-powered conversational interface where users can share their thoughts, feelings, or concerns and receive supportive responses.
+MindMate integrates **Google Gemini AI** to provide supportive conversational responses while simultaneously extracting structured emotional signals from user messages.
 
-The chat experience includes:
+For each AI interaction, the system can derive:
 
-- Real-time AI-generated responses
-- Animated typing indicator while a response is being generated
-- Markdown-formatted AI responses for improved readability
-- Automatic conversation scrolling
-- Speech-to-text input using browser-based speech recognition
-- Responsive chat interface across different screen sizes
+- Mood classification
+- Stress level
+- Sentiment
+- A supportive conversational response
 
-The landing page also provides limited access to the AI companion, allowing visitors to experience MindMate before signing in.
+The AI prompt is designed specifically for the wellness context and explicitly instructs the model not to diagnose medical conditions or prescribe medication.
 
 ---
 
-### 📅 Daily Check-In
+### 📅 Daily Mental Wellness Check-In
 
-The Daily Check-In module encourages users to regularly reflect on their current emotional state through a structured check-in experience.
+Users can complete a structured daily check-in to record different aspects of their well-being.
 
-It provides:
+The check-in captures information including:
 
-- Structured wellness questions
-- Interactive input and selection controls
-- A guided check-in flow
-- Submission-ready data structure for backend processing
-- A completion state after a successful daily check-in
+- Current mood
+- Stress level
+- Energy level
+- Sleep quality
+- Selected emotions
+- Personal reflection
 
-The module is designed to make regular emotional self-reflection simple and approachable.
+Server-side validation is applied to the Daily Check-In before information is written to the database.
 
----
-
-### 📓 Personal Journal
-
-The Journal provides users with a dedicated space for recording thoughts, experiences, and personal reflections.
-
-It is designed to encourage consistent self-reflection while keeping journaling integrated with the broader MindMate wellness experience.
+The system also uses a per-user, per-day check-in model so that submitting another check-in for the same day updates the existing record instead of creating duplicate daily entries.
 
 ---
 
-### 🌿 Interactive Wellness Hub
+### 📝 Personal Journal
 
-The Wellness Hub provides practical activities that users can access based on what they currently need, without requiring an AI-generated exercise each time.
+MindMate includes a personal journaling system for longer-form reflection.
 
-Users can explore activities related to areas such as stress, anxiety, sleep, focus, self-care, and loneliness.
+Users can:
 
-The current interactive exercises include:
+- Create journal entries
+- View previous entries
+- Update existing entries
+- Delete entries
 
-- 🌬️ **Deep Breathing** — guided breathing exercise
-- 🌿 **5-4-3-2-1 Grounding** — structured grounding activity
-- 🌙 **Sleep Relaxation** — guided relaxation experience for winding down
-- 🎯 **Quick Focus Reset** — short interactive focus exercise
-- 💙 **Self-Compassion Break** — guided three-step self-compassion activity
-- 🙏 **Gratitude Exercise** — interactive "Three Good Things" reflection
-- 🤝 **Connection Reset** — small guided actions designed to encourage connection
-
-Each exercise provides an interactive experience rather than functioning as a static informational card.
+The journal complements the structured Daily Check-In by giving users a space to capture experiences and thoughts that cannot easily be represented using predefined wellness metrics.
 
 ---
 
-### 📊 Wellness Reports
+### 📊 Wellness Reports & Analytics
 
-MindMate includes a dedicated reporting module designed to present wellness-related information and help users better understand their patterns over time.
+MindMate transforms stored wellness information into weekly and monthly reports.
 
-The reporting experience complements the Daily Check-In and Journal modules by providing users with a more structured view of their wellness journey.
+The reporting system uses conversation-derived emotional signals and Daily Check-In activity to generate information such as:
 
----
+- Mood trends
+- Mood distribution
+- Average wellness indicators
+- Daily or weekly activity
+- Check-in consistency
+- Current check-in streak
+- Total tracked entries
+- Generated insight summaries
 
-### 🎙️ Voice Input
-
-MindMate supports browser-based speech recognition within the AI chat interface.
-
-Users can speak instead of typing their message manually, providing an additional and more convenient way to interact with the AI companion.
-
----
-
-### 🔐 User Authentication
-
-MindMate includes account-based access to its primary application features.
-
-Authenticated users can access the main MindMate experience, including the AI companion, Daily Check-In, Journal, Wellness Hub, and Reports. The interface also provides profile and logout functionality across the authenticated pages.
+The frontend uses **Chart.js** to present these results through interactive visualizations, making long-term emotional patterns easier to understand.
 
 ---
 
-### 📱 Responsive User Interface
+### 🌿 Wellness Hub
 
-MindMate is designed to provide a consistent experience across different screen sizes.
+MindMate includes a collection of interactive, self-guided wellness exercises implemented directly in the frontend.
 
-The interface includes responsive layouts for:
+The Wellness Hub provides activities intended to support areas such as:
 
-- Desktop
-- Tablet
-- Mobile devices
+- Stress management
+- Relaxation
+- Sleep
+- Focus
+- Self-care
+- Emotional grounding
+- General well-being
 
-Navigation, chat components, wellness activities, forms, and other interface elements adapt according to the available screen space.
+These exercises operate independently of the backend, allowing users to access wellness activities without requiring an AI request.
 
 ---
 
-## 🔄 How MindMate Works
+### 🎙️ Voice-Enabled Interaction
 
-MindMate is designed around a simple user journey that allows users to move between conversational support, self-reflection, wellness activities, and personal insights from a unified interface.
+The AI conversation interface supports microphone input through the browser's **Web Speech API**.
 
-### User Workflow
+Users can speak instead of typing, providing a more natural way to interact with the MindMate AI companion on supported browsers.
 
-1. **Visit MindMate**  
-   A user begins on the MindMate landing page, where they can explore the platform and interact with the limited-access AI companion.
+---
 
-2. **Create an Account or Sign In**  
-   To access the complete MindMate experience, the user can register or sign in to their account.
+## ⚙️ How MindMate Works
 
-3. **Access the MindMate Dashboard**  
-   After authentication, the user can navigate between the core modules of the platform.
+MindMate follows a three-tier client-server architecture consisting of a static frontend, an application backend, and a relational database, with Google Gemini acting as an external AI service.
 
-4. **Talk to the AI Companion**  
-   Users can share thoughts, feelings, or concerns with the AI wellness companion through text or voice input.
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                           USER                              │
+└──────────────────────────────┬──────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│                         FRONTEND                            │
+│                                                             │
+│             HTML5 • CSS3 • Vanilla JavaScript              │
+│                                                             │
+│  AI Chat • Journal • Daily Check-In • Reports • Wellness   │
+└──────────────────────────────┬──────────────────────────────┘
+                               │
+                         Fetch API / JSON
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│                          BACKEND                            │
+│                                                             │
+│                    Node.js • Express.js                     │
+│                                                             │
+│        API Routes • Validation • Business Logic            │
+└───────────────────────┬─────────────────────┬───────────────┘
+                        │                     │
+                        ▼                     ▼
+             ┌──────────────────┐   ┌─────────────────────┐
+             │    PostgreSQL    │   │    Google Gemini    │
+             │                  │   │         AI          │
+             │ Users            │   │                     │
+             │ Journals         │   │ AI Responses        │
+             │ Chat History     │   │ Mood Analysis       │
+             │ Daily Check-Ins  │   │ Stress Analysis     │
+             │                  │   │ Sentiment Analysis  │
+             └──────────────────┘   └─────────────────────┘
 
-5. **Complete a Daily Check-In**  
-   The Daily Check-In provides a structured way for users to reflect on their current emotional state.
-
-6. **Write in the Journal**  
-   Users can record thoughts, experiences, and personal reflections through the Journal module.
-
-7. **Explore the Wellness Hub**  
-   Users can select what they currently need and access relevant interactive wellness exercises.
-
-8. **Review Wellness Reports**  
-   The Reports module provides a structured view of available wellness-related information and insights.
-
-### Application Flow
-
-```mermaid
-flowchart TD
-
-    A[Landing Page] --> B{User Account}
-
-    B -->|Sign In| C[Authentication]
-    B -->|Create Account| C
-
-    C --> D[MindMate Home]
-
-    D --> E[AI Wellness Companion]
-    D --> F[Daily Check-In]
-    D --> G[Personal Journal]
-    D --> H[Wellness Hub]
-    D --> I[Wellness Reports]
-
-    H --> J[Choose Current Need]
-    J --> K[Interactive Wellness Exercise]
-
-    E --> D
-    F --> D
-    G --> D
-    K --> D
-    I --> D
+             User Message
+     │
+     ▼
+Frontend Chat Interface
+     │
+     │  POST /chat
+     ▼
+Express Backend
+     │
+     ▼
+MindMate AI Prompt
+     │
+     ▼
+Google Gemini
+     │
+     ▼
+Structured AI Response
+     │
+     ├── Supportive Reply
+     ├── Mood
+     ├── Stress Level
+     └── Sentiment
+     │
+     ▼
+PostgreSQL
+     │
+     ▼
+Wellness Analytics
