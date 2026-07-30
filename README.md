@@ -50,3 +50,104 @@ The primary objectives of MindMate are to:
 - Maintain a simple, responsive, and user-friendly interface across different devices.
 
 ---
+
+## ✨ Key Features
+
+### 🤖 AI Wellness Companion
+
+MindMate provides an AI-powered conversational interface where users can share their thoughts, feelings, or concerns and receive supportive responses.
+
+The chat experience includes:
+
+- Real-time AI-generated responses
+- Animated typing indicator while a response is being generated
+- Markdown-formatted AI responses for improved readability
+- Automatic conversation scrolling
+- Speech-to-text input using browser-based speech recognition
+- Responsive chat interface across different screen sizes
+
+The landing page also provides limited access to the AI companion, allowing visitors to experience MindMate before signing in.
+
+---
+
+### 📅 Daily Check-In
+
+The Daily Check-In module encourages users to regularly reflect on their current emotional state through a structured check-in experience.
+
+It provides:
+
+- Structured wellness questions
+- Interactive input and selection controls
+- A guided check-in flow
+- Submission-ready data structure for backend processing
+- A completion state after a successful daily check-in
+
+The module is designed to make regular emotional self-reflection simple and approachable.
+
+---
+
+### 📓 Personal Journal
+
+The Journal provides users with a dedicated space for recording thoughts, experiences, and personal reflections.
+
+It is designed to encourage consistent self-reflection while keeping journaling integrated with the broader MindMate wellness experience.
+
+---
+
+### 🌿 Interactive Wellness Hub
+
+The Wellness Hub provides practical activities that users can access based on what they currently need, without requiring an AI-generated exercise each time.
+
+Users can explore activities related to areas such as stress, anxiety, sleep, focus, self-care, and loneliness.
+
+The current interactive exercises include:
+
+- 🌬️ **Deep Breathing** — guided breathing exercise
+- 🌿 **5-4-3-2-1 Grounding** — structured grounding activity
+- 🌙 **Sleep Relaxation** — guided relaxation experience for winding down
+- 🎯 **Quick Focus Reset** — short interactive focus exercise
+- 💙 **Self-Compassion Break** — guided three-step self-compassion activity
+- 🙏 **Gratitude Exercise** — interactive "Three Good Things" reflection
+- 🤝 **Connection Reset** — small guided actions designed to encourage connection
+
+Each exercise provides an interactive experience rather than functioning as a static informational card.
+
+---
+
+### 📊 Wellness Reports
+
+MindMate includes a dedicated reporting module designed to present wellness-related information and help users better understand their patterns over time.
+
+The reporting experience complements the Daily Check-In and Journal modules by providing users with a more structured view of their wellness journey.
+
+---
+
+### 🎙️ Voice Input
+
+MindMate supports browser-based speech recognition within the AI chat interface.
+
+Users can speak instead of typing their message manually, providing an additional and more convenient way to interact with the AI companion.
+
+---
+
+### 🔐 User Authentication
+
+MindMate includes account-based access to its primary application features.
+
+Authenticated users can access the main MindMate experience, including the AI companion, Daily Check-In, Journal, Wellness Hub, and Reports. The interface also provides profile and logout functionality across the authenticated pages.
+
+---
+
+### 📱 Responsive User Interface
+
+MindMate is designed to provide a consistent experience across different screen sizes.
+
+The interface includes responsive layouts for:
+
+- Desktop
+- Tablet
+- Mobile devices
+
+Navigation, chat components, wellness activities, forms, and other interface elements adapt according to the available screen space.
+
+---
