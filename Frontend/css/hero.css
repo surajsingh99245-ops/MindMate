@@ -445,114 +445,73 @@
 }
 
 
-/* ================= TABLET ================= */
+/* ================= DASHBOARD RESPONSIVE ================= */
 
-@media (max-width:768px) {
+/* Tablet */
 
-    .hero {
+@media (max-width: 768px) {
 
-        padding: 40px 20px;
-        gap: 40px;
-        margin-top: 70px;
-        min-height: auto;
+    .dashboard-card {
+
+        max-width: 450px;
+        padding: 22px;
 
     }
 
-    .hero-content h1 {
+    .dashboard-header h3 {
+
+        font-size: 20px;
+
+    }
+
+    .dashboard-header p {
+
+        font-size: 14px;
+
+    }
+
+    .card {
+
+        padding: 16px;
+
+    }
+
+    .mood-icon {
 
         font-size: 40px;
 
     }
 
-    .hero-content p {
+    .mood-text {
 
-        font-size: 16px;
-        line-height: 1.7;
-
-    }
-
-    .hero-buttons {
-
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
+        font-size: 22px;
 
     }
 
-    .primary-btn,
-    .secondary-btn {
+    .quick-actions {
 
-        width: 100%;
-        max-width: 320px;
-        text-align: center;
-
-    }
-
-    .hero-stats {
-
-        gap: 18px;
-        justify-content: center;
-
-    }
-
-    .dashboard-card {
-
-        max-width: 100%;
-        padding: 22px;
-
-    }
-
-    .dashboard-grid {
-
-        gap: 14px;
+        grid-template-columns: repeat(2, 1fr);
 
     }
 
 }
 
 
-/* ================= MOBILE ================= */
+/* Mobile */
 
-@media (max-width:480px) {
-
-    .hero {
-
-        padding: 30px 16px;
-        gap: 30px;
-
-    }
-
-    .hero-badge {
-
-        font-size: 12px;
-        padding: 7px 14px;
-        margin-top: 50px;
-
-    }
-
-    .hero-content h1 {
-
-        font-size: 32px;
-        line-height: 1.2;
-
-    }
-
-    .hero-content p {
-
-        font-size: 15px;
-
-    }
-
-.hero-stats {
-
-    justify-content: center;
-
-}
+@media (max-width: 480px) {
 
     .dashboard-card {
 
+        width: 100%;
         padding: 18px;
         border-radius: 20px;
+
+    }
+
+    .dashboard-header {
+
+        margin-bottom: 18px;
 
     }
 
@@ -572,25 +531,72 @@
 
         width: 42px;
         height: 42px;
+        font-size: 18px;
 
     }
 
     .dashboard-grid {
 
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 12px;
+
+    }
+
+    .card {
+
+        padding: 15px;
+
+    }
+
+    .card h4 {
+
+        font-size: 14px;
+
+    }
+
+    .mood-icon {
+
+        font-size: 34px;
+        margin: 10px 0;
+
+    }
+
+    .mood-text {
+
+        font-size: 18px;
+
+    }
+
+    .insight {
+
+        padding: 14px;
+        gap: 10px;
+
+    }
+
+    .insight h4 {
+
+        font-size: 15px;
+
+    }
+
+    .insight p {
+
+        font-size: 13px;
+        line-height: 1.5;
 
     }
 
     .quick-actions {
 
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
 
     }
 
     .action {
 
-        padding: 16px 10px;
+        padding: 14px 10px;
 
     }
 
@@ -602,7 +608,49 @@
 
     .action span {
 
-        font-size: 13px;
+        font-size: 12px;
+
+    }
+
+}
+
+
+/* Small Phones */
+
+@media (max-width: 360px) {
+
+    .dashboard-card {
+
+        padding: 14px;
+
+    }
+
+    .dashboard-header {
+
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+
+    }
+
+    .quick-actions {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .action {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+    }
+
+    .action i {
+
+        margin-bottom: 0;
 
     }
 
