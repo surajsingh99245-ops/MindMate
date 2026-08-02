@@ -63,7 +63,7 @@
     font-weight: 700;
 }
 
-.hero-content h1 span{
+.hero-content h1 span {
     color: var(--primary);
 }
 
@@ -93,7 +93,7 @@
 
     font-weight: 600;
 
-    transition:all .3s ease;
+    transition: all .3s ease;
 }
 
 
@@ -111,13 +111,13 @@
 
     font-weight: 600;
 
-    transition:all .3s ease;
+    transition: all .3s ease;
 }
 
-.primary-btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 15px 35px rgba(79,142,247,.25);
-} 
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(79, 142, 247, .25);
+}
 
 .secondary-btn:hover {
     transform: translateY(-3px);
@@ -440,6 +440,170 @@
 
     .hero-content h1 {
         font-size: 48px;
+    }
+
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width:768px) {
+
+    .hero {
+
+        padding: 40px 20px;
+        gap: 40px;
+        margin-top: 70px;
+        min-height: auto;
+
+    }
+
+    .hero-content h1 {
+
+        font-size: 40px;
+
+    }
+
+    .hero-content p {
+
+        font-size: 16px;
+        line-height: 1.7;
+
+    }
+
+    .hero-buttons {
+
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .primary-btn,
+    .secondary-btn {
+
+        width: 100%;
+        max-width: 320px;
+        text-align: center;
+
+    }
+
+    .hero-stats {
+
+        gap: 18px;
+        justify-content: center;
+
+    }
+
+    .dashboard-card {
+
+        max-width: 100%;
+        padding: 22px;
+
+    }
+
+    .dashboard-grid {
+
+        gap: 14px;
+
+    }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width:480px) {
+
+    .hero {
+
+        padding: 30px 16px;
+        gap: 30px;
+
+    }
+
+    .hero-badge {
+
+        font-size: 12px;
+        padding: 7px 14px;
+        margin-top: 50px;
+
+    }
+
+    .hero-content h1 {
+
+        font-size: 32px;
+        line-height: 1.2;
+
+    }
+
+    .hero-content p {
+
+        font-size: 15px;
+
+    }
+
+.hero-stats {
+
+    justify-content: center;
+
+}
+
+    .dashboard-card {
+
+        padding: 18px;
+        border-radius: 20px;
+
+    }
+
+    .dashboard-header h3 {
+
+        font-size: 18px;
+
+    }
+
+    .dashboard-header p {
+
+        font-size: 13px;
+
+    }
+
+    .profile {
+
+        width: 42px;
+        height: 42px;
+
+    }
+
+    .dashboard-grid {
+
+        grid-template-columns: 1fr;
+        gap: 14px;
+
+    }
+
+    .quick-actions {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .action {
+
+        padding: 16px 10px;
+
+    }
+
+    .action i {
+
+        font-size: 20px;
+
+    }
+
+    .action span {
+
+        font-size: 13px;
+
     }
 
 }
