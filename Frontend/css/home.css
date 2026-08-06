@@ -7,7 +7,7 @@ body {
 }
 
 
-/*==================== NAVBAR ====================*/
+/* NAVBAR */
 .navbar {
 
     position: fixed;
@@ -35,7 +35,7 @@ body {
 
 }
 
-/*==================== LOGO ====================*/
+LOGO
 
 .logo {
 
@@ -69,7 +69,7 @@ body {
 
 }
 
-/*==================== NAV LINKS ====================*/
+/* NAV LINKS */
 
 .nav-links {
 
@@ -135,7 +135,7 @@ body {
 
 }
 
-/*==================== PROFILE ====================*/
+/* PROFILE  */
 
 .profile {
 
@@ -187,7 +187,7 @@ body {
 
 }
 
-/*==================== DROPDOWN ====================*/
+/* DROPDOWN */
 
 .profile-dropdown {
 
@@ -261,7 +261,7 @@ body {
 
 }
 
-/*==================== MAIN ====================*/
+/* MAIN */
 
 main {
 
@@ -275,7 +275,7 @@ main {
 
 }
 
-/*==================== CHAT HOME ====================*/
+/* CHAT HOME */
 
 .chat-box {
 
@@ -310,10 +310,6 @@ main {
 
     transition: .35s ease;
 
-    /* transform: translateY(-60px); */
-
-    /* background:#ef4444; */
-
 }
 
 .messages {
@@ -325,12 +321,6 @@ main {
     display: flex;
 
     flex-direction: column;
-
-    /* gap: 10px; */
-
-    /* min-height: 350px;
-
-    max-height: 60vh; */
 
     overflow-y: auto;
 
@@ -368,7 +358,7 @@ main {
 
 }
 
-/*==================== HEADING ====================*/
+/* HEADING */
 
 .hero-text {
 
@@ -388,7 +378,7 @@ main {
 
 }
 
-/*==================== CHAT INPUT ====================*/
+/* CHAT INPUT */
 
 .chat-input {
 
@@ -452,7 +442,7 @@ main {
 
 }
 
-/*==================== BUTTONS ====================*/
+/* BUTTONS */
 
 .mic-btn,
 .send-btn {
@@ -474,7 +464,7 @@ main {
 
 }
 
-/*==================== MIC ====================*/
+/* MIC */
 
 .mic-btn {
 
@@ -497,7 +487,7 @@ main {
 
 }
 
-/*==================== SEND ====================*/
+/* SEND */
 
 .send-btn {
 
@@ -537,7 +527,7 @@ main {
 
 
 
-/*==================== CHAT MESSAGES ====================*/
+/* CHAT MESSAGES */
 
 .user-message,
 .ai-message {
@@ -664,7 +654,7 @@ main {
 
 /* ai reply animation */
 
-/*==================== TYPING INDICATOR ====================*/
+/* TYPING INDICATOR */
 
 .typing-indicator .message-content{
 
