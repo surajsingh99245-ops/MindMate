@@ -792,7 +792,7 @@ main {
 
     .profile {
 
-         margin-left:auto;
+        margin-left: auto;
 
     }
 
@@ -864,5 +864,18 @@ main {
         display: none;
 
     }
+
+}
+
+
+.menu-toggle i {
+
+    transition: transform .3s ease;
+
+}
+
+.menu-toggle:hover i {
+
+    transform: rotate(90deg);
 
 }
