@@ -1019,3 +1019,111 @@ main {
     }
 
 }
+
+
+/*==================== HOME SMALL MOBILE ====================*/
+
+@media (max-width:360px) {
+
+    main {
+
+        margin-top: 80px;
+        height: calc(100vh - 80px);
+
+        padding: 0 12px;
+
+    }
+
+    .chat-home {
+
+        justify-content: center;
+
+        padding-top: 0;
+
+        padding-bottom: 90px;
+
+    }
+
+    .chat-home.chat-started {
+
+        justify-content: flex-start;
+
+        padding-top: 20px;
+
+        padding-bottom: 20px;
+
+    }
+
+    .hero-text {
+
+        margin-top: 0;
+
+    }
+
+    .hero-text h1 {
+
+        font-size: 1.2rem;
+        line-height: 1.45;
+
+        padding: 0 8px;
+
+    }
+
+    .chat-box {
+
+        width: 100%;
+
+    }
+
+    .messages {
+
+        margin-bottom: 16px;
+
+    }
+
+    .message-content {
+
+        max-width: 95%;
+
+        padding: 12px 14px;
+
+        font-size: .85rem;
+
+    }
+
+    .chat-input {
+
+        padding: 6px 10px;
+
+        border-radius: 18px;
+
+    }
+
+    .chat-input input {
+
+        font-size: .85rem;
+
+    }
+
+    .mic-btn,
+    .send-btn {
+
+        width: 36px;
+        height: 36px;
+
+    }
+
+    .mic-btn {
+
+        margin-right: 6px;
+
+    }
+
+    .mic-btn i,
+    .send-btn i {
+
+        font-size: .95rem;
+
+    }
+
+}
