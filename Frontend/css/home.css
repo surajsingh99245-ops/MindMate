@@ -867,3 +867,41 @@ main {
     transform: rotate(90deg);
 
 }
+
+
+/*==================== HOME TABLET ====================*/
+
+@media (max-width:992px) {
+
+    main {
+
+        padding: 0 24px;
+
+    }
+
+    .hero-text {
+
+        margin-top: 110px;
+
+    }
+
+    .hero-text h1 {
+
+        font-size: 1.8rem;
+
+    }
+
+    .chat-box {
+
+        width: 100%;
+        max-width: 750px;
+
+    }
+
+    .message-content {
+
+        max-width: 82%;
+
+    }
+
+}
