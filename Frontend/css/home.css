@@ -626,6 +626,20 @@ main {
 
 }
 
+@media (max-width:480px) {
+
+    .chat-home.chat-started {
+
+        justify-content: flex-start;
+
+        padding-top: 20px;
+
+        padding-bottom: 20px;
+
+    }
+
+}
+
 .chat-home.chat-started .chat-box {
 
     height: calc(100vh - 140px);
@@ -901,6 +915,106 @@ main {
     .message-content {
 
         max-width: 82%;
+
+    }
+
+}
+
+
+/*==================== HOME MOBILE ====================*/
+
+@media (max-width:480px) {
+
+    main {
+
+        margin-top: 80px;
+
+        height: calc(100vh - 80px);
+
+        padding: 0 16px;
+
+    }
+
+    .chat-home {
+
+        justify-content: center;
+
+        padding-top: 0;
+
+        padding-bottom: 80px;
+
+    }
+
+    .hero-text {
+
+        margin-top: 40px;
+
+    }
+
+    .hero-text h1 {
+
+        font-size: 1.45rem;
+
+        line-height: 1.4;
+
+        padding: 0 10px;
+
+    }
+
+    .chat-box {
+
+        width: 100%;
+
+    }
+
+    .messages {
+
+        margin-bottom: 18px;
+
+    }
+
+    .message-content {
+
+        max-width: 90%;
+
+        padding: 14px 16px;
+
+        font-size: .92rem;
+
+    }
+
+    .chat-input {
+
+        padding: 8px 12px;
+
+        border-radius: 20px;
+
+    }
+
+    .chat-input input {
+
+        font-size: .95rem;
+
+    }
+
+    .mic-btn,
+    .send-btn {
+
+        width: 40px;
+        height: 40px;
+
+    }
+
+    .mic-btn {
+
+        margin-right: 8px;
+
+    }
+
+    .mic-btn i,
+    .send-btn i {
+
+        font-size: 1.1rem;
 
     }
 
