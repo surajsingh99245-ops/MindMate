@@ -293,9 +293,6 @@ main {
 
     transition: .35s ease;
 
-    display: flex;
-
-    flex-direction: column;
 }
 
 .chat-home {
@@ -618,15 +615,6 @@ main {
     margin: 0;
 
     overflow: hidden;
-
-}
-
-
-.chat-home.chat-started {
-
-    justify-content: flex-start;
-
-    padding-top: 40px;
 
 }
 
