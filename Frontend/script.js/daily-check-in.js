@@ -244,3 +244,111 @@ if (logoutBtn) {
     loadTodayStatus();
 
 })();
+
+
+
+// ================= MOBILE NAVBAR =================
+
+const checkinMenuToggle =
+    document.querySelector(".menu-toggle-checkin");
+
+const checkinNavLinks =
+    document.querySelector(".nav-links-checkin");
+
+
+if (checkinMenuToggle && checkinNavLinks) {
+
+    checkinMenuToggle.addEventListener("click", function (e) {
+
+        e.stopPropagation();
+
+        checkinNavLinks.classList.toggle("active");
+
+        const icon =
+            checkinMenuToggle.querySelector("i");
+
+
+        if (checkinNavLinks.classList.contains("active")) {
+
+            icon.classList.remove("fa-bars");
+
+            icon.classList.add("fa-xmark");
+
+        } else {
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+
+    // Close menu when clicking outside
+
+    document.addEventListener("click", function (e) {
+
+        if (
+            !checkinNavLinks.contains(e.target) &&
+            !checkinMenuToggle.contains(e.target)
+        ) {
+
+            checkinNavLinks.classList.remove("active");
+
+            const icon =
+                checkinMenuToggle.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+
+    // Close menu after selecting a page
+
+    const checkinLinks =
+        checkinNavLinks.querySelectorAll("a");
+
+
+    checkinLinks.forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            checkinNavLinks.classList.remove("active");
+
+            const icon =
+                checkinMenuToggle.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        });
+
+    });
+
+
+    // Reset menu when returning to desktop
+
+    window.addEventListener("resize", function () {
+
+        if (window.innerWidth > 992) {
+
+            checkinNavLinks.classList.remove("active");
+
+            const icon =
+                checkinMenuToggle.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+}
