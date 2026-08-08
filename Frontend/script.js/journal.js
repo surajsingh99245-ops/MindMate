@@ -155,54 +155,54 @@ function renderNotes() {
 </article>
 
 `).join("");
-  
-// ===== EDIT JOURNAL =====
- 
-document.querySelectorAll(".edit-btn").forEach(button => {
 
-    button.addEventListener("click", async function () {
+    // ===== EDIT JOURNAL =====
 
-        const id = Number(this.dataset.id);
+    document.querySelectorAll(".edit-btn").forEach(button => {
 
-        const note = notes.find(n => n.id === id);
+        button.addEventListener("click", async function () {
 
-        const title = document.getElementById(`title-${id}`);
-        const text = document.getElementById(`text-${id}`);
+            const id = Number(this.dataset.id);
 
-        // EDIT MODE
-        if (this.dataset.mode !== "edit") {
+            const note = notes.find(n => n.id === id);
 
-            title.contentEditable = "true";
-            text.contentEditable = "true";
+            const title = document.getElementById(`title-${id}`);
+            const text = document.getElementById(`text-${id}`);
 
-            title.focus();
+            // EDIT MODE
+            if (this.dataset.mode !== "edit") {
 
-            this.textContent = "💾 Save";
-            this.dataset.mode = "edit";
+                title.contentEditable = "true";
+                text.contentEditable = "true";
 
-            return;
-        }
+                title.focus();
 
-        // SAVE MODE
+                this.textContent = "💾 Save";
+                this.dataset.mode = "edit";
 
-        title.contentEditable = "false";
-        text.contentEditable = "false";
+                return;
+            }
 
-        note.title = title.textContent.trim();
-        note.text = text.textContent.trim();
+            // SAVE MODE
 
-        await updateNote(
-            note.id,
-            note.title,
-            note.text
-        );
+            title.contentEditable = "false";
+            text.contentEditable = "false";
 
-        this.textContent = "✏️ Edit";
-        this.dataset.mode = "";
+            note.title = title.textContent.trim();
+            note.text = text.textContent.trim();
+
+            await updateNote(
+                note.id,
+                note.title,
+                note.text
+            );
+
+            this.textContent = "✏️ Edit";
+            this.dataset.mode = "";
+
+        });
 
     });
-
-});
     // ===== DELETE JOURNAL =====
 
     document.querySelectorAll(".delete-btn").forEach(button => {
@@ -327,3 +327,111 @@ textInput.addEventListener("keydown", function (e) {
 });
 
 loadNotes();
+
+
+
+// ================= MOBILE NAVBAR =================
+
+const journalMenuToggle =
+    document.querySelector(".menu-toggle-journal");
+
+const journalNavLinks =
+    document.querySelector(".nav-links-journal");
+
+
+if (journalMenuToggle && journalNavLinks) {
+
+    journalMenuToggle.addEventListener("click", function (e) {
+
+        e.stopPropagation();
+
+        journalNavLinks.classList.toggle("active");
+
+        const icon =
+            journalMenuToggle.querySelector("i");
+
+
+        if (journalNavLinks.classList.contains("active")) {
+
+            icon.classList.remove("fa-bars");
+
+            icon.classList.add("fa-xmark");
+
+        } else {
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+
+    // Close menu when clicking outside
+
+    document.addEventListener("click", function (e) {
+
+        if (
+            !journalNavLinks.contains(e.target) &&
+            !journalMenuToggle.contains(e.target)
+        ) {
+
+            journalNavLinks.classList.remove("active");
+
+            const icon =
+                journalMenuToggle.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+
+    // Close menu after selecting a page
+
+    const journalLinks =
+        journalNavLinks.querySelectorAll("a");
+
+
+    journalLinks.forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            journalNavLinks.classList.remove("active");
+
+            const icon =
+                journalMenuToggle.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        });
+
+    });
+
+
+    // Reset when returning to desktop
+
+    window.addEventListener("resize", function () {
+
+        if (window.innerWidth > 992) {
+
+            journalNavLinks.classList.remove("active");
+
+            const icon =
+                journalMenuToggle.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+}
