@@ -95,7 +95,7 @@
     cursor: pointer;
 }
 
-.logo-journal img{
+.logo-journal img {
 
     width: 56px;
     height: 56px;
@@ -576,21 +576,313 @@
         padding-top: 2rem;
     }
 }
-.logged-user{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px 18px;
-    font-weight:600;
-    color:#333;
+
+.logged-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    font-weight: 600;
+    color: #333;
 }
 
-.logged-user i{
-    color:#4F8EF7;
+.logged-user i {
+    color: #4F8EF7;
 }
 
-.profile-dropdown-journal hr{
-    border:none;
-    border-top:1px solid #e5e7eb;
-    margin:0;
+.profile-dropdown-journal hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 0;
+}
+
+
+/*==================================================
+  RESPONSIVE NAVBAR - JOURNAL
+==================================================*/
+
+.menu-toggle-journal {
+
+    display: none;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: var(--logo-blue);
+
+    cursor: pointer;
+
+    font-size: 22px;
+
+    align-items: center;
+    justify-content: center;
+
+    transition: .3s ease;
+
+}
+
+.menu-toggle-journal:hover {
+
+    background: #f5f7fb;
+
+}
+
+.menu-toggle-journal i {
+
+    transition: transform .3s ease;
+
+}
+
+
+/*==================== TABLET ====================*/
+
+@media (max-width: 992px) {
+
+    .navbar-journal {
+
+        padding: 0 24px;
+
+    }
+
+    .nav-links-journal {
+
+        position: absolute;
+
+        top: 80px;
+        right: 24px;
+
+        width: 250px;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 0;
+
+        padding: 12px 0;
+
+        background: #ffffff;
+
+        border: 1px solid #edf2f7;
+
+        border-radius: 16px;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, .08);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transform: translateY(-10px);
+
+        transition:
+            opacity .3s ease,
+            transform .3s ease,
+            visibility .3s ease;
+
+        z-index: 1002;
+
+    }
+
+    .nav-links-journal.active {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        pointer-events: auto;
+
+        transform: translateY(0);
+
+    }
+
+    .nav-links-journal li {
+
+        width: 100%;
+
+    }
+
+    .nav-links-journal a {
+
+        display: block;
+
+        width: 100%;
+
+        padding: 14px 22px;
+
+    }
+
+    .nav-links-journal a::after {
+
+        display: none;
+
+    }
+
+
+    /* Profile stays on the right */
+
+    .profile-journal {
+
+        margin-left: auto;
+
+        z-index: 1003;
+
+    }
+
+
+    /* Hamburger */
+
+    .menu-toggle-journal {
+
+        display: flex;
+
+        margin-left: 12px;
+
+        z-index: 1003;
+
+    }
+
+}
+
+
+/*==================== MOBILE ====================*/
+
+@media (max-width: 480px) {
+
+    .navbar-journal {
+
+        height: 80px;
+
+        padding: 0 16px;
+
+    }
+
+    .logo-journal img {
+
+        width: 48px;
+        height: 48px;
+
+    }
+
+    .logo-text-journal {
+
+        font-size: 21px;
+
+    }
+
+    .profile-btn-journal {
+
+        padding: 6px 8px;
+
+        gap: 5px;
+
+    }
+
+    .profile-btn-journal i:first-child {
+
+        font-size: 29px;
+
+    }
+
+    .profile-btn-journal i:last-child {
+
+        font-size: 10px;
+
+    }
+
+    .nav-links-journal {
+
+        top: 76px;
+
+        right: 16px;
+
+        width: calc(100% - 32px);
+
+        max-width: 300px;
+
+    }
+
+    .menu-toggle-journal {
+
+        width: 40px;
+        height: 40px;
+
+        font-size: 21px;
+
+    }
+
+}
+
+
+/*==================== SMALL MOBILE ====================*/
+
+@media (max-width: 360px) {
+
+    .navbar-journal {
+
+        padding: 0 12px;
+
+    }
+
+    .logo-journal img {
+
+        width: 44px;
+        height: 44px;
+
+    }
+
+    .logo-text-journal {
+
+        font-size: 19px;
+
+    }
+
+    .profile-btn-journal {
+
+        padding: 5px 6px;
+
+    }
+
+    .profile-btn-journal i:first-child {
+
+        font-size: 27px;
+
+    }
+
+    .menu-toggle-journal {
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 20px;
+
+        margin-left: 8px;
+
+    }
+
+    .nav-links-journal {
+
+        right: 12px;
+
+        width: calc(100% - 24px);
+
+    }
+
+}
+
+
+/*==================== JOURNAL MOBILE TOP SPACING ====================*/
+
+@media (max-width: 768px) {
+
+    .journal-page {
+
+        padding-top: 7rem;
+
+    }
+
 }
