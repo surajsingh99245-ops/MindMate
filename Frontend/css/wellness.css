@@ -1,17 +1,17 @@
 /*==================== WELLNESS MAIN ====================*/
 
 
-.logged-user{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px 18px;
-    font-weight:600;
-    color:#333;
+.logged-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    font-weight: 600;
+    color: #333;
 }
 
-.logged-user i{
-    color:#4F8EF7;
+.logged-user i {
+    color: #4F8EF7;
 }
 
 
@@ -2513,7 +2513,7 @@
 }
 
 
-.connection-option > i {
+.connection-option>i {
 
     color: #94a3b8;
 
@@ -2834,29 +2834,238 @@
 
 
 
+/*==================================================
+  WELLNESS PAGE RESPONSIVE
+  NAVBAR NOT INCLUDED
+==================================================*/
 
 
-
-
-
-
-
-
-
-/*==================== RESPONSIVE ====================*/
+/*==================================================
+  TABLET
+==================================================*/
 
 @media (max-width: 800px) {
+
+    /*-----------------------------------------------
+      MAIN WELLNESS SECTION
+    -----------------------------------------------*/
+
+    .wellness-section {
+
+        padding: 60px 24px 80px;
+
+    }
+
+
+    .wellness-container {
+
+        width: 100%;
+        max-width: 100%;
+
+    }
+
+
+    /*-----------------------------------------------
+      PAGE HEADER
+    -----------------------------------------------*/
+
+    .wellness-header {
+
+        max-width: 700px;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        text-align: center;
+
+    }
+
+
+    .wellness-header h1 {
+
+        font-size: 2.2rem;
+
+        line-height: 1.25;
+
+    }
+
+
+    .wellness-header p {
+
+        font-size: 0.95rem;
+
+        line-height: 1.7;
+
+    }
+
+
+    /*-----------------------------------------------
+      WELLNESS NEEDS
+    -----------------------------------------------*/
+
+    .wellness-needs {
+
+        margin-top: 3rem;
+
+    }
+
+
+    .needs-heading {
+
+        text-align: center;
+
+    }
+
+
+    .needs-heading h2 {
+
+        font-size: 1.7rem;
+
+    }
+
+
+    .needs-heading p {
+
+        font-size: 0.95rem;
+
+    }
+
+
+    /*-----------------------------------------------
+      NEEDS GRID
+    -----------------------------------------------*/
 
     .needs-grid {
 
         grid-template-columns: repeat(2, 1fr);
+
+        gap: 1rem;
+
+    }
+
+
+    .need-card {
+
+        width: 100%;
+
+        min-height: 160px;
+
+        padding: 1.5rem 1.25rem;
+
+    }
+
+
+    .need-icon {
+
+        font-size: 2rem;
+
+    }
+
+
+    .need-title {
+
+        font-size: 1rem;
+
+    }
+
+
+    .need-description {
+
+        font-size: 0.85rem;
+
+    }
+
+
+    /*-----------------------------------------------
+      EXERCISE SECTION
+    -----------------------------------------------*/
+
+    .exercise-section {
+
+        margin-top: 4rem;
+
+    }
+
+
+    .exercise-header {
+
+        text-align: center;
+
+    }
+
+
+    .exercise-header h2 {
+
+        font-size: 1.9rem;
+
+    }
+
+
+    .exercise-header p {
+
+        font-size: 0.95rem;
+
+    }
+
+
+    /*-----------------------------------------------
+      EXERCISE LIST
+    -----------------------------------------------*/
+
+    .exercise-list {
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 1rem;
+
+    }
+
+
+    /*-----------------------------------------------
+      EXERCISE CARDS
+    -----------------------------------------------*/
+
+    .exercise-card {
+
+        padding: 1.5rem;
+
+    }
+
+
+    .exercise-card h3 {
+
+        font-size: 1.1rem;
+
+    }
+
+
+    .exercise-card p {
+
+        font-size: 0.9rem;
+
+        line-height: 1.6;
 
     }
 
 }
 
 
+/*==================================================
+  MOBILE
+==================================================*/
+
 @media (max-width: 520px) {
+
+    /*-----------------------------------------------
+      MAIN SECTION
+    -----------------------------------------------*/
+
+    .wellness-main {
+
+        width: 100%;
+
+    }
+
 
     .wellness-section {
 
@@ -2865,23 +3074,304 @@
     }
 
 
-    .wellness-header h1 {
+    .wellness-container {
 
-        font-size: 1.9rem;
+        width: 100%;
 
     }
 
 
+    /*-----------------------------------------------
+      PAGE HEADER
+    -----------------------------------------------*/
+
+    .wellness-header {
+
+        text-align: center;
+
+    }
+
+
+    .wellness-badge {
+
+        font-size: 0.8rem;
+
+        padding: 0.45rem 0.8rem;
+
+    }
+
+
+    .wellness-header h1 {
+
+        font-size: 1.9rem;
+
+        line-height: 1.25;
+
+        margin-top: 1rem;
+
+    }
+
+
+    .wellness-header p {
+
+        font-size: 0.9rem;
+
+        line-height: 1.7;
+
+    }
+
+
+    /*-----------------------------------------------
+      NEEDS SECTION
+    -----------------------------------------------*/
+
+    .wellness-needs {
+
+        margin-top: 2.5rem;
+
+    }
+
+
+    .needs-heading {
+
+        text-align: center;
+
+    }
+
+
+    .needs-heading h2 {
+
+        font-size: 1.45rem;
+
+    }
+
+
+    .needs-heading p {
+
+        font-size: 0.88rem;
+
+        line-height: 1.6;
+
+    }
+
+
+    /*-----------------------------------------------
+      NEED CARDS
+    -----------------------------------------------*/
+
     .needs-grid {
 
         grid-template-columns: 1fr;
+
+        gap: 0.9rem;
 
     }
 
 
     .need-card {
 
-        min-height: 150px;
+        min-height: 145px;
+
+        padding: 1.4rem 1rem;
+
+        border-radius: 18px;
+
+    }
+
+
+    .need-icon {
+
+        font-size: 2rem;
+
+        margin-bottom: 0.6rem;
+
+    }
+
+
+    .need-title {
+
+        font-size: 1rem;
+
+    }
+
+
+    .need-description {
+
+        font-size: 0.85rem;
+
+    }
+
+
+    /*-----------------------------------------------
+      EXERCISE SECTION
+    -----------------------------------------------*/
+
+    .exercise-section {
+
+        margin-top: 3rem;
+
+    }
+
+
+    .exercise-label {
+
+        font-size: 0.8rem;
+
+    }
+
+
+    .exercise-header h2 {
+
+        font-size: 1.6rem;
+
+        line-height: 1.3;
+
+    }
+
+
+    .exercise-header p {
+
+        font-size: 0.88rem;
+
+        line-height: 1.6;
+
+    }
+
+
+    /*-----------------------------------------------
+      EXERCISE LIST
+    -----------------------------------------------*/
+
+    .exercise-list {
+
+        grid-template-columns: 1fr;
+
+        gap: 1rem;
+
+    }
+
+
+    /*-----------------------------------------------
+      EXERCISE CARD
+    -----------------------------------------------*/
+
+    .exercise-card {
+
+        padding: 1.35rem;
+
+        border-radius: 18px;
+
+    }
+
+
+    .exercise-card h3 {
+
+        font-size: 1.05rem;
+
+    }
+
+
+    .exercise-card p {
+
+        font-size: 0.88rem;
+
+        line-height: 1.65;
+
+    }
+
+
+    /*-----------------------------------------------
+      ACTIVITY BUTTONS
+    -----------------------------------------------*/
+
+    .exercise-card button {
+
+        width: 100%;
+
+        min-height: 44px;
+
+    }
+
+}
+
+
+/*==================================================
+  SMALL MOBILE
+==================================================*/
+
+@media (max-width: 360px) {
+
+    .wellness-section {
+
+        padding-left: 12px;
+        padding-right: 12px;
+
+        padding-bottom: 60px;
+
+    }
+
+
+    .wellness-header h1 {
+
+        font-size: 1.7rem;
+
+    }
+
+
+    .wellness-header p {
+
+        font-size: 0.85rem;
+
+    }
+
+
+    .needs-heading h2 {
+
+        font-size: 1.3rem;
+
+    }
+
+
+    .need-card {
+
+        min-height: 135px;
+
+        padding: 1.2rem 0.9rem;
+
+    }
+
+
+    .need-icon {
+
+        font-size: 1.8rem;
+
+    }
+
+
+    .need-title {
+
+        font-size: 0.95rem;
+
+    }
+
+
+    .need-description {
+
+        font-size: 0.8rem;
+
+    }
+
+
+    .exercise-header h2 {
+
+        font-size: 1.45rem;
+
+    }
+
+
+    .exercise-card {
+
+        padding: 1.15rem;
 
     }
 
