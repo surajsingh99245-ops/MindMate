@@ -525,7 +525,7 @@ main {
 
 }
 
-.journal-chart-container{
+.journal-chart-container {
 
     position: relative;
 
@@ -623,110 +623,376 @@ main {
 
 /*==================== AI SUMMARY ====================*/
 
-.ai-summary{
+.ai-summary {
 
-    width:min(92%,1200px);
+    width: min(92%, 1200px);
 
-    margin:40px auto 80px;
+    margin: 40px auto 80px;
 
-    background:#fff;
+    background: #fff;
 
-    border-radius:22px;
+    border-radius: 22px;
 
-    padding:35px;
+    padding: 35px;
 
-    border:1px solid #edf2f7;
+    border: 1px solid #edf2f7;
 
-    box-shadow:0 8px 25px rgba(15,23,42,.05);
-
-}
-
-.summary-header{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-bottom:30px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
 
 }
 
-.summary-header i{
+.summary-header {
 
-    font-size:30px;
+    display: flex;
 
-    color:var(--logo-blue);
+    align-items: center;
 
-}
+    gap: 15px;
 
-.summary-header h2{
-
-    font-size:1.7rem;
-
-    color:var(--text-dark);
+    margin-bottom: 30px;
 
 }
 
-.insight-list{
+.summary-header i {
 
-    display:flex;
+    font-size: 30px;
 
-    flex-direction:column;
-
-    gap:20px;
+    color: var(--logo-blue);
 
 }
 
-.insight-item{
+.summary-header h2 {
 
-    display:flex;
+    font-size: 1.7rem;
 
-    align-items:flex-start;
-
-    gap:15px;
-
-    padding:18px 20px;
-
-    background:#f8fbff;
-
-    border-radius:16px;
+    color: var(--text-dark);
 
 }
 
-.insight-item i{
+.insight-list {
 
-    font-size:20px;
+    display: flex;
 
-    color:var(--logo-blue);
+    flex-direction: column;
 
-    margin-top:3px;
+    gap: 20px;
+
+}
+
+.insight-item {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    padding: 18px 20px;
+
+    background: #f8fbff;
+
+    border-radius: 16px;
 
 }
 
-.insight-item p{
+.insight-item i {
 
-    color:#4b5563;
+    font-size: 20px;
 
-    line-height:1.7;
+    color: var(--logo-blue);
+
+    margin-top: 3px;
 
 }
-.logged-user{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px 16px;
-    font-weight:600;
-    color:#333;
+
+.insight-item p {
+
+    color: #4b5563;
+
+    line-height: 1.7;
+
 }
 
-.logged-user i{
-    color:#4F8EF7;
+.logged-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: #333;
 }
 
-.profile-dropdown hr{
-    border:none;
-    border-top:1px solid #e5e7eb;
-    margin:0;
+.logged-user i {
+    color: #4F8EF7;
+}
+
+.profile-dropdown hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 0;
+}
+
+
+
+/* =========================================================
+   REPORT NAVBAR - RESPONSIVE
+   ========================================================= */
+
+/* Desktop: hamburger hidden */
+
+.report-menu-toggle {
+    display: none;
+
+    border: none;
+    background: transparent;
+
+    color: var(--logo-blue);
+
+    cursor: pointer;
+
+    padding: 8px;
+
+    font-size: 24px;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ==================== TABLET ==================== */
+
+@media (max-width: 992px) {
+
+    .navbar {
+        padding: 0 30px;
+    }
+
+    .nav-links {
+        gap: 22px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+}
+
+
+/* ==================== MOBILE ==================== */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        height: 70px;
+
+        padding: 0 20px;
+
+        /* Don't spread everything across the full navbar */
+        justify-content: flex-start;
+
+        gap: 0;
+
+        margin-left: auto;
+    }
+
+
+    /* Logo */
+
+    .logo {
+        flex-shrink: 0;
+    }
+
+    .logo img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .logo-text {
+        font-size: 21px;
+    }
+
+
+    /* Profile */
+
+    .profile {
+        margin-left: auto;
+
+        margin-right: 4px;
+    }
+
+    .profile-btn {
+        padding: 6px 8px;
+    }
+
+    .profile-btn i:first-child {
+        font-size: 29px;
+    }
+
+    .profile-btn i:last-child {
+        font-size: 10px;
+    }
+
+
+    /* Hamburger */
+
+    .report-menu-toggle {
+        display: flex;
+
+        width: 42px;
+        height: 42px;
+
+        padding: 8px;
+
+        border: none;
+        background: transparent;
+
+        align-items: center;
+        justify-content: center;
+
+        color: var(--logo-blue);
+
+        font-size: 24px;
+
+        cursor: pointer;
+
+        flex-shrink: 0;
+
+        margin-left: 2px;
+    }
+
+
+    /* Compact navigation dropdown */
+
+    .nav-links {
+        position: absolute;
+
+        top: 70px;
+        right: 20px;
+        left: auto;
+
+        width: 210px;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 0;
+
+        padding: 8px 0;
+
+        background: #ffffff;
+
+        border: 1px solid #e8edf5;
+
+        border-radius: 14px;
+
+        box-shadow:
+            0 12px 30px rgba(15, 23, 42, .12);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transform: translateY(-8px);
+
+        transition:
+            opacity .25s ease,
+            transform .25s ease,
+            visibility .25s ease;
+
+        z-index: 1100;
+    }
+
+
+    .nav-links.active {
+        opacity: 1;
+
+        visibility: visible;
+
+        pointer-events: auto;
+
+        transform: translateY(0);
+    }
+
+
+    .nav-links li {
+        width: 100%;
+    }
+
+
+    .nav-links a {
+        display: block;
+
+        width: 100%;
+
+        padding: 13px 18px;
+
+        font-size: 14px;
+    }
+
+
+    .nav-links a::after {
+        display: none;
+    }
+
+}
+
+
+/* ==================== SMALL MOBILE ==================== */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        height: 65px;
+
+        padding: 0 14px;
+    }
+
+
+    .logo img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .logo-text {
+        font-size: 19px;
+    }
+
+
+    .profile {
+        margin-left: auto;
+
+        margin-right: 2px;
+    }
+
+    .profile-btn {
+        padding: 5px;
+    }
+
+    .profile-btn i:first-child {
+        font-size: 27px;
+    }
+
+    .profile-btn i:last-child {
+        display: none;
+    }
+
+
+    .report-menu-toggle {
+        width: 40px;
+        height: 40px;
+
+        font-size: 22px;
+
+        margin-left: 0;
+    }
+
+
+    .nav-links {
+        top: 65px;
+
+        right: 14px;
+
+        width: 190px;
+    }
+
 }
