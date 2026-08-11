@@ -44,7 +44,7 @@ const weeklyData = {
 
 };
 
- 
+
 function renderMoodDistribution(distribution) {
 
     document.getElementById("happyPercent").textContent =
@@ -295,7 +295,7 @@ function renderMoodChart(labels, data) {
     });
 
 }
- 
+
 const journalCtx = document.getElementById("journalChart");
 
 let journalChart;
@@ -377,7 +377,7 @@ function renderJournalChart(labels, data) {
     });
 
 }
- 
+
 function renderInsights(insights) {
 
     const container = document.querySelector(".insight-list");
@@ -442,5 +442,99 @@ async function loadMonthlyReport() {
         console.log(err);
 
     }
+
+}
+
+
+
+
+// ==================== REPORT MOBILE NAVBAR ====================
+
+const reportMenuToggle =
+    document.querySelector(".report-menu-toggle");
+
+const reportNavLinks =
+    document.querySelector(".nav-links");
+
+if (reportMenuToggle && reportNavLinks) {
+
+    reportMenuToggle.addEventListener("click", (e) => {
+
+        e.stopPropagation();
+
+        reportNavLinks.classList.toggle("active");
+
+        const icon =
+            reportMenuToggle.querySelector("i");
+
+        if (reportNavLinks.classList.contains("active")) {
+
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+
+            reportMenuToggle.setAttribute(
+                "aria-label",
+                "Close navigation menu"
+            );
+
+        } else {
+
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+
+            reportMenuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+            );
+
+        }
+
+    });
+
+
+    // Close menu when clicking outside
+
+    document.addEventListener("click", (e) => {
+
+        if (
+            !reportNavLinks.contains(e.target) &&
+            !reportMenuToggle.contains(e.target)
+        ) {
+
+            reportNavLinks.classList.remove("active");
+
+            const icon =
+                reportMenuToggle.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+
+            reportMenuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+            );
+
+        }
+
+    });
+
+
+    // Close menu after selecting a link
+
+    reportNavLinks.querySelectorAll("a").forEach((link) => {
+
+        link.addEventListener("click", () => {
+
+            reportNavLinks.classList.remove("active");
+
+            const icon =
+                reportMenuToggle.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+
+        });
+
+    });
 
 }
