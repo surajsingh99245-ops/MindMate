@@ -1,4 +1,4 @@
-const API = "http://localhost:3000";
+const API = "https://mindmate-qzot.onrender.com/";
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
