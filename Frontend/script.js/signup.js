@@ -1,4 +1,4 @@
-const API = "https://mindmate-qzot.onrender.com/";
+const API = "https://mindmate-qzot.onrender.com";
 document.getElementById("signupForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
